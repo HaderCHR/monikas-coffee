@@ -1,148 +1,159 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-19T00:00:00Z",
+  "generatedAt": "2026-11-19T12:00:00Z",
   "title": "Design System: Monika's Coffee",
   "extensions": {
     "colorMeta": {
-      "paint": { "role": "primary", "displayName": "Bottle-Green Paint", "canonical": "#213a2e", "tonalRamp": ["#0d1913", "#16291f", "#213a2e", "#2b4738", "#46624f", "#6f8a76", "#a5b8a8", "#dce6dc"] },
-      "paint-deep": { "role": "primary", "displayName": "Deep Paint", "canonical": "#16291f", "tonalRamp": ["#08110c", "#0d1913", "#16291f", "#213a2e", "#3b5545", "#64806c", "#9cb19f", "#d8e3d8"] },
-      "paint-raised": { "role": "primary", "displayName": "Raised Paint", "canonical": "#2b4738", "tonalRamp": ["#0d1913", "#16291f", "#213a2e", "#2b4738", "#46624f", "#6f8a76", "#a5b8a8", "#dce6dc"] },
-      "gilt": { "role": "secondary", "displayName": "Sign-Writer's Gilt", "canonical": "#d2ae62", "tonalRamp": ["#3a2c10", "#5e4a1f", "#8a6e33", "#b3904a", "#d2ae62", "#e2c27f", "#eed9ab", "#f8eed6"] },
-      "gilt-bright": { "role": "secondary", "displayName": "Bright Gilt", "canonical": "#e2c27f", "tonalRamp": ["#3a2c10", "#5e4a1f", "#8a6e33", "#b3904a", "#d2ae62", "#e2c27f", "#eed9ab", "#f8eed6"] },
-      "gilt-line": { "role": "secondary", "displayName": "Gilt Line", "canonical": "rgb(210 174 98 / 0.5)" },
-      "shade": { "role": "secondary", "displayName": "Sign-Writer's Shade", "canonical": "#0d1913", "tonalRamp": ["#050a07", "#0d1913", "#16291f", "#213a2e", "#3b5545", "#64806c", "#9cb19f", "#d8e3d8"] },
-      "coffee": { "role": "tertiary", "displayName": "Coffee", "canonical": "#7d5f4b", "tonalRamp": ["#2a1d15", "#432f23", "#5e4434", "#7d5f4b", "#9a7e69", "#b89f8c", "#d6c3b4", "#f0e6dd"] },
-      "on-paint": { "role": "neutral", "displayName": "On-Paint Cream", "canonical": "#f1e8d6" },
-      "on-paint-muted": { "role": "neutral", "displayName": "On-Paint Sage", "canonical": "#c5cab7" },
-      "plaster": { "role": "neutral", "displayName": "Plaster", "canonical": "#f5efe6", "tonalRamp": ["#2e2924", "#4f4740", "#756b61", "#9d9285", "#c4b9aa", "#e2d9cb", "#f5efe6", "#fcfaf7"] },
-      "oat": { "role": "neutral", "displayName": "Oat", "canonical": "#ece2d2", "tonalRamp": ["#2e2720", "#4f443a", "#756757", "#9c8d7a", "#c3b5a1", "#ece2d2", "#f5efe6", "#fcfaf7"] },
-      "ink": { "role": "neutral", "displayName": "Espresso Ink", "canonical": "#33231b", "tonalRamp": ["#1c130e", "#33231b", "#4a3026", "#654a3d", "#86695b", "#a99082", "#cdbcb1", "#efe6df"] },
-      "brown": { "role": "neutral", "displayName": "Dark Brown", "canonical": "#4a3026", "tonalRamp": ["#1c130e", "#33231b", "#4a3026", "#654a3d", "#86695b", "#a99082", "#cdbcb1", "#efe6df"] },
-      "muted": { "role": "neutral", "displayName": "Warm Muted", "canonical": "#645d56", "tonalRamp": ["#221f1c", "#3a3531", "#514a44", "#645d56", "#827a72", "#a29b94", "#c6c0ba", "#ebe7e3"] },
-      "rule": { "role": "neutral", "displayName": "Brown Rule", "canonical": "rgb(74 48 38 / 0.18)" }
+      "espresso": { "role": "primary", "displayName": "Espresso", "canonical": "#241812", "tonalRamp": ["#120b08", "#1a110d", "#241812", "#3a2a21", "#5c4233", "#8a6e5c", "#c4ad9a", "#f3e9dc"] },
+      "espresso-deep": { "role": "primary", "displayName": "Espresso Deep", "canonical": "#1a110d", "tonalRamp": ["#0b0705", "#120b08", "#1a110d", "#241812", "#3a2a21", "#6b5243", "#b39c89", "#efe4d6"] },
+      "caramel": { "role": "secondary", "displayName": "Caramel", "canonical": "#c9a27a", "tonalRamp": ["#3d2c1a", "#5e442a", "#82603d", "#a68058", "#c9a27a", "#d9b893", "#e9d3b8", "#f7ecdf"] },
+      "caramel-light": { "role": "secondary", "displayName": "Caramel Light", "canonical": "#d9b893", "tonalRamp": ["#3d2c1a", "#5e442a", "#82603d", "#a68058", "#c9a27a", "#d9b893", "#e9d3b8", "#f7ecdf"] },
+      "foam": { "role": "neutral", "displayName": "Foam", "canonical": "#fcfaf7", "tonalRamp": ["#2e2924", "#4f4740", "#756b61", "#9d9285", "#c4b9aa", "#e4cdae", "#f5efe6", "#fcfaf7"] },
+      "milk": { "role": "neutral", "displayName": "Milk", "canonical": "#f5efe6", "tonalRamp": ["#2e2924", "#4f4740", "#756b61", "#9d9285", "#c4b9aa", "#e4cdae", "#f5efe6", "#fcfaf7"] },
+      "crema": { "role": "neutral", "displayName": "Crema", "canonical": "#e4cdae", "tonalRamp": ["#332619", "#54412c", "#7a6145", "#a08462", "#c5a985", "#e4cdae", "#efe0cb", "#f9f2e8"] },
+      "ink": { "role": "neutral", "displayName": "Espresso Ink", "canonical": "#2a1c16", "tonalRamp": ["#140d0a", "#2a1c16", "#4a3026", "#5c4233", "#7d5f4b", "#a58b78", "#cdbcae", "#f0e8e1"] },
+      "brown": { "role": "neutral", "displayName": "Brown", "canonical": "#4a3026", "tonalRamp": ["#140d0a", "#2a1c16", "#4a3026", "#5c4233", "#7d5f4b", "#a58b78", "#cdbcae", "#f0e8e1"] },
+      "roast": { "role": "neutral", "displayName": "Roast", "canonical": "#5c4233", "tonalRamp": ["#140d0a", "#2a1c16", "#4a3026", "#5c4233", "#7d5f4b", "#a58b78", "#cdbcae", "#f0e8e1"] },
+      "coffee": { "role": "neutral", "displayName": "Coffee", "canonical": "#7d5f4b", "tonalRamp": ["#2a1d15", "#432f23", "#5e4434", "#7d5f4b", "#9a7e69", "#b89f8c", "#d6c3b4", "#f0e6dd"] },
+      "on-dark": { "role": "neutral", "displayName": "On-Dark Cream", "canonical": "#f3e9dc" },
+      "on-dark-muted": { "role": "neutral", "displayName": "On-Dark Muted", "canonical": "#cdb9a3" },
+      "rule": { "role": "neutral", "displayName": "Hairline", "canonical": "rgb(74 48 38 / 0.2)" },
+      "rule-strong": { "role": "neutral", "displayName": "Field Rule", "canonical": "rgb(74 48 38 / 0.45)" },
+      "rule-dark": { "role": "neutral", "displayName": "Hairline on Espresso", "canonical": "rgb(243 233 220 / 0.16)" },
+      "focus": { "role": "neutral", "displayName": "Focus Brown", "canonical": "#8a5a2b" }
     },
     "typographyMeta": {
-      "signature": { "displayName": "Signature", "purpose": "The word \"Monika's\" only: fascia, header, footer." },
-      "display": { "displayName": "Display", "purpose": "Gilt titles lettered on boards (La carta, Escríbenos)." },
-      "headline": { "displayName": "Headline", "purpose": "Section titles on plaster in dark brown." },
-      "numeral": { "displayName": "Numeral", "purpose": "The ritual's real measurements, with a coffee-coloured unit." },
-      "title": { "displayName": "Title", "purpose": "Menu item names, channel labels, step titles." },
-      "body": { "displayName": "Body", "purpose": "Running text and leads." },
-      "label": { "displayName": "Label", "purpose": "Uppercase gilt menu category headings on the board." }
+      "display": { "displayName": "Display", "purpose": "Section titles." },
+      "headline": { "displayName": "Headline", "purpose": "Hero h1 on the recipe card, 404 title, the room's italic line, contact channel labels." },
+      "measure": { "displayName": "Measure", "purpose": "The ritual's measurements, lining figures, italic unit at 0.42em." },
+      "title": { "displayName": "Title", "purpose": "Menu category names, the price question, modal titles." },
+      "lead": { "displayName": "Lead", "purpose": "The one paragraph under each section title." },
+      "body": { "displayName": "Body", "purpose": "Running text." },
+      "notation": { "displayName": "Notation", "purpose": "The recipe card's small print: composition, counts, field labels, handles." },
+      "label": { "displayName": "Label", "purpose": "Buttons and text links." }
     },
     "shadows": [
-      { "name": "sign-shade", "value": "0.035em 0.045em 0 #0d1913", "purpose": "text-shadow under every gilt letter on paint; the sign-writer's drop shade." },
-      { "name": "hung-board", "value": "0 30px 60px -40px rgb(13 25 19 / 0.65)", "purpose": "Menu board and Sala window hanging on the oat wall." },
-      { "name": "button-ledge", "value": "0 1px 0 rgb(13 25 19 / 0.35)", "purpose": "Gilt button at rest." },
-      { "name": "button-lift", "value": "0 6px 16px -8px rgb(13 25 19 / 0.7)", "purpose": "Gilt button on hover." },
-      { "name": "notice", "value": "0 40px 80px -30px rgb(0 0 0 / 0.7)", "purpose": "Demo-channel popover only." }
+      { "name": "card-set-down", "value": "0 1px 0 rgb(74 48 38 / 0.08), 0 28px 56px -32px rgb(36 24 18 / 0.45)", "purpose": "The hero recipe card, set down over the photograph (404 card uses the second layer)." },
+      { "name": "modal-note", "value": "0 40px 80px -30px rgb(0 0 0 / 0.6)", "purpose": "The demonstration popover over a dimmed espresso backdrop." }
     ],
     "motion": [
-      { "name": "ease-out", "value": "cubic-bezier(0.22, 1, 0.36, 1)", "purpose": "Default for state changes, hover zoom, underline draw, crossfade." },
-      { "name": "ease-in-out", "value": "cubic-bezier(0.65, 0, 0.35, 1)", "purpose": "The shutter roll-up." },
-      { "name": "shutter-up", "value": "1.25s ease-in-out, 0.35s delay (door pane 0.55s), once on load", "purpose": "Hero shutters roll up; photos settle from scale 1.06 over 2.2s." },
-      { "name": "ritual-crossfade", "value": "opacity 0.7s ease-out; image scale 1.04 to 1 over 1.4s", "purpose": "Sticky ritual photograph follows the step nearest mid-screen." },
-      { "name": "photo-zoom", "value": "scale(1.03) over 0.9s ease-out", "purpose": "Hover zoom on framed photographs, hover-capable pointers only." },
-      { "name": "button-step", "value": "translateY(-1px) 0.18s on hover; translateY(1px) 0.06s on active", "purpose": "Button step and press." },
-      { "name": "underline-draw", "value": "scaleX(0 to 1) from left, 0.35s ease-out", "purpose": "Header nav hover and current section." },
-      { "name": "reduced-motion", "value": "all animation and transition durations 0.01ms", "purpose": "Everything rests under prefers-reduced-motion; shutters stay open." }
+      { "name": "ease-out", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "The one easing family: entrances, hovers, menu, underlines." },
+      { "name": "t-quick", "value": "180ms", "purpose": "Colour and press feedback on buttons and links." },
+      { "name": "t-hover", "value": "600ms", "purpose": "Photograph hover zoom (3%)." },
+      { "name": "pour-in", "value": "clip-path inset(100% 0 0 0) to 0, 1100ms ease-out, 80ms delay", "purpose": "Hero photograph pours in from the bottom on load; the image settles from scale 1.08 over 1700ms." },
+      { "name": "set-down", "value": "translateY(1.75rem) to 0, 900ms ease-out, 250ms delay", "purpose": "Hero card set down on the photograph; stays opaque." },
+      { "name": "cup-fill", "value": "scaleY(0) to 1 from the bottom, view() timeline, entry 20% to cover 40%", "purpose": "Each cup glyph fills as it scrolls into view." },
+      { "name": "timeline-draw", "value": "scaleX(0) to 1 from the left, view() timeline, entry 30% to cover 45%", "purpose": "The ritual timeline draws across the stations." },
+      { "name": "drift", "value": "translateY(2rem to -2rem) and (4rem to -3rem), view() timeline, above 48rem", "purpose": "Two room photographs drift against the scroll." },
+      { "name": "reduced-motion", "value": "all animations and transitions 0.01ms", "purpose": "Everything rests; content never waits on motion to be readable." }
     ],
     "breakpoints": [
-      { "name": "xs", "value": "26rem" },
+      { "name": "xs", "value": "30rem" },
       { "name": "sm", "value": "40rem" },
-      { "name": "md", "value": "44rem" },
-      { "name": "lg", "value": "56rem" },
-      { "name": "xl", "value": "60rem" }
+      { "name": "md", "value": "48rem" },
+      { "name": "nav", "value": "60rem" },
+      { "name": "lg", "value": "64rem" },
+      { "name": "xl", "value": "72rem" }
     ]
   },
   "components": [
     {
-      "name": "Gilt Button",
+      "name": "Primary Button",
       "kind": "button",
-      "refersTo": "button-gilt",
-      "description": "Primary action on paint: every Escríbenos and ask-by-message link.",
-      "html": "<div class=\"ds-paint\"><a class=\"ds-btn ds-btn-gilt\" href=\"#\">Escríbenos <svg class=\"ds-arrow\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 12h14M13 6l6 6-6 6\"/></svg></a></div>",
-      "css": ".ds-paint { background: #213a2e; padding: 24px; } .ds-btn { display: inline-flex; align-items: center; gap: 0.65em; min-height: 3rem; padding: 0.8em 1.35em; border: 1.5px solid transparent; border-radius: 2px; font-family: 'Libre Franklin', Arial, sans-serif; font-size: 1rem; font-weight: 600; line-height: 1.1; letter-spacing: 0.01em; text-decoration: none; cursor: pointer; transition: transform 0.18s cubic-bezier(0.22,1,0.36,1), background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease; } .ds-btn-gilt { background: #d2ae62; border-color: #d2ae62; color: #0d1913; box-shadow: 0 1px 0 rgb(13 25 19 / 0.35); } .ds-btn-gilt:hover { background: #e2c27f; border-color: #e2c27f; transform: translateY(-1px); box-shadow: 0 6px 16px -8px rgb(13 25 19 / 0.7); } .ds-btn-gilt:active { transform: translateY(1px); transition-duration: 0.06s; } .ds-btn-gilt:focus-visible { outline: 2px solid #e2c27f; outline-offset: 3px; } .ds-arrow { width: 1.05em; height: 1.05em; transition: transform 0.25s cubic-bezier(0.22,1,0.36,1); } .ds-btn:hover .ds-arrow { transform: translateX(3px); }"
+      "refersTo": "button-primary",
+      "description": "The one button: an espresso-ink pill on light grounds, arrow nudges on hover.",
+      "html": "<a class=\"ds-btn\" href=\"#\">Escríbenos<svg class=\"ds-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 12h15m-5.5-6 6 6-6 6\"/></svg></a>",
+      "css": ".ds-btn { display: inline-flex; align-items: center; gap: 0.6rem; min-height: 3.25rem; padding: 0.85rem 1.6rem; border-radius: 999px; background: #2a1c16; color: #fcfaf7; font-family: var(--font-text, 'Familjen Grotesk', Arial, sans-serif); font-size: 1rem; font-weight: 600; line-height: 1.1; text-decoration: none; transition: background-color 180ms ease, transform 180ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-btn .ds-icon { width: 1.1rem; height: 1.1rem; transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-btn:hover { background: #4a3026; } .ds-btn:hover .ds-icon { transform: translateX(3px); } .ds-btn:active { transform: scale(0.97); } .ds-btn:focus-visible { outline: 2px solid #8a5a2b; outline-offset: 3px; }"
     },
     {
-      "name": "Line Button",
+      "name": "Button on Espresso",
       "kind": "button",
-      "refersTo": "button-line",
-      "description": "Secondary action on paint beside a gilt button.",
-      "html": "<div class=\"ds-paint\"><a class=\"ds-btn-line\" href=\"#\">Ver la carta</a></div>",
-      "css": ".ds-paint { background: #213a2e; padding: 24px; } .ds-btn-line { display: inline-flex; align-items: center; min-height: 3rem; padding: 0.8em 1.35em; border: 1.5px solid rgb(210 174 98 / 0.5); border-radius: 2px; background: transparent; color: #f1e8d6; font-family: 'Libre Franklin', Arial, sans-serif; font-size: 1rem; font-weight: 600; line-height: 1.1; text-decoration: none; transition: transform 0.18s cubic-bezier(0.22,1,0.36,1), background-color 0.2s ease, border-color 0.2s ease; } .ds-btn-line:hover { border-color: #d2ae62; background: rgb(210 174 98 / 0.08); transform: translateY(-1px); } .ds-btn-line:active { transform: translateY(1px); } .ds-btn-line:focus-visible { outline: 2px solid #e2c27f; outline-offset: 3px; }"
+      "refersTo": "button-on-espresso",
+      "description": "The same pill inside a dark section, turned caramel.",
+      "html": "<div class=\"ds-dark\"><a class=\"ds-btn-dark\" href=\"#\">Preguntar por mensaje</a></div>",
+      "css": ".ds-dark { background: #241812; padding: 2rem; } .ds-btn-dark { display: inline-flex; align-items: center; min-height: 3.25rem; padding: 0.85rem 1.6rem; border-radius: 999px; background: #c9a27a; color: #241812; font-family: var(--font-text, 'Familjen Grotesk', Arial, sans-serif); font-size: 1rem; font-weight: 600; line-height: 1.1; text-decoration: none; transition: background-color 180ms ease, transform 180ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-btn-dark:hover { background: #d9b893; } .ds-btn-dark:active { transform: scale(0.97); } .ds-btn-dark:focus-visible { outline: 2px solid #c9a27a; outline-offset: 3px; }"
     },
     {
-      "name": "Board",
-      "kind": "card",
-      "refersTo": "board",
-      "description": "Painted panel with an inset chamfered gilt rule; frames the fascia, menu, door and notice.",
-      "html": "<div class=\"ds-board\"><h3 class=\"ds-gilt\">La carta</h3><p>Cafés, bebidas frías y repostería.</p></div>",
-      "css": ".ds-board { --c: 1rem; --i: 0.75rem; position: relative; isolation: isolate; background: #213a2e; color: #f1e8d6; padding: 2.5rem; font-family: 'Libre Franklin', Arial, sans-serif; } .ds-board::before, .ds-board::after { content: ''; position: absolute; z-index: -1; pointer-events: none; clip-path: polygon(var(--c) 0, calc(100% - var(--c)) 0, 100% var(--c), 100% calc(100% - var(--c)), calc(100% - var(--c)) 100%, var(--c) 100%, 0 calc(100% - var(--c)), 0 var(--c)); } .ds-board::before { inset: var(--i); background: rgb(210 174 98 / 0.5); } .ds-board::after { inset: calc(var(--i) + 1px); background: #213a2e; } .ds-board p { margin: 0.75rem 0 0; color: #c5cab7; } .ds-gilt { margin: 0; font-family: Besley, Georgia, serif; font-weight: 800; font-size: 3rem; line-height: 0.95; color: #d2ae62; text-shadow: 0.035em 0.045em 0 #0d1913; }"
-    },
-    {
-      "name": "Menu Item",
+      "name": "Text Link",
       "kind": "custom",
-      "description": "One line of the menu board: beaded square photograph beside a Besley name and short description.",
-      "html": "<div class=\"ds-paint\"><div class=\"ds-item\"><div class=\"ds-photo\"></div><div><h4 class=\"ds-item-name\">Cappuccino</h4><p class=\"ds-item-desc\">Espresso, leche y una capa generosa de espuma.</p></div></div></div>",
-      "css": ".ds-paint { background: #213a2e; padding: 24px; } .ds-item { display: grid; grid-template-columns: 7rem minmax(0,1fr); gap: 1.25rem; align-items: center; } .ds-photo { position: relative; aspect-ratio: 1; overflow: hidden; background: linear-gradient(135deg, #7d5f4b, #33231b); transition: transform 0.9s cubic-bezier(0.22,1,0.36,1); } .ds-photo::after { content: ''; position: absolute; inset: 0.4rem; border: 1px solid rgb(226 194 127 / 0.55); } .ds-item:hover .ds-photo { transform: scale(1.03); } .ds-item-name { margin: 0 0 0.35rem; font-family: Besley, Georgia, serif; font-weight: 600; font-size: 1.3rem; line-height: 1.08; color: #f1e8d6; } .ds-item-desc { margin: 0; max-width: 40ch; font-family: 'Libre Franklin', Arial, sans-serif; font-size: 0.95rem; line-height: 1.55; color: #c5cab7; }"
+      "refersTo": "text-link",
+      "description": "The quieter action: label type with a drawn underline that retracts on hover.",
+      "html": "<a class=\"ds-text-link\" href=\"#\">Ver la carta</a>",
+      "css": ".ds-text-link { display: inline-flex; align-items: center; min-height: 2.75rem; font-family: var(--font-text, 'Familjen Grotesk', Arial, sans-serif); font-weight: 600; color: #2a1c16; text-decoration: none; background: linear-gradient(currentColor, currentColor) 0 calc(100% - 0.55rem) / 100% 1px no-repeat; transition: background-size 400ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-text-link:hover { background-size: 0% 1px; background-position: 100% calc(100% - 0.55rem); } .ds-text-link:focus-visible { outline: 2px solid #8a5a2b; outline-offset: 3px; }"
     },
     {
       "name": "Header Navigation",
       "kind": "nav",
-      "refersTo": "nav-bar",
-      "description": "Sticky green bar: script signature, spaced trade word, links with a drawn gilt underline, compact gilt button.",
-      "html": "<header class=\"ds-nav\"><a class=\"ds-logo\" href=\"#\"><span class=\"ds-script\">Monika's</span><span class=\"ds-trade\">Coffee</span></a><nav><a href=\"#\" class=\"ds-link\" aria-current=\"location\">La casa</a><a href=\"#\" class=\"ds-link\">La carta</a><a href=\"#\" class=\"ds-link\">El ritual</a></nav></header>",
-      "css": ".ds-nav { display: flex; align-items: center; gap: 2rem; height: 4rem; padding: 0 1.5rem; background: #213a2e; font-family: 'Libre Franklin', Arial, sans-serif; } .ds-logo { display: inline-flex; align-items: center; gap: 0.45rem; text-decoration: none; } .ds-script { font-family: Yellowtail, cursive; font-size: 1.85rem; line-height: 1; color: #d2ae62; text-shadow: 0.035em 0.045em 0 #0d1913; } .ds-trade { font-family: Besley, Georgia, serif; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.32em; text-transform: uppercase; color: #c5cab7; } .ds-nav nav { display: flex; gap: 1.75rem; margin-left: auto; } .ds-link { position: relative; display: inline-flex; align-items: center; min-height: 44px; font-size: 0.95rem; font-weight: 500; color: #f1e8d6; text-decoration: none; } .ds-link::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0.55rem; height: 1px; background: #d2ae62; transform: scaleX(0); transform-origin: left; transition: transform 0.35s cubic-bezier(0.22,1,0.36,1); } .ds-link:hover::after, .ds-link[aria-current]::after { transform: scaleX(1); } .ds-link[aria-current] { color: #e2c27f; } .ds-link:focus-visible { outline: 2px solid #e2c27f; outline-offset: 3px; }"
+      "refersTo": "navigation",
+      "description": "Foam bar: italic Brygada wordmark, links whose underline draws in, small pill CTA.",
+      "html": "<header class=\"ds-nav\"><a class=\"ds-wordmark\" href=\"#\"><span class=\"ds-wordmark-name\">Monika's</span><span class=\"ds-wordmark-trade\">Coffee</span></a><nav><a href=\"#\" aria-current=\"location\">La casa</a><a href=\"#\">La carta</a><a href=\"#\">El ritual</a></nav><a class=\"ds-nav-cta\" href=\"#\">Escríbenos</a></header>",
+      "css": ".ds-nav { display: flex; align-items: center; gap: 2rem; height: 4.5rem; padding: 0 1.5rem; background: #fcfaf7; border-bottom: 1px solid rgb(74 48 38 / 0.2); font-family: var(--font-text, 'Familjen Grotesk', Arial, sans-serif); } .ds-wordmark { display: inline-flex; align-items: baseline; gap: 0.45rem; margin-right: auto; color: #2a1c16; text-decoration: none; line-height: 1; } .ds-wordmark-name { font-family: var(--font-display, 'Brygada 1918', Georgia, serif); font-style: italic; font-weight: 600; font-size: 1.7rem; letter-spacing: -0.02em; } .ds-wordmark-trade { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #7d5f4b; } .ds-nav nav { display: flex; gap: 2rem; } .ds-nav nav a { display: inline-flex; align-items: center; min-height: 2.75rem; font-size: 0.975rem; font-weight: 500; color: #4a3026; text-decoration: none; background: linear-gradient(currentColor, currentColor) 0 calc(100% - 0.6rem) / 0% 1px no-repeat; transition: background-size 400ms cubic-bezier(0.16, 1, 0.3, 1), color 180ms ease; } .ds-nav nav a:hover, .ds-nav nav a[aria-current] { color: #2a1c16; background-size: 100% 1px; } .ds-nav nav a:focus-visible, .ds-nav-cta:focus-visible { outline: 2px solid #8a5a2b; outline-offset: 3px; } .ds-nav-cta { display: inline-flex; align-items: center; min-height: 2.75rem; padding: 0.6rem 1.2rem; border-radius: 999px; background: #2a1c16; color: #fcfaf7; font-size: 0.95rem; font-weight: 600; text-decoration: none; transition: background-color 180ms ease; } .ds-nav-cta:hover { background: #4a3026; }"
     },
     {
-      "name": "Contact Channel",
-      "kind": "custom",
-      "refersTo": "channel-row",
-      "description": "A door-board row: gilt icon, Besley label, sage handle, circular arrow well that fills gilt on hover.",
-      "html": "<div class=\"ds-paint\"><button class=\"ds-channel\" type=\"button\"><svg class=\"ds-ch-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><path d=\"M4 6h16v12H4z\"/><path d=\"M4 7l8 6 8-6\"/></svg><span class=\"ds-ch-text\"><span class=\"ds-ch-label\">Correo</span><span class=\"ds-ch-handle\">hola@ejemplo.example</span></span><span class=\"ds-ch-well\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\"><path d=\"M5 12h14M13 6l6 6-6 6\"/></svg></span></button></div>",
-      "css": ".ds-paint { background: #213a2e; padding: 24px; } .ds-channel { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 1.1rem; width: 100%; min-height: 5.5rem; padding: 1rem 0.75rem; border: 0; border-top: 1px solid rgb(210 174 98 / 0.5); border-bottom: 1px solid rgb(210 174 98 / 0.5); background: transparent; color: #f1e8d6; text-align: left; cursor: pointer; transition: background-color 0.25s ease, padding 0.35s cubic-bezier(0.22,1,0.36,1); } .ds-channel:hover { background: #2b4738; padding-inline: 1.25rem 1rem; } .ds-channel:active { background: #16291f; } .ds-channel:focus-visible { outline: 2px solid #e2c27f; outline-offset: 3px; } .ds-ch-icon { width: 1.75rem; height: 1.75rem; color: #d2ae62; } .ds-ch-text { display: grid; gap: 0.15rem; } .ds-ch-label { font-family: Besley, Georgia, serif; font-size: 1.5rem; font-weight: 600; line-height: 1.15; } .ds-ch-handle { font-family: 'Libre Franklin', Arial, sans-serif; font-size: 0.95rem; color: #c5cab7; } .ds-ch-well { display: inline-flex; align-items: center; justify-content: center; width: 2.75rem; height: 2.75rem; border: 1px solid rgb(210 174 98 / 0.5); border-radius: 50%; transition: border-color 0.25s ease, background-color 0.25s ease; } .ds-ch-well svg { width: 1.15rem; height: 1.15rem; } .ds-channel:hover .ds-ch-well { border-color: #d2ae62; background: #d2ae62; color: #0d1913; }"
+      "name": "Recipe Card",
+      "kind": "card",
+      "refersTo": "recipe-card",
+      "description": "The milk card set down over a photograph, with its ruled notation line.",
+      "html": "<div class=\"ds-card\"><h1 class=\"ds-card-title\">Café recién hecho y repostería de casa.</h1><p class=\"ds-card-text\">Espressos y lattes preparados al momento.</p><dl class=\"ds-notes\"><div><dt>Molido</dt><dd>18 g</dd></div><div><dt>Extracción</dt><dd>25 s</dd></div><div><dt>Leche</dt><dd>65 °C</dd></div></dl></div>",
+      "css": ".ds-card { display: grid; gap: 1.5rem; max-width: 34rem; padding: clamp(1.75rem, 3.2vw, 3rem); background: #f5efe6; color: #4a3026; border-radius: 4px; box-shadow: 0 1px 0 rgb(74 48 38 / 0.08), 0 28px 56px -32px rgb(36 24 18 / 0.45); font-family: var(--font-text, 'Familjen Grotesk', Arial, sans-serif); } .ds-card-title { margin: 0; font-family: var(--font-display, 'Brygada 1918', Georgia, serif); font-size: clamp(2.1rem, 1.5rem + 2.6vw, 3.6rem); font-weight: 500; line-height: 1.04; letter-spacing: -0.025em; color: #2a1c16; } .ds-card-text { margin: 0; font-size: 1.25rem; line-height: 1.5; } .ds-notes { display: grid; grid-template-columns: repeat(3, 1fr); margin: 0; border-block: 1px solid rgb(74 48 38 / 0.45); } .ds-notes > div { display: grid; gap: 0.2rem; padding: 0.85rem 0 0.9rem; } .ds-notes > div + div { padding-left: 1rem; border-left: 1px solid rgb(74 48 38 / 0.2); } .ds-notes dt { font-size: 0.875rem; font-weight: 500; color: #7d5f4b; } .ds-notes dd { margin: 0; font-family: var(--font-display, 'Brygada 1918', Georgia, serif); font-size: 1.75rem; line-height: 1.1; color: #2a1c16; font-variant-numeric: lining-nums; }"
     },
     {
-      "name": "Ritual Measure",
+      "name": "Ruled Fields",
       "kind": "custom",
-      "description": "A real measurement set as a large Besley numeral with its unit in coffee, then the step title.",
-      "html": "<div class=\"ds-plaster\"><p class=\"ds-measure\"><span class=\"ds-num\">25</span><span class=\"ds-unit\">s</span></p><h3 class=\"ds-step-title\">Una extracción corta</h3></div>",
-      "css": ".ds-plaster { background: #f5efe6; padding: 24px; } .ds-measure { display: flex; align-items: baseline; gap: 0.4rem; margin: 0 0 1.25rem; font-family: Besley, Georgia, serif; color: #4a3026; } .ds-num { font-size: 6rem; font-weight: 800; line-height: 0.85; letter-spacing: -0.035em; font-variant-numeric: lining-nums; } .ds-unit { font-size: 1.75rem; font-weight: 600; color: #7d5f4b; } .ds-step-title { margin: 0; font-family: Besley, Georgia, serif; font-weight: 600; font-size: 1.75rem; line-height: 1.08; color: #4a3026; }"
+      "refersTo": "ruled-fields",
+      "description": "The house notes: a strong rule opens the field, hairlines divide rows, italic Brygada terms.",
+      "html": "<dl class=\"ds-fields\"><div><dt>La taza</dt><dd>Se prepara cuando la pides, nunca antes.</dd></div><div><dt>La bollería</dt><dd>Se hornea en casa.</dd></div><div><dt>La mesa</dt><dd>Música baja y ninguna prisa por levantarla.</dd></div></dl>",
+      "css": ".ds-fields { margin: 0; max-width: 32rem; border-top: 1px solid rgb(74 48 38 / 0.45); color: #4a3026; font-family: var(--font-text, 'Familjen Grotesk', Arial, sans-serif); font-size: 1.0625rem; line-height: 1.6; } .ds-fields > div { display: grid; grid-template-columns: 8.5rem 1fr; gap: 1rem; padding-block: 0.95rem; border-bottom: 1px solid rgb(74 48 38 / 0.2); } .ds-fields dt { font-family: var(--font-display, 'Brygada 1918', Georgia, serif); font-style: italic; font-size: 1.15rem; color: #2a1c16; } .ds-fields dd { margin: 0; padding-top: 0.1rem; }"
+    },
+    {
+      "name": "Cup in Section",
+      "kind": "custom",
+      "refersTo": "cup",
+      "description": "The signature glyph: a glass drawn in layers of a drink, bottom up, filling on scroll. Shown beside a menu item with its notation legend.",
+      "html": "<div class=\"ds-item\"><span class=\"ds-cup\" aria-hidden=\"true\"><span class=\"ds-cup-fill\"><span style=\"background:#fffcf6;box-shadow:inset 0 0 0 1px rgb(74 48 38 / 0.18)\"></span><span style=\"background:#eadbc6\"></span><span style=\"background:#3b2417\"></span></span></span><div><h4 class=\"ds-item-name\">Cappuccino</h4><p class=\"ds-notation\">Espresso, leche y espuma</p></div></div>",
+      "css": ".ds-item { display: grid; grid-template-columns: auto 1fr; column-gap: 0.85rem; align-items: end; } .ds-cup { display: inline-flex; flex-direction: column; width: 2rem; height: 2.85rem; padding: 2px; border: 1.5px solid rgb(74 48 38 / 0.45); border-top: 0; border-radius: 0 0 0.55rem 0.55rem; overflow: hidden; } .ds-cup-fill { display: flex; flex-direction: column; height: 100%; transform-origin: bottom; animation: ds-fill 900ms cubic-bezier(0.16, 1, 0.3, 1) both; } .ds-cup-fill > span { display: block; flex: 1 1 0; } .ds-cup-fill > span + span { margin-top: 1px; } .ds-cup-fill > span:last-child { border-radius: 0 0 0.4rem 0.4rem; } @keyframes ds-fill { from { transform: scaleY(0); } } @media (prefers-reduced-motion: reduce) { .ds-cup-fill { animation: none; } } .ds-item-name { margin: 0; font-family: var(--font-display, 'Brygada 1918', Georgia, serif); font-size: 1.3rem; font-weight: 500; line-height: 1.08; color: #2a1c16; } .ds-notation { margin: 0.2rem 0 0; font-family: var(--font-text, 'Familjen Grotesk', Arial, sans-serif); font-size: 0.875rem; font-weight: 500; letter-spacing: 0.01em; line-height: 1.3; color: #7d5f4b; }"
+    },
+    {
+      "name": "Contact Channel Row",
+      "kind": "custom",
+      "refersTo": "channel",
+      "description": "A ruled row on espresso: caramel icon, Brygada label, notation handle, caramel arrow disc.",
+      "html": "<div class=\"ds-dark-row\"><a class=\"ds-channel\" href=\"#\"><svg class=\"ds-channel-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"3\" y=\"5.5\" width=\"18\" height=\"13\" rx=\"1.5\"/><path d=\"m3.8 6.5 8.2 6.4 8.2-6.4\"/></svg><span class=\"ds-channel-label\">Correo</span><span class=\"ds-channel-handle\">hola@monikas.example</span><span class=\"ds-channel-go\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 12h15m-5.5-6 6 6-6 6\"/></svg></span></a></div>",
+      "css": ".ds-dark-row { background: #241812; padding: 1.5rem; } .ds-channel { display: grid; grid-template-columns: auto 1fr auto; grid-template-areas: 'icon label go' 'icon handle go'; align-items: center; gap: 0.2rem 1.25rem; min-height: 7rem; padding: 1.25rem 0; border-top: 1px solid rgb(243 233 220 / 0.35); border-bottom: 1px solid rgb(243 233 220 / 0.16); color: #f3e9dc; text-decoration: none; } .ds-channel-icon { grid-area: icon; width: 1.6rem; height: 1.6rem; color: #c9a27a; } .ds-channel-label { grid-area: label; align-self: end; font-family: var(--font-display, 'Brygada 1918', Georgia, serif); font-size: clamp(2.1rem, 1.5rem + 2.6vw, 3.6rem); font-weight: 500; line-height: 1.05; letter-spacing: -0.02em; transition: color 180ms ease; } .ds-channel-handle { grid-area: handle; align-self: start; font-family: var(--font-text, 'Familjen Grotesk', Arial, sans-serif); font-size: 0.875rem; font-weight: 500; color: #cdb9a3; } .ds-channel-go { grid-area: go; display: grid; place-items: center; width: 3rem; height: 3rem; border-radius: 50%; background: #c9a27a; color: #241812; transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-channel:hover .ds-channel-label { color: #c9a27a; } .ds-channel:hover .ds-channel-go { transform: translateX(4px); } .ds-channel:focus-visible { outline: 2px solid #c9a27a; outline-offset: 3px; }"
     }
   ],
   "narrative": {
-    "northStar": "The Painted Shopfront",
-    "overview": "The site is a sign-written shop façade and the room behind it. Bottle-green paint carries everything that belongs to the front of the shop: the header bar, the fascia, the window bays, the menu board on the wall, the door (contact) and the footer. Gilt, lettered with a sign-writer's dark drop shade, is reserved for lettering and fine rules on that paint. Inside the room, the page turns to plaster cream and oat with espresso-brown ink, and the photographs do the talking.\n\nDensity is calm and generous in the room sections (one idea per section, wide vertical rhythm) and deliberately dense on the menu board, which holds the whole menu on one painted panel in two columns, like a real board. Depth comes from paint and joinery, not from floating cards: photographs sit square-cornered inside green joinery with a thin gilt bead, boards carry a chamfered gilt rule inset from their edge.\n\nMotion is restrained and physical: the shutters roll up once on load, the ritual's sticky photograph crossfades with the step being read, photographs ease in a 3% zoom on hover, buttons step up and press down, nav underlines draw from the left. Everything rests under reduced motion.",
+    "northStar": "The Cup in Section",
+    "overview": "The page is Monika's house recipe card read as an editorial: the café's craft written in its own notation (doses, seconds, degrees, what goes into each cup) set beside large, quiet photographs. Read top to bottom, the page is a cup cut through: foam at the top, then milk, crema, and espresso at the foot. Every ground is a layer of a coffee, and the visitor moves down through them.\n\nThe system is warm, calm and sparse. A 1918 book face carries headlines, the wordmark and the measurements at display size; a plain grotesk carries text and the small print. Between them there is no middle size: big measured numbers against small notation. Structure comes from hairline rules like a ruled card, never from boxes, frames or card grids. Photographs are square-cornered, unframed and treated as one graded set.\n\nMotion is one grammar: exponential ease-out, and things fill from the bottom like a poured cup. Everything is readable without motion and comes to rest under reduced motion.",
     "keyCharacteristics": [
-      "Two materials: green paint with gilt lettering (the front) and plaster with brown ink (the room).",
-      "Gilt appears only on paint, never on plaster.",
-      "Square photographs in green joinery with a gilt bead; no rounded image cards.",
-      "Boards with notched (chamfered) gilt rules frame the sign, the menu and the door.",
-      "Three typefaces with fixed jobs: Yellowtail signs the name, Besley letters every heading and numeral, Libre Franklin sets the text."
+      "Grounds change only by cup layer: foam, milk, crema, espresso, espresso-deep.",
+      "One accent, caramel, and only on espresso.",
+      "Hairline-ruled fields as the structural device (notation line, house notes, contact channels, menu categories).",
+      "The cup-in-section glyph as the signature mark.",
+      "Square, unframed photographs; one pill button."
     ],
     "rules": [
-      { "name": "The Gilt Stays On Paint Rule", "body": "Gilt lettering, gilt rules and the gilt bead appear only on bottle-green surfaces. On plaster, headings are dark brown and dividers are the brown rule.", "section": "colors" },
-      { "name": "The Two Materials Rule", "body": "Every section is either paint (front of shop: header, hero, menu board, door, footer) or plaster/oat (the room). No third surface colour, no gradients between them.", "section": "colors" },
-      { "name": "The Signature Only Rule", "body": "Yellowtail sets the word \"Monika's\" and nothing else.", "section": "typography" },
-      { "name": "The Measurement Is The Headline Rule", "body": "Where a fact has a number (grams, seconds, degrees), the numeral is set largest and the sentence follows.", "section": "typography" },
-      { "name": "The Hung, Not Floating Rule", "body": "A shadow only says that a painted object hangs on a wall: long, low, with a large negative spread. No ambient card shadows on plaster.", "section": "elevation" }
+      { "name": "The Cup Layer Rule", "body": "A section's ground is one of the cup's layers, in order down the page. Between light layers the seam is a soft gradient over `spacing.seam` (milk into crema runs `in oklab` over 1.75 seams); no other surface tints exist.", "section": "colors" },
+      { "name": "The Caramel-on-Espresso Rule", "body": "Caramel appears only on espresso grounds. On light grounds the accent role is played by espresso ink.", "section": "colors" },
+      { "name": "The No Middle Size Rule", "body": "Measurements and headlines sit at display size against small notation; do not introduce an intermediate size to bridge them.", "section": "typography" },
+      { "name": "The Written Field Rule", "body": "Italic Brygada marks the hand-written parts of the card (wordmark, field terms, units, the long line). Roman Brygada carries headings. Grotesk never goes italic.", "section": "typography" },
+      { "name": "The Set-Down Rule", "body": "Only a card that sits over something else gets a shadow. Sections, photographs and list rows never do.", "section": "elevation" }
     ],
     "dos": [
-      "Do letter in gilt with the shade drop only on bottle-green paint.",
-      "Do set photographs square-cornered inside green joinery (one joint wide), with the gilt bead on anything larger than a thumbnail.",
-      "Do frame a block that belongs to the shopfront (sign, menu, door, notice) as a board with the chamfered gilt rule.",
-      "Do alternate room sections between plaster and oat instead of drawing lines between them.",
-      "Do set real measurements as large Besley numerals with the unit in coffee.",
-      "Do let every animation rest under prefers-reduced-motion; motion is once on load, on scroll position, or on hover/press.",
-      "Do serve photographs as WebP with a JPEG fallback."
+      "**Do** change ground only by cup layer, in order, with a soft seam between light layers.",
+      "**Do** keep caramel on espresso grounds only.",
+      "**Do** build structure from hairline rules: `rule-strong` to open a field, `rule` between rows.",
+      "**Do** keep photographs square-cornered and unframed, and treat new photographs with the same warm, matte, lower-saturation grade.",
+      "**Do** use the single pill button; on espresso it turns caramel.",
+      "**Do** write measurements in Brygada at display size with an italic unit, and composition in small tabular notation.",
+      "**Do** animate with the exponential ease-out (`cubic-bezier(0.16, 1, 0.3, 1)`) and fill from the bottom: the hero photo pours in on load (clip from the bottom, 1100ms), cups fill and the ritual timeline draws on scroll timelines, two room photographs drift against the scroll. Everything is readable before motion and rests under reduced motion."
     ],
     "donts": [
-      "Don't use Yellowtail for anything but the word \"Monika's\".",
-      "Don't place gilt text or gilt rules on plaster or oat.",
-      "Don't round photograph or panel corners, or float cards on soft ambient shadows.",
-      "Don't break a menu category across the board's columns, or turn the menu into a uniform tile grid.",
-      "Don't introduce a third surface colour or a gradient between paint and plaster."
+      "**Don't** put eyebrows or kickers above headings.",
+      "**Don't** lay content out as card grids, or put frames inside frames.",
+      "**Don't** add a second button style or a second accent colour.",
+      "**Don't** add shadows to sections, photographs or rows; only set-down cards carry one.",
+      "**Don't** size contact or footer type from the viewport as single giant words; size it from content or its own column."
     ]
   }
 }

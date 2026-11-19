@@ -4,12 +4,14 @@ import { site, nav, contactAnchor } from '../data/site';
 import { photographers } from '../data/credits';
 ---
 
-<footer class="footer on-paint">
+<footer class="footer dark">
   <div class="wrap">
-    <p class="footer__signature gilt" aria-hidden="true">Monika's</p>
-
     <div class="footer__grid">
       <div class="footer__about">
+        <p class="footer__mark" aria-hidden="true">
+          <span class="footer__name">Monika's</span>
+          <span class="footer__trade">Coffee</span>
+        </p>
         <p class="footer__tagline">Café, repostería de casa y una mesa junto a la ventana.</p>
         <p class="footer__fiction">
           Monika's Coffee es una marca ficticia creada como proyecto de portafolio. No tiene local,
@@ -23,11 +25,17 @@ import { photographers } from '../data/credits';
           {
             nav.map((item) => (
               <li>
-                <a href={`#${item.id}`}>{item.label}</a>
+                <a href={`#${item.id}`}>
+                  <span class="draw">{item.label}</span>
+                </a>
               </li>
             ))
           }
-          <li><a href={`#${contactAnchor}`}>Escríbenos</a></li>
+          <li>
+            <a href={`#${contactAnchor}`}>
+              <span class="draw">Escríbenos</span>
+            </a>
+          </li>
         </ul>
       </nav>
 
@@ -40,7 +48,7 @@ import { photographers } from '../data/credits';
               photographers.map((p) => (
                 <li>
                   <a href={`https://unsplash.com/@${p.handle}`} rel="noopener" target="_blank">
-                    {p.author}
+                    <span class="draw">{p.author}</span>
                     <span class="visually-hidden"> (abre en una pestaña nueva)</span>
                   </a>
                 </li>
@@ -55,7 +63,7 @@ import { photographers } from '../data/credits';
       <p>© {site.year} {site.name} · Marca ficticia</p>
       <a class="footer__top" href="#inicio">
         Volver arriba
-        <Icon name="arrow-up" class="icon footer__top-icon" />
+        <Icon name="arrow-up" />
       </a>
     </div>
   </div>
@@ -63,42 +71,56 @@ import { photographers } from '../data/credits';
 
 <style>
   .footer {
-    background: var(--paint-deep);
-    padding-block: clamp(3rem, 6vw, 5.5rem) 1.5rem;
-    font-size: 0.95rem;
-  }
-
-  .footer__signature {
-    margin: 0 0 clamp(2rem, 4vw, 3.5rem);
-    font-family: var(--font-script);
-    font-size: clamp(5rem, 1rem + 17vw, 15.5rem);
-    line-height: 0.9;
-    padding: 0.05em 0 0.15em 0.12em;
-    color: var(--gilt);
-    text-shadow: 0.03em 0.04em 0 var(--shade);
+    background: var(--espresso-deep);
+    padding-top: clamp(3.5rem, 2rem + 5vw, 6rem);
+    font-size: 0.975rem;
   }
 
   .footer__grid {
     display: grid;
-    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1.2fr);
-    gap: 2.5rem clamp(2rem, 5vw, 5rem);
-    padding-block: 2.5rem;
-    border-top: 1px solid var(--gilt-line);
+    grid-template-columns: minmax(0, 6fr) minmax(0, 3fr) minmax(0, 3fr);
+    gap: clamp(2rem, 4vw, 4rem);
+    padding-bottom: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .footer__about {
+    display: grid;
+    gap: 1rem;
+    align-content: start;
+    max-width: 30rem;
+  }
+
+  .footer__mark {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 0.5rem;
+    color: var(--on-dark);
+    line-height: 1;
+  }
+
+  .footer__name {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 600;
+    font-size: clamp(2.5rem, 1.8rem + 2.4vw, 3.75rem);
+    letter-spacing: -0.025em;
+  }
+
+  .footer__trade {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--caramel);
   }
 
   .footer__tagline {
-    font-family: var(--font-sign);
-    font-size: clamp(1.35rem, 1.15rem + 0.7vw, 1.75rem);
-    font-weight: 600;
-    line-height: 1.25;
-    color: var(--on-paint);
-    max-width: 22ch;
-    margin-bottom: 1rem;
-  }
-
-  .footer__fiction {
-    max-width: 44ch;
-    color: var(--on-paint-muted);
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    line-height: 1.35;
+    color: var(--on-dark);
   }
 
   .footer__heading {
@@ -106,56 +128,82 @@ import { photographers } from '../data/credits';
     font-family: var(--font-text);
     font-size: 0.8rem;
     font-weight: 600;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--gilt);
+    color: var(--caramel);
   }
 
   .footer__nav a,
   .footer__credits a {
-    display: inline-flex;
+    display: flex;
     align-items: center;
+    width: 100%;
     min-height: 2.75rem;
-    color: var(--on-paint);
-    text-decoration: underline;
-    text-decoration-color: transparent;
-    transition: text-decoration-color 0.2s ease, color 0.2s ease;
+    color: var(--on-dark);
+    text-decoration: none;
+    transition: color var(--t-quick) ease;
   }
 
   .footer__nav a:hover,
   .footer__credits a:hover {
-    color: var(--gilt-bright);
-    text-decoration-color: currentColor;
+    color: var(--caramel);
   }
 
   .footer__credits summary {
     display: flex;
     align-items: center;
+    gap: 0.5rem;
     min-height: 2.75rem;
-    color: var(--on-paint-muted);
     cursor: pointer;
-    list-style-position: inside;
+    color: var(--on-dark);
+    list-style: none;
   }
 
-  .footer__credits summary:hover {
-    color: var(--on-paint);
+  .footer__credits summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .footer__credits summary::after {
+    content: '+';
+    margin-left: auto;
+    color: var(--caramel);
+    font-size: 1.25rem;
+    line-height: 1;
+    transition: transform 300ms var(--ease-out);
+  }
+
+  .footer__credits details[open] summary::after {
+    transform: rotate(45deg);
+  }
+
+  /* The list of photographers opens to its height instead of appearing at once. */
+  @media (prefers-reduced-motion: no-preference) {
+    .footer__credits details {
+      interpolate-size: allow-keywords;
+    }
+
+    .footer__credits details::details-content {
+      block-size: 0;
+      overflow: clip;
+      transition:
+        block-size 480ms var(--ease-out),
+        content-visibility 480ms allow-discrete;
+    }
+
+    .footer__credits details[open]::details-content {
+      block-size: auto;
+    }
   }
 
   .footer__credits ul {
+    padding-top: 0.25rem;
     columns: 2;
-    column-gap: 1.25rem;
-    margin-top: 0.5rem;
+    column-gap: 1rem;
+    font-size: 0.9rem;
   }
 
   .footer__credits li {
     break-inside: avoid;
-  }
-
-  .footer__credits a {
-    display: flex;
-    width: 100%;
-    min-height: 2.75rem;
-    font-size: 0.875rem;
   }
 
   .footer__base {
@@ -163,10 +211,10 @@ import { photographers } from '../data/credits';
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    gap: 1rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--gilt-line);
-    color: var(--on-paint-muted);
+    gap: 0.5rem 2rem;
+    padding-block: 1.25rem;
+    border-top: 1px solid var(--rule);
+    font-size: 0.9rem;
   }
 
   .footer__top {
@@ -174,29 +222,36 @@ import { photographers } from '../data/credits';
     align-items: center;
     gap: 0.5rem;
     min-height: 2.75rem;
-    color: var(--on-paint);
+    color: var(--on-dark);
     text-decoration: none;
   }
 
-  .footer__top-icon {
+  .footer__top .icon {
     width: 1.1rem;
     height: 1.1rem;
-    fill: none;
-    stroke: currentColor;
-    transition: transform 0.3s var(--ease-out);
   }
 
-  .footer__top:hover {
-    color: var(--gilt-bright);
+  /* The arrow leaves upwards and comes back from below. */
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .footer__top:hover .icon {
+      animation: arrow-up-through 560ms var(--ease-out);
+    }
   }
 
-  .footer__top:hover .footer__top-icon {
-    transform: translateY(-3px);
+  @keyframes arrow-up-through {
+    40% {
+      transform: translateY(-120%);
+      opacity: 0;
+    }
+    41% {
+      transform: translateY(120%);
+      opacity: 0;
+    }
   }
 
   @media (max-width: 56rem) {
     .footer__grid {
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     }
 
     .footer__about {
@@ -204,9 +259,13 @@ import { photographers } from '../data/credits';
     }
   }
 
-  @media (max-width: 34rem) {
+  @media (max-width: 30rem) {
     .footer__grid {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .footer__credits ul {
+      columns: 1;
     }
   }
 </style>

@@ -1,302 +1,310 @@
 ---
 import Photo from './Photo.astro';
 import Icon from './Icon.astro';
-import { site, contactAnchor } from '../data/site';
+import { contactAnchor } from '../data/site';
 import sala from '../assets/photos/casa-sala.jpg';
-import mesa from '../assets/photos/ambiente-mesa.jpg';
 ---
 
-<section class="hero on-paint" id="inicio" data-nav-section aria-labelledby="hero-title">
-  <div class="hero__inner wrap">
-    <!-- The fascia: the shop's sign board, lettered in gilt. -->
-    <div class="fascia board">
-      <h1 class="sign" id="hero-title">
-        <span class="sign__name gilt">Monika's</span>
-        <span class="sign__rest">
-          <span class="sign__trade gilt">Coffee</span>
-          <span class="visually-hidden">: </span>
-          <span class="sign__line">{site.tagline}</span>
-        </span>
+<section class="hero" id="inicio" data-nav-section aria-labelledby="hero-title">
+  <div class="hero__grid wrap">
+    <div class="hero__photo photo">
+      <Photo
+        src={sala}
+        alt="La sala con luz de tarde: mesas de madera, sillas de bistró y plantas colgantes."
+        widths={[640, 960, 1280, 1600, 1920]}
+        sizes="100vw"
+        priority
+      />
+    </div>
+
+    <!-- The house recipe card, set down over the photograph. -->
+    <div class="hero__card">
+      <h1 class="hero__title" id="hero-title">
+        <span class="visually-hidden">Monika's Coffee: </span>Café recién hecho y repostería de casa,
+        para quedarse un rato.
       </h1>
-    </div>
-
-    <!-- The shopfront bays: a wide window and a tall door pane, set in green joinery. -->
-    <div class="bays">
-      <div class="bay bay--window frame frame--bead">
-        <Photo
-          src={sala}
-          alt="La sala al atardecer: mesas de madera, sillas de bistró y plantas colgantes bañadas por una luz dorada."
-          widths={[640, 960, 1280, 1600, 1800]}
-          sizes="(min-width: 60rem) 62vw, (min-width: 44rem) 58vw, 100vw"
-          priority
-        />
-        <span class="transom" aria-hidden="true"></span>
-        <span class="shutter" aria-hidden="true"></span>
-      </div>
-      <div class="bay bay--door frame frame--bead">
-        <Photo
-          src={mesa}
-          alt="Tres cafés con un corazón dibujado en la espuma, sobre una mesa de madera rodeada de plantas."
-          widths={[240, 400, 640, 800, 1000]}
-          sizes="(min-width: 60rem) 30vw, (min-width: 44rem) 40vw, 34vw"
-        />
-        <span class="shutter" aria-hidden="true"></span>
-      </div>
-    </div>
-
-    <!-- The stallriser: the painted panel under the windows. -->
-    <div class="stallriser">
-      <p class="stallriser__text">
+      <p class="hero__text">
         Una cafetería pequeña para sentarse sin prisa: espressos y lattes preparados al momento,
         bebidas frías, matcha y bollería del día.
       </p>
-      <div class="stallriser__actions">
-        <a class="btn btn--gilt" href={`#${contactAnchor}`}>
+      <div class="hero__actions">
+        <a class="btn" href={`#${contactAnchor}`}>
           Escríbenos
-          <Icon name="arrow" class="arrow" />
+          <Icon name="arrow" />
         </a>
-        <a class="btn btn--line" href="#carta">Ver la carta</a>
+        <a class="text-link" href="#carta">Ver la carta</a>
       </div>
+    </div>
+
+    <!-- The recipe's three measurements, written on a ruled line like the foot of a card. -->
+    <div class="hero__notes">
+      <dl>
+        <div>
+          <dt>Molido</dt>
+          <dd>18 g</dd>
+        </div>
+        <div>
+          <dt>Extracción</dt>
+          <dd>25 s</dd>
+        </div>
+        <div>
+          <dt>Leche</dt>
+          <dd>65 °C</dd>
+        </div>
+      </dl>
+      <a class="text-link" href="#ritual">
+        Cómo preparamos cada taza
+        <Icon name="arrow" />
+      </a>
     </div>
   </div>
 </section>
 
 <style>
   .hero {
-    background: var(--paint);
-    padding-block: var(--joint) calc(var(--joint) * 2);
+    --photo-h: clamp(22rem, 64svh, 44rem);
+    --overlap: clamp(9rem, 22svh, 15rem);
+    padding-bottom: clamp(3rem, 6vw, 6rem);
   }
 
-  .hero__inner {
+  .hero__grid {
     display: grid;
-    grid-template-rows: auto minmax(15rem, 1fr) auto;
-    gap: var(--joint);
-    min-height: calc(100svh - var(--header-h) - var(--joint) * 3);
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-template-rows: calc(var(--photo-h) - var(--overlap)) var(--overlap) auto;
+    column-gap: clamp(1rem, 2vw, 2rem);
   }
 
-  /* ----- Fascia ----- */
+  /* The photograph runs the full width of the page and out to the window's right edge. */
+  .hero__photo {
+    grid-column: 1 / -1;
+    grid-row: 1 / 3;
+    margin-right: calc(-1 * var(--gutter));
+    margin-top: clamp(0.5rem, 1.5vw, 1.5rem);
+  }
 
-  .fascia {
+  /* The light falls on the tables and chairs: keep them in the crop. */
+  .hero__photo :global(img) {
+    object-position: 50% 78%;
+  }
+
+  .hero__card {
+    position: relative;
+    grid-column: 1 / 8;
+    grid-row: 2 / 4;
+    align-self: start;
     display: grid;
-    place-items: center;
-    padding: clamp(1.25rem, 2.6vw, 2.25rem) clamp(1.5rem, 4vw, 3rem);
+    gap: clamp(1.25rem, 2vw, 1.75rem);
+    padding: clamp(1.75rem, 3.2vw, 3rem);
+    background: var(--milk);
+    border-radius: 4px;
+    box-shadow:
+      0 1px 0 rgb(74 48 38 / 0.08),
+      0 28px 56px -32px rgb(36 24 18 / 0.45);
   }
 
-  .sign {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: clamp(0.75rem, 2.5vw, 2.5rem);
-    font-weight: 400;
-    text-align: left;
-  }
-
-  .sign__name {
-    font-family: var(--font-script);
-    font-size: clamp(3.6rem, 1.6rem + 7.4vw, 8.25rem);
-    line-height: 0.9;
-    letter-spacing: 0;
-    padding: 0.06em 0.12em 0.14em 0.02em; /* room for the script's swashes and shade */
-  }
-
-  .sign__rest {
-    display: grid;
-    gap: 0.55rem;
-    padding-left: clamp(0.75rem, 2.5vw, 2.5rem);
-    border-left: 1px solid var(--gilt-line);
-  }
-
-  .sign__trade {
-    font-family: var(--font-sign);
-    font-weight: 800;
-    font-size: clamp(1.5rem, 0.9rem + 2.2vw, 2.9rem);
-    line-height: 1;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    margin-right: -0.28em;
-  }
-
-  .sign__line {
-    font-family: var(--font-sign);
+  .hero__title {
+    font-size: var(--step-3);
     font-weight: 500;
-    font-size: clamp(0.98rem, 0.85rem + 0.45vw, 1.25rem);
-    line-height: 1.3;
-    letter-spacing: 0.01em;
-    color: var(--on-paint);
-    max-width: 19ch;
+    line-height: 1.04;
+    letter-spacing: -0.025em;
+    max-width: 17ch;
   }
 
-  /* ----- Bays ----- */
+  .hero__text {
+    max-width: 44ch;
+    font-size: var(--step-1);
+    line-height: 1.5;
+  }
 
-  .bays {
+  .hero__notes {
+    grid-column: 8 / -1;
+    grid-row: 3;
+    align-self: start;
     display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: var(--joint);
-    min-height: 0;
+    justify-items: start;
+    gap: 0.75rem;
+    margin-top: clamp(1.5rem, 3vw, 2.75rem);
   }
 
-  .bay {
-    min-height: 0;
-  }
-
-  .bay :global(picture),
-  .bay :global(img) {
-    position: absolute;
-    inset: 0;
+  .hero__notes dl {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     width: 100%;
-    height: 100%;
   }
 
-  .bay--window :global(img) {
-    object-position: 50% 62%;
-  }
-
-  .bay--door :global(img) {
-    object-position: 50% 70%;
-  }
-
-  /* The transom bar: the horizontal glazing bar that splits a shop window into a top light
-     and the main pane, beaded in gilt like the rest of the joinery. Wide windows only. */
-  .transom {
+  /* The two rules of the line, drawn as their own strokes so the entrance can write them. */
+  .hero__notes dl::before,
+  .hero__notes dl::after {
+    content: '';
     position: absolute;
     left: 0;
     right: 0;
-    top: 22%;
-    height: var(--joint);
-    background: var(--paint);
-    box-shadow:
-      0 -1px 0 rgb(226 194 127 / 0.5),
-      0 1px 0 rgb(226 194 127 / 0.5);
-    pointer-events: none;
+    height: 1px;
+    background: var(--rule-strong);
+    transform-origin: left;
   }
 
-  /* The shutter: green slats that roll up once when the page opens. Hidden by default,
-     so with reduced motion (or no animation support) the windows are simply open. */
-  .shutter {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background:
-      repeating-linear-gradient(
-        to bottom,
-        var(--paint-raised) 0 1.1rem,
-        var(--paint) 1.1rem 1.2rem,
-        var(--shade) 1.2rem 1.25rem
-      );
-    transform: translateY(-101%);
-    pointer-events: none;
+  .hero__notes dl::before {
+    top: 0;
   }
+
+  .hero__notes dl::after {
+    bottom: 0;
+  }
+
+  .hero__notes dl > div {
+    display: grid;
+    gap: 0.2rem;
+    padding: 0.85rem 0 0.9rem;
+  }
+
+  .hero__notes dl > div + div {
+    padding-left: 1rem;
+    border-left: 1px solid var(--rule);
+  }
+
+  .hero__notes dt {
+    font-size: var(--step--1);
+    font-weight: 500;
+    color: var(--coffee);
+  }
+
+  .hero__notes dd {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    line-height: 1.1;
+    color: var(--ink);
+    font-variant-numeric: lining-nums;
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1.75rem;
+  }
+
+  /* ----- The one authored entrance: the room is poured in from the bottom, then the card
+     is set down on it. Everything starts visible without it. ----- */
 
   @media (prefers-reduced-motion: no-preference) {
-    .shutter {
-      animation: shutter-up 1.25s var(--ease-in-out) 0.35s backwards;
+    .hero__photo {
+      animation: pour-in 1100ms var(--ease-out) 80ms backwards;
     }
 
-    .bay--door .shutter {
-      animation-delay: 0.55s;
+    .hero__photo :global(img) {
+      animation: settle 1700ms var(--ease-out) 80ms backwards;
     }
 
-    .bay :global(img) {
-      animation: settle 2.2s var(--ease-out) 0.35s backwards;
+    /* The card stays opaque: it is set down, never faded in over the photograph. */
+    .hero__card {
+      animation: set-down 900ms var(--ease-out) 250ms backwards;
+    }
+
+    /* Then the measurements are written on their ruled line: two strokes, three values. */
+    .hero__notes dl::before {
+      animation: write 900ms var(--ease-out) 620ms backwards;
+    }
+
+    .hero__notes dl::after {
+      animation: write 900ms var(--ease-out) 720ms backwards;
+    }
+
+    .hero__notes dd {
+      animation: rise 700ms var(--ease-out) 820ms backwards;
+    }
+
+    .hero__notes dl > div:nth-child(2) dd {
+      animation-delay: 890ms;
+    }
+
+    .hero__notes dl > div:nth-child(3) dd {
+      animation-delay: 960ms;
     }
   }
 
-  @keyframes shutter-up {
+  @keyframes pour-in {
     from {
-      transform: translateY(0);
+      clip-path: inset(100% 0 0 0);
     }
     to {
-      transform: translateY(-101%);
+      clip-path: inset(0 0 0 0);
     }
   }
 
   @keyframes settle {
     from {
-      transform: scale(1.06);
-    }
-    to {
-      transform: scale(1);
+      transform: scale(1.08);
     }
   }
 
-  /* ----- Stallriser ----- */
-
-  /* The sill moulding (a gilt line) sits on top of the stallriser. */
-  .stallriser {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.25rem 2.5rem;
-    padding: clamp(1rem, 1.8vw, 1.5rem) 0 0;
-    border-top: 1px solid var(--gilt-line);
-  }
-
-  .stallriser__text {
-    max-width: 50ch;
-    font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
-    line-height: 1.55;
-    color: var(--on-paint);
-  }
-
-  .stallriser__actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    flex: none;
-  }
-
-  /* ----- Small screens: the sign stacks, the door pane steps aside ----- */
-
-  @media (max-width: 60rem) {
-    .hero__inner {
-      grid-template-rows: auto minmax(13rem, 1fr) auto;
-    }
-
-    .bays {
-      grid-template-columns: 3fr 2fr;
-    }
-
-    .stallriser {
-      flex-direction: column;
-      align-items: stretch;
+  @keyframes write {
+    from {
+      transform: scaleX(0);
     }
   }
 
-  /* Narrower windows lose the transom; phones keep both bays so coffee shows at once. */
-  @media (max-width: 60rem) {
-    .transom {
-      display: none;
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(0.45em);
     }
   }
 
-  @media (max-width: 44rem) {
-    .bays {
-      grid-template-columns: 2fr 1fr;
+  @keyframes set-down {
+    from {
+      transform: translateY(1.75rem);
     }
   }
 
-  @media (max-width: 40rem) {
-    .sign {
-      flex-direction: column;
-      gap: 0.6rem;
-      text-align: center;
+  /* ----- Tablet: the card takes more of the width ----- */
+
+  @media (max-width: 64rem) {
+    .hero__notes {
+      grid-column: 1 / -1;
+      grid-row: 4;
+      max-width: 34rem;
     }
 
-    .sign__rest {
-      justify-items: center;
-      padding-left: 0;
-      padding-top: 0.6rem;
-      border-left: 0;
-      border-top: 1px solid var(--gilt-line);
+    .hero__card {
+      grid-column: 1 / 10;
+    }
+  }
+
+  /* ----- Phones: the photograph runs edge to edge, the card overlaps its foot ----- */
+
+  @media (max-width: 48rem) {
+    .hero {
+      --photo-h: clamp(17rem, 50svh, 26rem);
+      --overlap: 3.5rem;
     }
 
-    .sign__line {
-      max-width: none;
+    .hero__photo {
+      grid-column: 1 / -1;
+      margin-inline: calc(-1 * var(--gutter));
+      margin-top: 0;
     }
 
-    .stallriser__actions {
-      display: grid;
-      grid-template-columns: 1fr;
+    .hero__card {
+      grid-column: 1 / -1;
+      margin-inline: -0.25rem;
+    }
+
+    .hero__actions .btn {
+      flex: 1 1 100%;
+    }
+
+    .hero__actions .text-link {
+      margin-inline: auto;
+    }
+  }
+
+  /* Small phones: a shorter photograph keeps "Escríbenos" in the first screen. */
+  @media (max-width: 30rem) {
+    .hero {
+      --photo-h: clamp(13rem, 36svh, 19rem);
     }
   }
 </style>

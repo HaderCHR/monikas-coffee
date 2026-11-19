@@ -151,3 +151,49 @@ export const menu: MenuCategory[] = [
     ],
   },
 ];
+
+/** One ingredient of a drink, as it sits in the cup. */
+export type Layer =
+  | 'espresso' | 'agua' | 'leche' | 'espuma' | 'chocolate' | 'nata'
+  | 'vainilla' | 'caramelo' | 'hielo' | 'matcha' | 'te' | 'frutos';
+
+export const layerNames: Record<Layer, string> = {
+  espresso: 'espresso',
+  agua: 'agua caliente',
+  leche: 'leche',
+  espuma: 'espuma',
+  chocolate: 'chocolate',
+  nata: 'nata',
+  vainilla: 'vainilla',
+  caramelo: 'caramelo',
+  hielo: 'hielo',
+  matcha: 'matcha',
+  te: 'té',
+  frutos: 'frutos rojos',
+};
+
+/**
+ * What goes into each drink, bottom to top, with a rough share (1–3) of the cup.
+ * These are what the drinks are by definition, not house recipes or quantities.
+ * Pastries have no entry.
+ */
+export const composition: Record<string, [Layer, 1 | 2 | 3][]> = {
+  espresso: [['espresso', 1]],
+  americano: [['espresso', 1], ['agua', 3]],
+  cappuccino: [['espresso', 1], ['leche', 1], ['espuma', 1]],
+  'cafe-latte': [['espresso', 1], ['leche', 3], ['espuma', 1]],
+  mocha: [['chocolate', 1], ['espresso', 1], ['leche', 2], ['nata', 1]],
+  'vanilla-latte': [['vainilla', 1], ['espresso', 1], ['leche', 3], ['espuma', 1]],
+  'iced-caramel-latte': [['caramelo', 1], ['hielo', 2], ['leche', 2], ['espresso', 1], ['nata', 1]],
+  'iced-latte': [['hielo', 2], ['leche', 2], ['espresso', 1]],
+  'matcha-latte': [['matcha', 1], ['leche', 2], ['espuma', 1]],
+  'te-frutos-rojos': [['frutos', 1], ['hielo', 2], ['te', 2]],
+};
+
+/** "Espresso, leche y espuma": the cup read from the bottom up, as a sentence. */
+export const compositionText = (id: string) => {
+  const names = (composition[id] ?? []).map(([layer]) => layerNames[layer]);
+  if (!names.length) return '';
+  const text = names.length > 1 ? `${names.slice(0, -1).join(', ')} y ${names.at(-1)}` : names[0];
+  return text.charAt(0).toUpperCase() + text.slice(1);
+};

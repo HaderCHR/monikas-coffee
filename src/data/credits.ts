@@ -1,7 +1,8 @@
 /**
  * Photo credits. Every photograph is a stand-in from Unsplash, used under the Unsplash
  * License (free use, attribution appreciated but not required). Verified as free (not
- * Unsplash+) on 2026-11-19. Files live in src/assets/photos under the key name.
+ * Unsplash+) on 2026-11-19. Files live in src/assets/photos under the key name, colour-graded
+ * as one set (warmer, matte, lower saturation) on 2026-11-19; the Unsplash License allows edits.
  */
 export type Credit = { file: string; author: string; handle: string; id: string };
 
@@ -27,12 +28,8 @@ export const credits: Credit[] = [
   { file: 'ritual-extraccion', author: 'Nathan Dumlao', handle: 'nate_dumlao', id: 'So7cyDtlmls' },
   { file: 'ritual-leche', author: 'Brooke Cagle', handle: 'brookecagle', id: 'X4RJG4aNi8o' },
   { file: 'ritual-agua', author: 'Giorgio Trovato', handle: 'giorgiotrovato', id: 'nxhqxf1FJBY' },
-  { file: 'hero-sala', author: 'KWON JUNHO', handle: 'juno1412', id: 'cdV6wL_Eoy4' },
-  { file: 'ambiente-charla', author: 'Julio Lopez', handle: 'juliolopez', id: 'd7jgsEdPcpw' },
   { file: 'ambiente-pastel', author: 'Roman Kraft', handle: 'iamromankraft', id: 'suOsnKfTzMI' },
   { file: 'ambiente-taza-verde', author: 'Priscilla Du Preez', handle: 'priscilladupreez', id: '3MrkGyBoRc0' },
-  { file: 'ambiente-barra', author: 'RR Abrot', handle: 'rr_abrot', id: 'pNIgH0y3upM' },
-  { file: 'ambiente-tazas', author: 'Izz R', handle: 'dizzcoverie', id: 'VKPLOCtxJRs' },
 ];
 
 /** Unique photographers, in order of first appearance. */

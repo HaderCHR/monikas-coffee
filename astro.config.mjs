@@ -7,20 +7,26 @@ export default defineConfig({
   site: 'https://haderchr.github.io',
   base: '/monikas-coffee',
 
-  // Self-hosted fonts (OFL / Apache 2.0, files and licences in src/assets/fonts).
+  // Self-hosted variable fonts (SIL OFL 1.1, files and licences in src/assets/fonts).
   // Astro generates @font-face rules, preload links and metric-matched fallbacks.
   fonts: [
     {
       provider: fontProviders.local(),
-      name: 'Besley',
-      cssVariable: '--font-sign',
+      name: 'Brygada 1918',
+      cssVariable: '--font-display',
       fallbacks: ['Georgia', 'serif'],
       options: {
         variants: [
           {
-            src: ['./src/assets/fonts/besley-latin-wght-normal.woff2'],
-            weight: '400 900',
+            src: ['./src/assets/fonts/brygada-1918-latin.woff2'],
+            weight: '400 700',
             style: 'normal',
+            display: 'swap',
+          },
+          {
+            src: ['./src/assets/fonts/brygada-1918-italic-latin.woff2'],
+            weight: '400 700',
+            style: 'italic',
             display: 'swap',
           },
         ],
@@ -28,30 +34,14 @@ export default defineConfig({
     },
     {
       provider: fontProviders.local(),
-      name: 'Libre Franklin',
+      name: 'Familjen Grotesk',
       cssVariable: '--font-text',
       fallbacks: ['Arial', 'sans-serif'],
       options: {
         variants: [
           {
-            src: ['./src/assets/fonts/libre-franklin-latin-wght-normal.woff2'],
-            weight: '100 900',
-            style: 'normal',
-            display: 'swap',
-          },
-        ],
-      },
-    },
-    {
-      provider: fontProviders.local(),
-      name: 'Yellowtail',
-      cssVariable: '--font-script',
-      fallbacks: ['cursive'],
-      options: {
-        variants: [
-          {
-            src: ['./src/assets/fonts/yellowtail-latin-400-normal.woff2'],
-            weight: '400',
+            src: ['./src/assets/fonts/familjen-grotesk-latin.woff2'],
+            weight: '400 700',
             style: 'normal',
             display: 'swap',
           },

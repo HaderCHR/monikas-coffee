@@ -1,46 +1,58 @@
 /* ==========================================================================
-   Monika's Coffee — global tokens, base and shared pieces
-   World: a painted shopfront (bottle-green paint, gilt sign-writing) and the
-   plaster-and-wood room behind it.
+   Monika's Coffee — the house recipe card.
+   Grounds are the layers of a cup read from the top: foam, milk, crema, espresso.
    ========================================================================== */
 
 :root {
-  /* Paint: façade, menu board, door, footer */
-  --paint: #213a2e;
-  --paint-deep: #16291f;
-  --paint-raised: #2b4738;
-  --gilt: #d2ae62;
-  --gilt-bright: #e2c27f;
-  --gilt-line: rgb(210 174 98 / 0.5);
-  --shade: #0d1913;
-  --on-paint: #f1e8d6;
-  --on-paint-muted: #c5cab7;
+  /* Grounds, top of the cup to the bottom */
+  --foam: #fcfaf7; /* header, hero, the house */
+  --milk: #f5efe6; /* the menu */
+  --crema: #e4cdae; /* the ritual */
+  --espresso: #241812; /* the room, contact */
+  --espresso-deep: #1a110d; /* footer */
 
-  /* Room: plaster walls, oat, espresso ink */
-  --plaster: #f5efe6;
-  --oat: #ece2d2;
-  --ink: #33231b;
-  --brown: #4a3026;
-  --coffee: #7d5f4b; /* the brief's #8B6B55, darkened to reach 5:1 on plaster */
-  --muted: #645d56;
-  --rule: rgb(74 48 38 / 0.18);
+  /* Ink on light grounds */
+  --ink: #2a1c16; /* headlines */
+  --brown: #4a3026; /* body text */
+  --coffee: #7d5f4b; /* notation, secondary (5:1 on milk) */
+  --roast: #5c4233; /* secondary text on crema */
+  --rule: rgb(74 48 38 / 0.2);
+  --rule-strong: rgb(74 48 38 / 0.45);
 
-  /* Layout */
-  --gutter: clamp(1rem, 3.2vw, 3rem);
-  --wrap: 82.5rem;
-  --section-y: clamp(4.5rem, 2.5rem + 6.5vw, 9rem);
-  --header-h: 4rem;
-  --joint: clamp(0.5rem, 0.9vw, 0.875rem); /* width of the green joinery between panes */
+  /* On espresso */
+  --on-dark: #f3e9dc;
+  --on-dark-muted: #cdb9a3;
+  --caramel: #c9a27a; /* the one accent, on espresso only */
+  --rule-dark: rgb(243 233 220 / 0.16);
 
-  /* Motion */
-  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --focus: #8a5a2b;
 
-  --focus: var(--brown);
-  color-scheme: light;
+  /* Type */
+  --step--1: 0.875rem;
+  --step-0: 1.0625rem;
+  --step-1: clamp(1.2rem, 1.1rem + 0.45vw, 1.45rem);
+  --step-2: clamp(1.5rem, 1.25rem + 1vw, 2rem);
+  --step-3: clamp(2.1rem, 1.5rem + 2.6vw, 3.6rem);
+  --step-4: clamp(2.6rem, 1.6rem + 4.2vw, 5.25rem);
+
+  /* Space */
+  --gutter: clamp(1rem, 4vw, 3.5rem);
+  --wrap: 86rem;
+  --section-y: clamp(4.5rem, 2.5rem + 5.5vw, 8rem);
+  --seam: clamp(4rem, 2rem + 5vw, 7rem);
+  --header-h: 4.5rem;
+
+  /* Motion: one family of exponential ease-out */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --t-quick: 180ms;
+  --t-hover: 600ms;
+  --t-press: 120ms;
+  --t-pour: 520ms;
+  /* A gentler deceleration for pours, so the rising surface stays visible for a moment. */
+  --ease-pour: cubic-bezier(0.33, 1, 0.68, 1);
 }
 
-/* ---------- Base ---------- */
+/* ----- Base ----- */
 
 *,
 *::before,
@@ -48,11 +60,14 @@
   box-sizing: border-box;
 }
 
+* {
+  margin: 0;
+}
+
 html {
-  -webkit-text-size-adjust: 100%;
-  text-size-adjust: 100%;
   scroll-padding-top: calc(var(--header-h) + 1rem);
-  background: var(--paint-deep);
+  -webkit-text-size-adjust: 100%;
+  scrollbar-color: var(--coffee) var(--milk);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -66,40 +81,15 @@ html:has(dialog[open]) {
 }
 
 body {
-  margin: 0;
-  background: var(--plaster);
-  color: var(--ink);
+  min-height: 100svh;
+  background: var(--foam);
+  color: var(--brown);
   font-family: var(--font-text);
-  font-size: 1.0625rem;
+  font-size: var(--step-0);
   line-height: 1.6;
-  font-optical-sizing: auto;
+  font-kerning: normal;
+  text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overflow-x: clip;
-}
-
-h1,
-h2,
-h3,
-h4 {
-  margin: 0;
-  font-family: var(--font-sign);
-  font-weight: 600;
-  line-height: 1.08;
-  letter-spacing: -0.012em;
-  text-wrap: balance;
-}
-
-p {
-  margin: 0;
-  text-wrap: pretty;
-}
-
-ul[role='list'],
-ol[role='list'] {
-  list-style: none;
-  margin: 0;
-  padding: 0;
 }
 
 img,
@@ -113,45 +103,83 @@ img {
   height: auto;
 }
 
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
 a {
   color: inherit;
   text-decoration-thickness: 1px;
   text-underline-offset: 0.22em;
 }
 
-button {
-  font: inherit;
-  color: inherit;
-}
-
-figure {
-  margin: 0;
-}
-
 ::selection {
-  background: var(--gilt);
-  color: var(--shade);
+  background: var(--crema);
+  color: var(--ink);
+}
+
+/* The focus ring arrives a little wide and tightens onto the control. */
+:where(a, button, summary, [tabindex]) {
+  outline-offset: 8px;
+  transition: outline-offset 200ms var(--ease-out);
 }
 
 :focus-visible {
   outline: 2px solid var(--focus);
   outline-offset: 3px;
-  border-radius: 1px;
-}
-
-.on-paint {
-  --focus: var(--gilt-bright);
-  color: var(--on-paint);
+  border-radius: 2px;
 }
 
 main:focus {
   outline: none;
 }
 
-/* ---------- Utilities ---------- */
+/* A section on espresso: its own ink, rules, focus and selection. */
+.dark {
+  --ground: var(--espresso);
+  --focus: var(--caramel);
+  --rule: var(--rule-dark);
+  background: var(--espresso);
+  color: var(--on-dark-muted);
+}
+
+.dark :is(h1, h2, h3, h4) {
+  color: var(--on-dark);
+}
+
+.dark ::selection {
+  background: var(--caramel);
+  color: var(--espresso);
+}
+
+/* ----- Layout helpers ----- */
 
 .wrap {
-  width: min(var(--wrap), 100% - 2 * var(--gutter));
+  width: min(100% - 2 * var(--gutter), var(--wrap));
   margin-inline: auto;
 }
 
@@ -159,220 +187,308 @@ main:focus {
   position: absolute !important;
   width: 1px;
   height: 1px;
-  margin: -1px;
   padding: 0;
+  margin: -1px;
   overflow: hidden;
   clip: rect(0 0 0 0);
-  clip-path: inset(50%);
   white-space: nowrap;
   border: 0;
 }
 
 .skip-link {
-  position: fixed;
+  position: absolute;
   top: 0.75rem;
   left: 0.75rem;
   z-index: 100;
   padding: 0.75rem 1.1rem;
-  background: var(--gilt);
-  color: var(--shade);
-  font-weight: 600;
-  text-decoration: none;
-  transform: translateY(-160%);
-  transition: transform 0.2s var(--ease-out);
+  background: var(--ink);
+  color: var(--foam);
+  border-radius: 999px;
+  transform: translateY(-200%);
+  transition: transform var(--t-quick) var(--ease-out);
 }
 
-.skip-link:focus-visible {
+.skip-link:focus {
   transform: none;
-  outline-color: var(--shade);
 }
 
-/* ---------- Type pieces ---------- */
+/* ----- Type roles ----- */
 
-/* Gilt sign-writing: flat gold face with the sign-writer's dark drop shade. */
-.gilt {
-  color: var(--gilt);
-  text-shadow: 0.035em 0.045em 0 var(--shade);
-}
-
-.section-title {
-  font-size: clamp(2.25rem, 1.35rem + 3.4vw, 4.25rem);
+.title {
+  font-size: var(--step-4);
+  letter-spacing: -0.025em;
   line-height: 1.02;
-  color: var(--brown);
 }
 
 .lead {
-  font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
-  line-height: 1.55;
-  color: var(--muted);
-  max-width: 46ch;
+  font-size: var(--step-1);
+  line-height: 1.5;
+  max-width: 34em;
 }
 
-/* ---------- Buttons ---------- */
+/* Notation: the recipe card's small print. Tabular figures so measurements line up. */
+.notation {
+  font-size: var(--step--1);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  font-variant-numeric: tabular-nums lining-nums;
+  color: var(--coffee);
+}
+
+.dark .notation {
+  color: var(--on-dark-muted);
+}
+
+/* ----- Buttons: one style, a pill; on espresso it turns caramel.
+   On hover a lighter shade is poured in from the bottom (the page's motion idea), the shadow
+   deepens and the arrow travels out and back; under the finger the pill gives a little. ----- */
 
 .btn {
-  --btn-bg: transparent;
-  --btn-fg: currentColor;
-  --btn-border: transparent;
+  --btn-bg: var(--ink);
+  --btn-fg: var(--foam);
+  --btn-pour: #5c4233;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.65em;
-  min-height: 3rem;
-  padding: 0.8em 1.35em;
-  border: 1.5px solid var(--btn-border);
-  border-radius: 2px;
+  gap: 0.6rem;
+  min-height: 3.25rem;
+  padding: 0.85rem 1.6rem;
+  border: 0;
+  border-radius: 999px;
   background: var(--btn-bg);
   color: var(--btn-fg);
   font-family: var(--font-text);
   font-size: 1rem;
   font-weight: 600;
   line-height: 1.1;
-  letter-spacing: 0.01em;
   text-decoration: none;
-  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 1px 2px rgb(36 24 18 / 0.18);
   transition:
-    transform 0.18s var(--ease-out),
-    background-color 0.2s ease,
-    border-color 0.2s ease,
-    color 0.2s ease,
-    box-shadow 0.2s ease;
+    box-shadow 300ms ease,
+    transform 380ms var(--ease-out);
+}
+
+.dark .btn {
+  --btn-bg: var(--caramel);
+  --btn-fg: var(--espresso);
+  --btn-pour: #e3c8a4;
+  box-shadow: none;
+}
+
+/* The poured layer. Without motion it simply fades in. */
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--btn-pour);
+  opacity: 0;
+  transition: opacity 240ms ease;
+}
+
+.btn:hover::before {
+  opacity: 1;
 }
 
 .btn:hover {
-  transform: translateY(-1px);
+  box-shadow: 0 12px 24px -14px rgb(36 24 18 / 0.7);
 }
 
-.btn:active {
-  transform: translateY(1px);
-  transition-duration: 0.06s;
+.btn .icon {
+  width: 1.1rem;
+  height: 1.1rem;
 }
 
-.btn .arrow {
-  width: 1.05em;
-  height: 1.05em;
-  transition: transform 0.25s var(--ease-out);
+/* The quieter action: text with a drawn underline that is redrawn on hover. */
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+  background: linear-gradient(currentColor, currentColor) 0 calc(100% - 0.55rem) / 100% 1px no-repeat;
 }
 
-.btn:hover .arrow {
-  transform: translateX(3px);
+.dark .text-link {
+  color: var(--on-dark);
 }
 
-.btn--gilt {
-  --btn-bg: var(--gilt);
-  --btn-fg: var(--shade);
-  --btn-border: var(--gilt);
-  box-shadow: 0 1px 0 rgb(13 25 19 / 0.35);
+.text-link .icon {
+  width: 1rem;
+  height: 1rem;
 }
 
-.btn--gilt:hover {
-  --btn-bg: var(--gilt-bright);
-  --btn-border: var(--gilt-bright);
-  box-shadow: 0 6px 16px -8px rgb(13 25 19 / 0.7);
+/* An underline that draws in from the left and leaves to the right: the position switches
+   instantly while the length is animated, so each direction reads as one stroke. */
+.draw {
+  text-decoration: none;
+  background: linear-gradient(currentColor, currentColor) 100% calc(100% - var(--draw-y, 0.1em)) / 0% 1px no-repeat;
+  transition: background-size 380ms var(--ease-out);
 }
 
-.btn--line {
-  --btn-fg: var(--on-paint);
-  --btn-border: var(--gilt-line);
+.draw:hover,
+:hover > .draw,
+.draw[aria-current],
+[aria-current] > .draw {
+  background-position-x: 0;
+  background-size: 100% 1px;
+  transition-duration: 460ms;
 }
 
-.btn--line:hover {
-  --btn-border: var(--gilt);
-  --btn-bg: rgb(210 174 98 / 0.08);
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .btn::before {
+    opacity: 1;
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform var(--t-pour) var(--ease-pour);
+  }
+
+  .btn:hover::before {
+    transform: scaleY(1);
+  }
+
+  .btn:hover .icon,
+  .text-link:hover .icon {
+    animation: arrow-through 560ms var(--ease-out);
+  }
+
+  .text-link:hover {
+    animation: underline-redraw 680ms var(--ease-out);
+  }
 }
 
-/* ---------- Board: a painted panel with a chamfered gilt rule ---------- */
-/* Two stacked pseudo-elements: a gilt chamfered plate, and the paint plate 1px inside it. */
-
-.board {
-  --chamfer: clamp(0.75rem, 1.4vw, 1.25rem);
-  --rule-inset: clamp(0.5rem, 1vw, 0.875rem);
-  position: relative;
-  isolation: isolate;
-  background: var(--paint);
+@media (prefers-reduced-motion: no-preference) {
+  .btn:active {
+    transform: scale(0.965);
+    transition-duration: var(--t-press);
+  }
 }
 
-.board::before,
-.board::after {
-  content: '';
-  position: absolute;
-  z-index: -1;
-  pointer-events: none;
-  clip-path: polygon(
-    var(--chamfer) 0,
-    calc(100% - var(--chamfer)) 0,
-    100% var(--chamfer),
-    100% calc(100% - var(--chamfer)),
-    calc(100% - var(--chamfer)) 100%,
-    var(--chamfer) 100%,
-    0 calc(100% - var(--chamfer)),
-    0 var(--chamfer)
-  );
+/* Out to the right, back in from the left. */
+@keyframes arrow-through {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  40% {
+    transform: translateX(120%);
+    opacity: 0;
+  }
+  41% {
+    transform: translateX(-120%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
-.board::before {
-  inset: var(--rule-inset);
-  background: var(--gilt-line);
+@keyframes underline-redraw {
+  0% {
+    background-position-x: 100%;
+    background-size: 100% 1px;
+  }
+  40% {
+    background-position-x: 100%;
+    background-size: 0% 1px;
+  }
+  41% {
+    background-position-x: 0;
+    background-size: 0% 1px;
+  }
+  100% {
+    background-position-x: 0;
+    background-size: 100% 1px;
+  }
 }
 
-.board::after {
-  inset: calc(var(--rule-inset) + 1px);
-  background: var(--paint);
-}
+/* ----- Photographs: square corners, no frames. Under the pointer the picture leans in while
+   a mat in the colour of the ground closes around it, like a print being mounted. ----- */
 
-/* ---------- Photographs ---------- */
-
-/* A frame that crops its photograph; the gilt bead mimics the beading around shop glass. */
-.frame {
+.photo {
+  --mat: var(--ground, var(--foam));
   position: relative;
   overflow: hidden;
-  background: var(--paint-deep);
+  background: var(--crema);
 }
 
-.frame picture,
-.frame img {
+.dark .photo {
+  background: #3a2a21;
+}
+
+.photo :is(picture, img) {
   width: 100%;
   height: 100%;
 }
 
-.frame img {
+.photo img {
   object-fit: cover;
 }
 
-.frame--bead::after {
+.photo--zoom::after {
   content: '';
   position: absolute;
-  inset: clamp(0.35rem, 0.6vw, 0.5rem);
-  border: 1px solid rgb(226 194 127 / 0.55);
+  inset: 0;
   pointer-events: none;
+  box-shadow: inset 0 0 0 0 var(--mat);
+  transition: box-shadow 320ms var(--ease-out);
 }
 
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .frame--zoom img {
-    transition: transform 0.9s var(--ease-out);
+  .photo--zoom img {
+    transition: transform 700ms var(--ease-out);
   }
 
-  .frame--zoom:hover img {
-    transform: scale(1.03);
+  .photo--zoom:hover img {
+    transform: scale(1.06);
+    transition-duration: 1100ms;
+  }
+
+}
+
+/* The mat is not movement: it also answers the pointer with reduced motion (as a fade). */
+@media (hover: hover) {
+  .photo--zoom:hover::after {
+    box-shadow: inset 0 0 0 var(--mat-w, 0.75rem) var(--mat);
+    transition-duration: 600ms;
   }
 }
 
-/* ---------- Icons ---------- */
+/* ----- Icons ----- */
 
 .icon {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.25rem;
+  height: 1.25rem;
   flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
-/* ---------- Reduced motion: everything rests ---------- */
-
+/* Reduced motion: nothing travels, scales or draws; colour and opacity still fade, so every
+   hover, press and open stays legible. */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+    /* display, overlay and content-visibility are discrete, not movement: keeping them lets
+       dialogs, the notice and the credits fade out instead of vanishing. */
+    transition-property: color, background-color, border-color, opacity, box-shadow, display, overlay,
+      content-visibility !important;
+    /* The property list above re-indexes each element's own lists; discrete behaviour has to be
+       set for all of them so display and overlay still wait for the fade. */
+    transition-behavior: allow-discrete !important;
+    scroll-behavior: auto !important;
   }
 }

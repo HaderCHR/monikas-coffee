@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="12" fill="#213a2e"/>
-  <g fill="none" stroke="#d2ae62" stroke-linecap="round" stroke-width="3">
-    <path d="M26 9.5c-2.6 3 2.6 5.2 0 8.4M35 9.5c-2.6 3 2.6 5.2 0 8.4"/>
-    <path d="M47.5 28.5h2.8a5.2 5.2 0 0 1 0 10.4h-4.2"/>
+  <rect width="64" height="64" rx="12" fill="#241812"/>
+  <clipPath id="cup"><path d="M17 12h30l-3.2 36.5a5.5 5.5 0 0 1-5.5 5H25.7a5.5 5.5 0 0 1-5.5-5z"/></clipPath>
+  <g clip-path="url(#cup)">
+    <rect x="10" y="12" width="44" height="12" fill="#fffcf6"/>
+    <rect x="10" y="25.5" width="44" height="12" fill="#e4cdae"/>
+    <rect x="10" y="39" width="44" height="16" fill="#c9a27a"/>
   </g>
-  <path fill="#d2ae62" d="M14.5 24h33v5.5A15.5 15.5 0 0 1 32 45h-2A15.5 15.5 0 0 1 14.5 29.5z"/>
-  <rect x="10" y="48" width="42" height="4" rx="2" fill="#d2ae62"/>
 </svg>

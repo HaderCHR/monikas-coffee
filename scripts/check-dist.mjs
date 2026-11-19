@@ -42,7 +42,7 @@ const imgs = tags('img');
 // A bare `alt` attribute is an empty alt (decorative image): valid, and how Astro writes alt="".
 check(imgs.every((t) => /\salt(?:=|\s|>)/.test(t)), `every <img> has alt (${imgs.length} images)`);
 const decorative = imgs.filter((t) => !/\salt="[^"]+"/.test(t)).length;
-check(decorative === 4, `only the 4 duplicated ritual photographs are decorative (${decorative})`);
+check(decorative === 0, `every photograph is described, none decorative (${decorative})`);
 check(imgs.every((t) => attr(t, 'width') && attr(t, 'height')), 'every <img> has width and height (no layout shift)');
 check(imgs.filter((t) => attr(t, 'fetchpriority') === 'high').length === 1, 'exactly one high-priority (LCP) image');
 const ids = new Set([...html.matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]));

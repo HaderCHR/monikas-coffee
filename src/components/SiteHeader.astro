@@ -3,11 +3,11 @@ import Icon from './Icon.astro';
 import { nav, contactAnchor } from '../data/site';
 ---
 
-<header class="header on-paint" data-header>
+<header class="header" data-header>
   <div class="header__bar wrap">
-    <a class="header__logo" href="#inicio" aria-label="Monika's Coffee, volver al inicio">
-      <span class="header__script gilt" aria-hidden="true">Monika's</span>
-      <span class="header__trade" aria-hidden="true">Coffee</span>
+    <a class="wordmark" href="#inicio" aria-label="Monika's Coffee, al inicio">
+      <span class="wordmark__name">Monika's</span>
+      <span class="wordmark__trade">Coffee</span>
     </a>
 
     <nav class="header__nav" aria-label="Principal">
@@ -15,7 +15,7 @@ import { nav, contactAnchor } from '../data/site';
         {
           nav.map((item) => (
             <li>
-              <a href={`#${item.id}`} data-nav-link={item.id}>
+              <a class="draw" href={`#${item.id}`} data-nav-link={item.id}>
                 {item.label}
               </a>
             </li>
@@ -24,192 +24,143 @@ import { nav, contactAnchor } from '../data/site';
       </ul>
     </nav>
 
-    <div class="header__actions">
-      <a class="btn btn--gilt header__cta" href={`#${contactAnchor}`}>Escríbenos</a>
-      <button
-        class="header__menu-btn"
-        type="button"
-        aria-haspopup="dialog"
-        aria-expanded="false"
-        aria-controls="menu"
-        aria-label="Abrir el menú"
-        data-menu-open
-      >
-        <Icon name="menu" />
-        <span aria-hidden="true">Menú</span>
-      </button>
-    </div>
-  </div>
+    <a class="btn header__cta" href={`#${contactAnchor}`}>Escríbenos</a>
 
-  <!-- Full-screen menu for small screens: a modal dialog gives focus containment and Esc for free. -->
-  <dialog class="menu on-paint" id="menu" aria-label="Menú" data-menu>
-    <div class="menu__top wrap">
-      <span class="header__script gilt" aria-hidden="true">Monika's</span>
-      <button class="menu__close" type="button" aria-label="Cerrar el menú" data-menu-close>
+    <button
+      class="header__menu"
+      type="button"
+      aria-label="Abrir el menú"
+      aria-expanded="false"
+      aria-controls="menu"
+      data-menu-open
+    >
+      <Icon name="menu" />
+      <span aria-hidden="true">Menú</span>
+    </button>
+  </div>
+</header>
+
+<dialog class="menu" id="menu" aria-label="Menú" data-menu>
+  <div class="menu__inner wrap">
+    <div class="menu__top">
+      <span class="wordmark" aria-hidden="true">
+        <span class="wordmark__name">Monika's</span>
+        <span class="wordmark__trade">Coffee</span>
+      </span>
+      <button class="header__menu" type="button" aria-label="Cerrar el menú" data-menu-close>
         <Icon name="close" />
         <span aria-hidden="true">Cerrar</span>
       </button>
     </div>
-    <nav class="menu__nav wrap" aria-label="Menú móvil">
-      <ul role="list">
+    <nav aria-label="Menú del sitio">
+      <ul class="menu__links" role="list">
         {
           nav.map((item) => (
             <li>
-              <a href={`#${item.id}`} data-nav-link={item.id}>
-                {item.label}
-              </a>
+              <a href={`#${item.id}`}>{item.label}</a>
             </li>
           ))
         }
       </ul>
-      <a class="btn btn--gilt menu__cta" href={`#${contactAnchor}`}>
-        Escríbenos
-        <Icon name="arrow" class="arrow" />
-      </a>
     </nav>
-  </dialog>
-</header>
+    <a class="btn menu__cta" href={`#${contactAnchor}`}>
+      Escríbenos
+      <Icon name="arrow" />
+    </a>
+  </div>
+</dialog>
 
 <style>
   .header {
     position: sticky;
     top: 0;
     z-index: 50;
-    background: var(--paint);
+    background: var(--foam);
     border-bottom: 1px solid transparent;
-    transition:
-      transform 0.35s var(--ease-out),
-      border-color 0.3s ease;
+    transition: border-color 300ms ease;
   }
 
   .header[data-scrolled='true'] {
-    border-bottom-color: var(--gilt-line);
-  }
-
-  .header[data-hidden='true'] {
-    transform: translateY(-100%);
+    border-bottom-color: var(--rule);
   }
 
   .header__bar {
     display: flex;
     align-items: center;
-    gap: clamp(1rem, 3vw, 3rem);
+    gap: clamp(1rem, 3vw, 2.5rem);
     height: var(--header-h);
   }
 
-  .header__logo {
+  /* ----- Wordmark: the name in Brygada italic, the trade in small grotesk caps ----- */
+
+  .wordmark {
     display: inline-flex;
-    align-items: center;
+    align-items: baseline;
     gap: 0.45rem;
-    min-height: 44px;
+    margin-right: auto;
+    padding-block: 0.55rem;
+    color: var(--ink);
     text-decoration: none;
-  }
-
-  .header__script {
-    font-family: var(--font-script);
-    font-size: 1.85rem;
     line-height: 1;
-    padding-top: 0.15em;
   }
 
-  .header__trade {
-    font-family: var(--font-sign);
-    font-weight: 700;
+  .wordmark__name {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 600;
+    font-size: 1.7rem;
+    letter-spacing: -0.02em;
+  }
+
+  .wordmark__trade {
     font-size: 0.72rem;
-    letter-spacing: 0.32em;
+    font-weight: 600;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--on-paint-muted);
-    padding-top: 0.5em;
+    color: var(--coffee);
   }
 
-  .header__nav {
-    margin-inline-start: auto;
-  }
+  /* ----- Links: an underline draws in on hover and stays on the current section ----- */
 
   .header__nav ul {
     display: flex;
-    gap: clamp(1.25rem, 2.4vw, 2.25rem);
+    gap: clamp(1.25rem, 2.5vw, 2.25rem);
   }
 
   .header__nav a {
-    position: relative;
+    --draw-y: 0.6rem;
     display: inline-flex;
     align-items: center;
-    min-height: 44px;
-    font-size: 0.95rem;
+    min-height: 2.75rem;
+    font-size: 0.975rem;
     font-weight: 500;
-    color: var(--on-paint);
-    text-decoration: none;
+    color: var(--brown);
   }
 
-  /* Underline that draws from the left on hover and stays for the current section. */
-  .header__nav a::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0.55rem;
-    height: 1px;
-    background: var(--gilt);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.35s var(--ease-out);
-  }
-
-  .header__nav a:hover::after,
-  .header__nav a[aria-current='location']::after {
-    transform: scaleX(1);
-  }
-
-  .header__nav a[aria-current='location'] {
-    color: var(--gilt-bright);
-  }
-
-  .header__actions {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+  .header__nav a:hover,
+  .header__nav a[aria-current] {
+    color: var(--ink);
   }
 
   .header__cta {
     min-height: 2.75rem;
-    padding: 0.6em 1.1em;
+    padding: 0.6rem 1.2rem;
     font-size: 0.95rem;
   }
 
-  .header__menu-btn,
-  .menu__close {
+  .header__menu {
     display: none;
     align-items: center;
-    gap: 0.45rem;
-    min-height: 44px;
-    min-width: 44px;
-    padding: 0 0.6rem;
-    border: 1px solid var(--gilt-line);
-    border-radius: 2px;
-    background: transparent;
-    color: var(--on-paint);
-    font-size: 0.95rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition:
-      border-color 0.2s ease,
-      background-color 0.2s ease;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    padding: 0.5rem 0.25rem 0.5rem 0.75rem;
+    border: 0;
+    background: none;
+    font-weight: 600;
+    color: var(--ink);
   }
 
-  .header__menu-btn:hover,
-  .menu__close:hover {
-    border-color: var(--gilt);
-    background: rgb(210 174 98 / 0.08);
-  }
-
-  .header__menu-btn .icon,
-  .menu__close .icon {
-    width: 1.25rem;
-    height: 1.25rem;
-  }
-
-  /* ----- Mobile menu ----- */
+  /* ----- Full-screen menu on small screens ----- */
 
   .menu {
     width: 100%;
@@ -219,29 +170,19 @@ import { nav, contactAnchor } from '../data/site';
     margin: 0;
     padding: 0;
     border: 0;
-    background: var(--paint);
+    background: var(--foam);
+    color: var(--ink);
   }
 
   .menu::backdrop {
-    background: var(--paint-deep);
+    background: rgb(36 24 18 / 0.4);
   }
 
-  .menu[open] {
+  .menu__inner {
     display: flex;
     flex-direction: column;
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .menu[open] {
-      animation: menu-in 0.45s var(--ease-out);
-    }
-  }
-
-  @keyframes menu-in {
-    from {
-      opacity: 0;
-      transform: translateY(-1.5rem);
-    }
+    min-height: 100%;
+    padding-bottom: 2rem;
   }
 
   .menu__top {
@@ -251,73 +192,80 @@ import { nav, contactAnchor } from '../data/site';
     height: var(--header-h);
   }
 
-  .menu__close {
-    display: inline-flex;
+  .menu__links {
+    display: grid;
+    margin-top: clamp(2rem, 8vh, 4rem);
+    border-top: 1px solid var(--rule);
   }
 
-  .menu__nav {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    padding-block: 1.5rem 2rem;
-  }
-
-  .menu__nav li + li {
-    border-top: 1px solid var(--gilt-line);
-  }
-
-  .menu__nav a:not(.btn) {
-    display: flex;
-    align-items: center;
-    min-height: 4.25rem;
-    font-family: var(--font-sign);
-    font-size: clamp(1.9rem, 8vw, 2.6rem);
-    font-weight: 600;
-    color: var(--on-paint);
+  .menu__links a {
+    display: block;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--rule);
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 9vw, 2.75rem);
+    font-weight: 500;
+    line-height: 1.1;
     text-decoration: none;
-  }
-
-  .menu__nav a[aria-current='location'] {
-    color: var(--gilt);
   }
 
   .menu__cta {
     margin-top: auto;
     width: 100%;
-    min-height: 3.5rem;
-    font-size: 1.05rem;
+  }
+
+  /* Opens over 320ms, closes in 200ms: the exit is quicker than the entrance. */
+  .menu {
+    opacity: 0;
+    transition:
+      opacity 200ms ease,
+      overlay 200ms allow-discrete,
+      display 200ms allow-discrete;
+  }
+
+  .menu[open] {
+    opacity: 1;
+    transition-duration: 320ms;
+  }
+
+  @starting-style {
+    .menu[open] {
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+
+    .menu[open] .menu__links li {
+      animation: menu-link 520ms var(--ease-out) backwards;
+    }
+
+    .menu[open] .menu__links li:nth-child(2) { animation-delay: 40ms; }
+    .menu[open] .menu__links li:nth-child(3) { animation-delay: 80ms; }
+    .menu[open] .menu__links li:nth-child(4) { animation-delay: 120ms; }
+  }
+
+  @keyframes menu-link {
+    from {
+      opacity: 0;
+      transform: translateY(0.75rem);
+    }
   }
 
   @media (max-width: 60rem) {
-    .header__nav {
+    .header__nav,
+    .header__cta {
       display: none;
     }
 
-    .header__actions {
-      margin-inline-start: auto;
-    }
-
-    .header__menu-btn {
+    .header__menu {
       display: inline-flex;
     }
   }
 
-  @media (max-width: 26rem) {
-    .header__trade {
+  @media (max-width: 22.5rem) {
+    .wordmark__trade {
       display: none;
-    }
-
-    .header__cta {
-      padding-inline: 0.85em;
-    }
-
-    .header__menu-btn span {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      overflow: hidden;
-      clip-path: inset(50%);
-      white-space: nowrap;
     }
   }
 </style>
@@ -328,34 +276,23 @@ import { nav, contactAnchor } from '../data/site';
   const openBtn = document.querySelector<HTMLButtonElement>('[data-menu-open]');
   const closeBtn = document.querySelector<HTMLButtonElement>('[data-menu-close]');
 
-  // --- Scroll state: border once the page moves; hide while reading downwards, show on the way up.
+  // --- A hairline under the bar once the page has moved.
   if (header) {
-    let lastY = window.scrollY;
-    let ticking = false;
-
+    let queued = false;
     const update = () => {
-      const y = window.scrollY;
-      header.dataset.scrolled = String(y > 8);
-      const goingDown = y > lastY + 4;
-      const goingUp = y < lastY - 4;
-      const keepVisible = header.contains(document.activeElement) || y < 480;
-      if (goingDown && !keepVisible) header.dataset.hidden = 'true';
-      else if (goingUp || keepVisible) header.dataset.hidden = 'false';
-      lastY = y;
-      ticking = false;
+      header.dataset.scrolled = String(window.scrollY > 8);
+      queued = false;
     };
-
     window.addEventListener(
       'scroll',
       () => {
-        if (!ticking) {
-          ticking = true;
+        if (!queued) {
+          queued = true;
           requestAnimationFrame(update);
         }
       },
       { passive: true },
     );
-    header.addEventListener('focusin', () => (header.dataset.hidden = 'false'));
     update();
   }
 

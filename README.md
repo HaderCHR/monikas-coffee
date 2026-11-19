@@ -6,37 +6,46 @@ lo indica donde podría confundirse.
 
 ## Concepto
 
-La página es el **escaparate pintado de la cafetería y la sala que hay detrás**.
+La página es **la ficha de receta de la casa, leída como un editorial**: el oficio del café escrito
+en su propia notación (gramos, segundos, grados, lo que lleva cada taza) junto a fotografías
+grandes y tranquilas. Leída de arriba abajo, la página es **una taza en sección**: espuma, leche,
+crema y espresso.
 
-- **Fachada (hero):** un rótulo de madera pintada en verde botella con el nombre en letras doradas
-  de rotulista (guion "Monika's" + "COFFEE" en clarendon), dos vanos —el ventanal con su travesaño y
-  la puerta— con fotografías enmarcadas en carpintería verde, y el zócalo bajo el alféizar con el
-  mensaje y las acciones. Al cargar, la persiana sube una vez (desactivado con movimiento reducido).
-- **La casa:** paredes de yeso crema, composición asimétrica foto + texto.
-- **La carta:** una pizarra pintada colgada en la pared que reúne los 13 productos escritos en dos
-  columnas con un filete dorado entre ellas, como una carta de verdad: foto cuadrada junto a cada
-  nombre. Su último renglón es la invitación a preguntar precios y disponibilidad. Una columna en
-  móvil.
-- **El ritual:** cuatro gestos registrados con su medida real (18 g, 25 s, 65 °C, 1 vaso). En
-  escritorio, la fotografía queda fija y cambia con cada paso.
-- **La sala:** una sola ventana de muchos paneles: seis fotografías de distinto tamaño unidas por la
-  carpintería verde.
-- **Escríbenos:** la puerta. Tres canales (WhatsApp, Instagram, correo) claramente de demostración.
-- **Pie:** la firma "Monika's" en grande, navegación secundaria y créditos fotográficos.
+- **Portada:** la sala con luz de tarde a todo lo ancho; encima, apoyada en su borde inferior, una
+  ficha con el titular, una frase, «Escríbenos» y «Ver la carta». Al cargar, la foto se «sirve»
+  desde abajo y la ficha se posa sobre ella (una sola vez; nada con movimiento reducido).
+- **La casa:** composición asimétrica: titular grande, la ventana en vertical y las notas de la casa
+  como campos de una ficha con renglones.
+- **La carta:** un índice de recetas. El nombre de cada categoría se queda fijo a la izquierda
+  mientras pasan sus productos; junto a cada bebida, **una tacita dibujada por capas** con lo que
+  lleva dentro (espresso, leche, espuma, hielo…) y la misma información en texto. Las capas son lo
+  que la bebida es por definición, no recetas ni cantidades de la casa.
+- **El ritual:** cuatro estaciones en orden sobre una línea de tiempo que se dibuja al leerla, cada
+  una con su medida (18 g, 25 s, 65 °C, 1 vaso).
+- **La sala:** un pliego editorial sobre fondo espresso: fotos de distintos tamaños y alturas, el
+  titular y una línea de texto grande entre ellas.
+- **Escríbenos:** tres canales como tres puertas, claramente de demostración.
+- **Pie:** marca, nota de marca ficticia, navegación y créditos.
 
-**Paleta:** verde botella `#213A2E` (fachada, pizarra, puerta, pie), dorado `#D2AE62` solo para
-rótulos sobre verde, y los neutros del brief para el interior: crema `#F5EFE6`, avena `#ECE2D2`,
-marrón espresso `#4A3026` / `#33231B`, café `#7D5F4B` (el `#8B6B55` del brief, oscurecido para
-llegar a 5:1 de contraste) y gris cálido `#645D56` (el `#77716B` del brief daba 4,3:1 sobre crema).
+**Paleta** (las capas de la taza): espuma `#FCFAF7` (cabecera, portada, la casa), leche `#F5EFE6`
+(la carta), crema `#E4CDAE` (el ritual) y espresso `#241812` / `#1A110D` (la sala, el contacto,
+el pie). Tinta espresso `#2A1C16` / `#4A3026`, café `#7D5F4B` para la notación (el `#8B6B55` del
+brief, oscurecido para llegar a 5:1) y un único acento caramelo `#C9A27A`, solo sobre espresso.
+Entre fondos claros hay transiciones suaves, sin franjas.
 
-**Tipografía:** Besley (clarendon de rotulista) para rótulos y titulares, Yellowtail (guion de
-rotulista) solo para la firma "Monika's", y Libre Franklin para el texto. Todas autoalojadas.
+**Tipografía:** Brygada 1918 (una romana de libro de 1918, con cursiva) para titulares, medidas y
+la marca; Familjen Grotesk para el texto y la notación. Las dos, variables y autoalojadas.
+
+**Fotografía:** 23 fotos con un etalonaje común (algo más cálidas, mate y con menos saturación)
+para que se lean como una misma sesión. Sin marcos: esquinas rectas y un zoom lento al pasar el
+cursor.
 
 ## Tecnología
 
 - **[Astro 7](https://astro.build)** (versión fijada `7.4.5`) generando un sitio **estático**:
-  cero JavaScript de framework en el cliente; solo dos scripts pequeños (cabecera/menú y el paso
-  activo del ritual, ~1,7 KB en total).
+  cero JavaScript de framework en el cliente; un solo script pequeño (cabecera y menú). Los
+  efectos ligados al scroll usan animaciones CSS con `animation-timeline`: sin librerías y sin
+  JavaScript; donde el navegador no las admite, todo se ve en reposo.
 - **Imágenes:** `astro:assets` + sharp en build: WebP responsive (`srcset`/`sizes`) con JPEG de
   respaldo, `width`/`height` explícitos (sin saltos de maquetación), `lazy` fuera del primer
   pantallazo y `fetchpriority="high"` solo en la imagen principal. Se probó AVIF y se descartó:
@@ -55,7 +64,7 @@ rotulista) solo para la firma "Monika's", y Libre Franklin para el texto. Todas 
 src/
   pages/        index.astro (la landing), 404.astro, robots.txt.ts, sitemap.xml.ts
   layouts/      Base.astro (head: SEO, Open Graph, fuentes, JSON-LD)
-  components/   SiteHeader, Hero, Casa, Carta, Ritual, Sala, Contacto, SiteFooter, Photo, Icon
+  components/   SiteHeader, Hero, Casa, Carta, Cup, Ritual, Sala, Contacto, SiteFooter, Photo, Icon
   data/         site.ts, menu.ts (carta), contact.ts (canales demo), credits.ts (fotos)
   styles/       global.css (tokens, base, botones, "board", marcos de foto)
   assets/       photos/ (originales de Unsplash), fonts/ (woff2 + licencias)
@@ -110,14 +119,17 @@ Todas las fotos son **imágenes de muestra** de [Unsplash](https://unsplash.com)
 [Licencia de Unsplash](https://unsplash.com/license) (uso gratuito, también comercial; la atribución
 se agradece pero no es obligatoria). Se comprobó una a una que eran gratuitas y no Unsplash+
 (19/11/2026). Las personas que aparecen no son clientes de ninguna cafetería real. Se descartó una
-foto porque mostraba la carta de otra cafetería con su marca.
+foto porque mostraba la carta de otra cafetería con su marca, y en el rediseño se retiraron cuatro
+que no encajaban con una casa pequeña (un local industrial, una foto genérica de banco de imágenes,
+otra cafetería con otro estilo y tazas sucias). Las 23 que quedan llevan un etalonaje común
+aplicado con sharp; la licencia de Unsplash permite modificarlas.
 
 | Archivo | Uso | Autor | Foto |
 |---|---|---|---|
-| casa-sala | Hero (ventanal) | Volodymyr Dobrovolskyy | [4lZyKFyzmWw](https://unsplash.com/photos/4lZyKFyzmWw) |
-| ambiente-mesa | Hero (puerta) | Nathan Dumlao | [zUNs99PGDg0](https://unsplash.com/photos/zUNs99PGDg0) |
+| casa-sala | Portada | Volodymyr Dobrovolskyy | [4lZyKFyzmWw](https://unsplash.com/photos/4lZyKFyzmWw) |
+| ambiente-mesa | La sala | Nathan Dumlao | [zUNs99PGDg0](https://unsplash.com/photos/zUNs99PGDg0) |
 | ambiente-luz | La casa | Long Chung | [EGU0c37idAA](https://unsplash.com/photos/EGU0c37idAA) |
-| casa-tazas | La casa | Katja Vogt | [CipURjPCXOo](https://unsplash.com/photos/CipURjPCXOo) |
+| casa-tazas | La sala | Katja Vogt | [CipURjPCXOo](https://unsplash.com/photos/CipURjPCXOo) |
 | espresso | Carta | Katt Galvan | [3v0vppDjvMI](https://unsplash.com/photos/3v0vppDjvMI) |
 | americano | Carta | Mehmet Talha Onuk | [MBeY2m00Ybc](https://unsplash.com/photos/MBeY2m00Ybc) |
 | cappuccino | Carta | T (@tanyabarrow) | [UWidxu7nZNg](https://unsplash.com/photos/UWidxu7nZNg) |
@@ -145,8 +157,8 @@ foto porque mostraba la carta de otra cafetería con su marca.
 Otros recursos: iconos de WhatsApp e Instagram de [Simple Icons](https://simpleicons.org) (CC0),
 dibujados en un solo color; el resto de iconos, el favicon y la imagen Open Graph se crearon para
 este proyecto (`scripts/make-icons.mjs` genera los PNG/ICO a partir de `public/favicon.svg`; la
-imagen OG se compuso con las fuentes y la foto `casa-sala` y se capturó a 1200×630).
-Fuentes: Besley y Libre Franklin (SIL OFL 1.1), Yellowtail (Apache 2.0); licencias en
+imagen Open Graph es una captura de la portada a 1200×630).
+Fuentes: Brygada 1918 y Familjen Grotesk (SIL OFL 1.1); licencias en
 `src/assets/fonts/`.
 
 ## Decisiones y límites conocidos
@@ -160,10 +172,16 @@ Fuentes: Besley y Libre Franklin (SIL OFL 1.1), Yellowtail (Apache 2.0); licenci
   hacer pasar la cafetería por un negocio verificable.
 - **Sin filtros en la carta:** las cuatro categorías caben en una pizarra con índice de anclas
   enlazables (`#carta-clasicos`, etc.); ocultar productos tras filtros no mejoraba la exploración.
-- **Movimiento:** solo dos momentos (la persiana del hero y la foto fija del ritual) más micro
-  interacciones al pasar el cursor; nada aparece al hacer scroll y todo queda quieto con
-  `prefers-reduced-motion`.
-- **Fotos de muestra:** son de distintos autores, así que la luz y el estilo no son 100 %
-  homogéneos como lo serían en una sesión propia.
+- **Movimiento:** una sola familia de curvas (salida exponencial) y una idea: las cosas se llenan
+  desde abajo, como una taza. La portada se sirve al cargar; las tacitas de la carta se llenan al
+  entrar en pantalla; la línea del ritual se dibuja al leerla; dos fotos de la sala se desplazan un
+  poco para dar profundidad. Las interacciones siguen la misma idea: los botones y los discos de
+  contacto se «llenan» de un tono más claro al pasar el cursor, las flechas salen y vuelven, los
+  subrayados se escriben y se borran, al señalar una bebida se vuelve a servir la capa superior de
+  su tacita y su foto se enmarca con un paspartú del color del fondo, y el aviso y el menú salen más
+  rápido de lo que entran. Ningún contenido espera al scroll para poder leerse, y todo queda quieto
+  con `prefers-reduced-motion`.
+- **Fotos de muestra:** son de distintos autores; el etalonaje común las acerca, pero no sustituye a
+  una sesión propia con la misma luz y el mismo local.
 - **`_headers`:** solo lo aplican hostings compatibles (Netlify, Cloudflare Pages); GitHub Pages lo
   ignora. La CSP va siempre en el `<meta>` de la página.

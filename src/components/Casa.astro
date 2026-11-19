@@ -1,124 +1,195 @@
 ﻿---
 import Photo from './Photo.astro';
 import luz from '../assets/photos/ambiente-luz.jpg';
-import tazas from '../assets/photos/casa-tazas.jpg';
+
+// The house written as recipe-card fields: a word, then what it means here.
+const notes = [
+  { term: 'La taza', text: 'Se prepara cuando la pides, nunca antes.' },
+  { term: 'La bollería', text: 'Se hornea en casa.' },
+  { term: 'La mesa', text: 'Música baja y ninguna prisa por levantarla.' },
+];
 ---
 
 <section class="casa" id="la-casa" data-nav-section aria-labelledby="casa-title">
   <div class="casa__grid wrap">
-    <div class="casa__photo frame frame--zoom">
+    <h2 class="title casa__title" id="casa-title">
+      Una casa pequeña con la cafetera siempre encendida
+    </h2>
+
+    <div class="casa__photo photo photo--zoom">
       <Photo
         src={luz}
         alt="Rincón con dos taburetes de madera junto a una ventana; la luz del sol entra entre las plantas."
         widths={[480, 720, 960, 1200]}
-        sizes="(min-width: 60rem) 46vw, 100vw"
+        sizes="(min-width: 48rem) 38vw, 100vw"
       />
     </div>
 
-    <div class="casa__side">
-      <div class="casa__text">
-        <h2 class="section-title" id="casa-title">Una casa pequeña con la cafetera siempre encendida</h2>
-        <p class="casa__intro">
-          Monika's es una cafetería de barrio pensada para quedarse un rato. Mesas de madera,
-          plantas que alguien riega cada mañana y una ventana por la que entra la mejor luz de la tarde.
-        </p>
-        <p>
-          Preparamos cada taza cuando la pides y horneamos la bollería en casa. No hay música alta
-          ni prisa por levantar la mesa: aquí se viene a desayunar despacio, a leer, a ponerse al día
-          con alguien o a no hacer nada durante lo que dura un café.
-        </p>
-      </div>
-      <div class="casa__detail frame frame--zoom">
-        <Photo
-          src={tazas}
-          alt="Dos tazas de cerámica hechas a mano, una rosada con triángulos, sobre un estante de madera."
-          widths={[400, 640, 880]}
-          sizes="(min-width: 60rem) 30vw, 100vw"
-        />
-      </div>
+    <div class="casa__body">
+      <p class="lead">
+        Monika's es una cafetería de barrio pensada para quedarse un rato. Mesas de madera, plantas
+        que alguien riega cada mañana y una ventana por la que entra la mejor luz de la tarde.
+      </p>
+
+      <dl class="casa__notes">
+        {
+          notes.map((note) => (
+            <div class="casa__note">
+              <dt>{note.term}</dt>
+              <dd>{note.text}</dd>
+            </div>
+          ))
+        }
+      </dl>
+
+      <p class="casa__close">
+        Aquí se viene a desayunar despacio, a leer, a ponerse al día con alguien o a no hacer nada
+        durante lo que dura un café.
+      </p>
     </div>
   </div>
 </section>
 
 <style>
   .casa {
-    background: var(--plaster);
-    padding-block: var(--section-y);
+    padding-block: clamp(3rem, 2rem + 4vw, 6rem) var(--section-y);
   }
 
   .casa__grid {
     display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr));
-    gap: clamp(1.5rem, 3vw, 3rem);
-    align-items: stretch;
+    column-gap: clamp(1rem, 2vw, 2rem);
+    row-gap: clamp(2rem, 4vw, 3.5rem);
+  }
+
+  .casa__title {
+    grid-column: 1 / 8;
+    grid-row: 1;
+    max-width: 14ch;
   }
 
   .casa__photo {
-    grid-column: 1 / 7;
+    grid-column: 8 / -1;
+    grid-row: 1 / 3;
     aspect-ratio: 4 / 5;
+    align-self: start;
+    margin-top: clamp(4rem, 9vw, 9rem);
   }
 
-  .casa__side {
-    grid-column: 7 / 13;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 2.5rem;
-    padding-left: clamp(0rem, 2vw, 2rem);
-  }
-
-  .casa__text {
+  .casa__body {
+    grid-column: 2 / 7;
+    grid-row: 2;
     display: grid;
-    gap: 1.25rem;
+    gap: clamp(1.75rem, 3vw, 2.5rem);
+    align-content: start;
+  }
+
+  /* Recipe-card fields: a ruled line, the word, what it means here. */
+  /* Ruled lines, drawn as strokes so they can be written in as the card is read. */
+  .casa__notes {
+    position: relative;
+  }
+
+  .casa__notes::before,
+  .casa__note::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    transform-origin: left;
+  }
+
+  .casa__notes::before {
+    top: 0;
+    background: var(--rule-strong);
+  }
+
+  .casa__note::after {
+    bottom: 0;
+    background: var(--rule);
+  }
+
+  .casa__note {
+    position: relative;
+    display: grid;
+    grid-template-columns: 8.5rem minmax(0, 1fr);
+    gap: 1rem;
+    padding-block: 0.95rem;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      .casa__notes::before,
+      .casa__note::after {
+        animation: write linear both;
+        animation-timeline: view();
+        animation-range: entry 40% cover 30%;
+      }
+
+      .casa__note:nth-child(2)::after {
+        animation-range: entry 60% cover 34%;
+      }
+
+      .casa__note:nth-child(3)::after {
+        animation-range: entry 80% cover 38%;
+      }
+    }
+  }
+
+  @keyframes write {
+    from {
+      transform: scaleX(0);
+    }
+  }
+
+  .casa__note dt {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.15rem;
     color: var(--ink);
   }
 
-  .casa__text h2 {
-    margin-bottom: 0.5rem;
-    font-size: clamp(2.25rem, 1.5rem + 2.6vw, 3.6rem);
+  .casa__note dd {
+    margin: 0;
+    padding-top: 0.1rem;
   }
 
-  .casa__intro {
-    font-size: clamp(1.125rem, 1.05rem + 0.35vw, 1.3rem);
-    line-height: 1.55;
-    color: var(--brown);
+  .casa__close {
+    max-width: 40ch;
+    color: var(--coffee);
   }
 
-  .casa__text p:not(.casa__intro) {
-    color: var(--muted);
-    max-width: 46ch;
-  }
-
-  .casa__detail {
-    aspect-ratio: 16 / 9;
-  }
-
-  @media (max-width: 44rem) {
-    .casa__grid {
-      grid-template-columns: 1fr;
-    }
-
-    .casa__photo,
-    .casa__side {
-      grid-column: 1 / -1;
-    }
-
-    /* Text first, then the photographs. */
-    .casa__side {
-      display: contents;
-    }
-
-    .casa__text {
-      order: -1;
+  @media (max-width: 64rem) {
+    .casa__title {
+      grid-column: 1 / 9;
     }
 
     .casa__photo {
-      aspect-ratio: 4 / 4.4;
+      grid-column: 7 / -1;
+      margin-top: clamp(6rem, 14vw, 10rem);
     }
 
-    .casa__detail {
-      width: 100%;
-      aspect-ratio: 16 / 10;
+    .casa__body {
+      grid-column: 1 / 7;
+    }
+  }
+
+  @media (max-width: 48rem) {
+    .casa__title,
+    .casa__photo,
+    .casa__body {
+      grid-column: 1 / -1;
+      grid-row: auto;
+      margin-top: 0;
+    }
+
+    .casa__photo {
+      aspect-ratio: 4 / 3.4;
+    }
+
+    .casa__note {
+      grid-template-columns: 6.5rem minmax(0, 1fr);
     }
   }
 </style>

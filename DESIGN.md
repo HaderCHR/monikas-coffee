@@ -1,249 +1,249 @@
 ---
 name: Monika's Coffee
-description: A painted shopfront in bottle green and gilt, and the plaster-and-wood room behind it.
+description: The house recipe card read as an editorial; the page is a cup in section, foam to espresso.
 colors:
-  paint: "#213a2e"
-  paint-deep: "#16291f"
-  paint-raised: "#2b4738"
-  gilt: "#d2ae62"
-  gilt-bright: "#e2c27f"
-  gilt-line: "rgb(210 174 98 / 0.5)"
-  shade: "#0d1913"
-  on-paint: "#f1e8d6"
-  on-paint-muted: "#c5cab7"
-  plaster: "#f5efe6"
-  oat: "#ece2d2"
-  ink: "#33231b"
+  foam: "#fcfaf7"
+  milk: "#f5efe6"
+  crema: "#e4cdae"
+  espresso: "#241812"
+  espresso-deep: "#1a110d"
+  caramel: "#c9a27a"
+  caramel-light: "#d9b893"
+  ink: "#2a1c16"
   brown: "#4a3026"
+  roast: "#5c4233"
   coffee: "#7d5f4b"
-  muted: "#645d56"
-  rule: "rgb(74 48 38 / 0.18)"
+  on-dark: "#f3e9dc"
+  on-dark-muted: "#cdb9a3"
+  rule: "rgb(74 48 38 / 0.2)"
+  rule-strong: "rgb(74 48 38 / 0.45)"
+  rule-dark: "rgb(243 233 220 / 0.16)"
+  focus: "#8a5a2b"
 typography:
-  signature:
-    fontFamily: "Yellowtail, cursive"
-    fontSize: "clamp(3.6rem, 1.6rem + 7.4vw, 8.25rem)"
-    fontWeight: 400
-    lineHeight: 0.9
-    letterSpacing: "0"
   display:
-    fontFamily: "Besley, Georgia, serif"
-    fontSize: "clamp(2.75rem, 1.6rem + 4.4vw, 5.5rem)"
-    fontWeight: 800
-    lineHeight: 0.95
-    letterSpacing: "-0.01em"
-  headline:
-    fontFamily: "Besley, Georgia, serif"
-    fontSize: "clamp(2.25rem, 1.35rem + 3.4vw, 4.25rem)"
-    fontWeight: 600
+    fontFamily: "Brygada 1918, Georgia, serif"
+    fontSize: "clamp(2.6rem, 1.6rem + 4.2vw, 5.25rem)"
+    fontWeight: 500
     lineHeight: 1.02
-    letterSpacing: "-0.012em"
-  numeral:
-    fontFamily: "Besley, Georgia, serif"
-    fontSize: "clamp(4rem, 2.5rem + 4.8vw, 7.5rem)"
-    fontWeight: 800
-    lineHeight: 0.85
-    letterSpacing: "-0.035em"
+    letterSpacing: "-0.025em"
+  headline:
+    fontFamily: "Brygada 1918, Georgia, serif"
+    fontSize: "clamp(2.1rem, 1.5rem + 2.6vw, 3.6rem)"
+    fontWeight: 500
+    lineHeight: 1.04
+    letterSpacing: "-0.025em"
+  measure:
+    fontFamily: "Brygada 1918, Georgia, serif"
+    fontSize: "clamp(2.6rem, 1.6rem + 4.2vw, 5.25rem)"
+    fontWeight: 500
+    lineHeight: 1
+    letterSpacing: "-0.03em"
     fontFeature: "lnum"
   title:
-    fontFamily: "Besley, Georgia, serif"
-    fontSize: "clamp(1.15rem, 1.05rem + 0.4vw, 1.4rem)"
-    fontWeight: 600
+    fontFamily: "Brygada 1918, Georgia, serif"
+    fontSize: "clamp(1.5rem, 1.25rem + 1vw, 2rem)"
+    fontWeight: 500
     lineHeight: 1.08
+    letterSpacing: "-0.02em"
+  lead:
+    fontFamily: "Familjen Grotesk, Arial, sans-serif"
+    fontSize: "clamp(1.2rem, 1.1rem + 0.45vw, 1.45rem)"
+    fontWeight: 400
+    lineHeight: 1.5
   body:
-    fontFamily: "Libre Franklin, Arial, sans-serif"
+    fontFamily: "Familjen Grotesk, Arial, sans-serif"
     fontSize: "1.0625rem"
     fontWeight: 400
     lineHeight: 1.6
+  notation:
+    fontFamily: "Familjen Grotesk, Arial, sans-serif"
+    fontSize: "0.875rem"
+    fontWeight: 500
+    letterSpacing: "0.01em"
+    fontFeature: "tnum, lnum"
   label:
-    fontFamily: "Besley, Georgia, serif"
-    fontSize: "1.05rem"
-    fontWeight: 700
-    lineHeight: 1.08
-    letterSpacing: "0.14em"
+    fontFamily: "Familjen Grotesk, Arial, sans-serif"
+    fontSize: "1rem"
+    fontWeight: 600
+    lineHeight: 1.1
 rounded:
-  none: "0"
-  hairline: "2px"
-  round: "50%"
+  square: "0"
+  card: "4px"
+  pill: "999px"
 spacing:
-  joint: "clamp(0.5rem, 0.9vw, 0.875rem)"
-  gutter: "clamp(1rem, 3.2vw, 3rem)"
-  section-y: "clamp(4.5rem, 2.5rem + 6.5vw, 9rem)"
-  wrap: "82.5rem"
-  header-h: "4rem"
+  gutter: "clamp(1rem, 4vw, 3.5rem)"
+  section: "clamp(4.5rem, 2.5rem + 5.5vw, 8rem)"
+  seam: "clamp(4rem, 2rem + 5vw, 7rem)"
+  header: "4.5rem"
+  wrap: "86rem"
 components:
-  button-gilt:
-    backgroundColor: "{colors.gilt}"
-    textColor: "{colors.shade}"
-    rounded: "{rounded.hairline}"
-    padding: "0.8em 1.35em"
-    height: "3rem"
-  button-gilt-hover:
-    backgroundColor: "{colors.gilt-bright}"
-    textColor: "{colors.shade}"
-  button-line:
-    backgroundColor: "transparent"
-    textColor: "{colors.on-paint}"
-    rounded: "{rounded.hairline}"
-    padding: "0.8em 1.35em"
-    height: "3rem"
-  board:
-    backgroundColor: "{colors.paint}"
-    textColor: "{colors.on-paint}"
-    rounded: "{rounded.none}"
-    padding: "clamp(1.5rem, 1rem + 3vw, 4rem)"
-  nav-bar:
-    backgroundColor: "{colors.paint}"
-    textColor: "{colors.on-paint}"
-    height: "{spacing.header-h}"
-  channel-row:
-    backgroundColor: "transparent"
-    textColor: "{colors.on-paint}"
-    padding: "1rem 0.75rem"
-    height: "5.5rem"
-  channel-row-hover:
-    backgroundColor: "{colors.paint-raised}"
+  button-primary:
+    backgroundColor: "{colors.ink}"
+    textColor: "{colors.foam}"
+    typography: "{typography.label}"
+    rounded: "{rounded.pill}"
+    padding: "0.85rem 1.6rem"
+    height: "3.25rem"
+  button-primary-hover:
+    backgroundColor: "{colors.brown}"
+  button-on-espresso:
+    backgroundColor: "{colors.caramel}"
+    textColor: "{colors.espresso}"
+    typography: "{typography.label}"
+    rounded: "{rounded.pill}"
+    padding: "0.85rem 1.6rem"
+    height: "3.25rem"
+  button-on-espresso-hover:
+    backgroundColor: "{colors.caramel-light}"
+  text-link:
+    textColor: "{colors.ink}"
+    typography: "{typography.label}"
+    height: "2.75rem"
+  recipe-card:
+    backgroundColor: "{colors.milk}"
+    textColor: "{colors.brown}"
+    rounded: "{rounded.card}"
+    padding: "clamp(1.75rem, 3.2vw, 3rem)"
+  photo:
+    backgroundColor: "{colors.crema}"
+    rounded: "{rounded.square}"
 ---
 
 # Design System: Monika's Coffee
 
 ## Overview
 
-**Creative North Star: "The Painted Shopfront"**
+**Creative North Star: "The Cup in Section"**
 
-The site is a sign-written shop façade and the room behind it. Bottle-green paint carries everything that belongs to the front of the shop: the header bar, the fascia, the window bays, the menu board on the wall, the door (contact) and the footer. Gilt, lettered with a sign-writer's dark drop shade, is reserved for lettering and fine rules on that paint. Inside the room, the page turns to plaster cream and oat with espresso-brown ink, and the photographs do the talking.
+The page is Monika's house recipe card read as an editorial: the café's craft written in its own notation (doses, seconds, degrees, what goes into each cup) set beside large, quiet photographs. Read top to bottom, the page is a cup cut through: foam at the top, then milk, crema, and espresso at the foot. Every ground is a layer of a coffee, and the visitor moves down through them.
 
-Density is calm and generous in the room sections (one idea per section, wide vertical rhythm) and deliberately dense on the menu board, which holds the whole menu on one painted panel in two columns, like a real board. Depth comes from paint and joinery, not from floating cards: photographs sit square-cornered inside green joinery with a thin gilt bead, boards carry a chamfered gilt rule inset from their edge.
+The system is warm, calm and sparse. A 1918 book face carries headlines, the wordmark and the measurements at display size; a plain grotesk carries text and the small print. Between them there is no middle size: big measured numbers against small notation. Structure comes from hairline rules like a ruled card, never from boxes, frames or card grids. Photographs are square-cornered, unframed and treated as one graded set.
 
-Motion is restrained and physical: the shutters roll up once on load, the ritual's sticky photograph crossfades with the step being read, photographs ease in a 3% zoom on hover, buttons step up and press down, nav underlines draw from the left. Everything rests under reduced motion.
+Motion is one grammar: exponential ease-out, and things fill from the bottom like a poured cup. Everything is readable without motion and comes to rest under reduced motion.
 
 **Key Characteristics:**
-- Two materials: green paint with gilt lettering (the front) and plaster with brown ink (the room).
-- Gilt appears only on paint, never on plaster.
-- Square photographs in green joinery with a gilt bead; no rounded image cards.
-- Boards with notched (chamfered) gilt rules frame the sign, the menu and the door.
-- Three typefaces with fixed jobs: Yellowtail signs the name, Besley letters every heading and numeral, Libre Franklin sets the text.
+- Grounds change only by cup layer: foam, milk, crema, espresso, espresso-deep.
+- One accent, caramel, and only on espresso.
+- Hairline-ruled fields as the structural device (notation line, house notes, contact channels, menu categories).
+- The cup-in-section glyph as the signature mark.
+- Square, unframed photographs; one pill button.
 
 ## Colors
 
-A two-material palette: bottle-green paint and gilt for the façade, plaster and espresso browns for the interior.
+A coffee read in cross-section: four warm grounds from near-white foam to espresso, brown inks, and a single caramel accent kept on the dark layers.
 
 ### Primary
-- **Bottle-Green Paint** (paint): the façade colour. Header, hero, menu board, door section, joinery between photographs. Raised Paint (paint-raised) is its hover and the shutter slats; Deep Paint (paint-deep) is the footer, the page edge and the frame backing behind photographs.
+- **Espresso** (`espresso`): the dark ground for the room (Sala) and contact; the bottom of the cup. Its sections switch ink, rules, focus and selection as a set.
+- **Espresso Deep** (`espresso-deep`): the footer only, the dregs below the espresso.
 
 ### Secondary
-- **Sign-Writer's Gilt** (gilt): lettering on paint (sign, board titles, category headings, contact title), the primary button, the active nav underline, icons on paint. Bright Gilt (gilt-bright) is its hover and the focus ring on paint. Gilt Line (gilt-line) is every rule, column rule, border and bead on paint.
-- **Shade** (shade): the sign-writer's drop shadow under gilt letters and the text colour on gilt buttons.
-
-### Tertiary
-- **Coffee** (coffee): the unit beside each ritual measurement (g, s, °C). Darkened from the brief's #8B6B55 to hold 5:1 on plaster.
+- **Caramel** (`caramel`): the one accent. Button fill on espresso, channel icons and arrow discs, footer labels, focus ring and selection on dark grounds. `caramel-light` is its hover state.
 
 ### Neutral
-- **Plaster** (plaster): the room background (Casa, Ritual) and body background.
-- **Oat** (oat): the alternate room band (Carta wall, Sala), so sections read as walls without lines.
-- **Espresso Ink** (ink): body text on plaster.
-- **Dark Brown** (brown): headings and numerals on plaster; the focus ring on plaster.
-- **Warm Muted** (muted): secondary text and leads on plaster.
-- **On-Paint Cream** (on-paint) and **On-Paint Sage** (on-paint-muted): primary and secondary text on green.
-- **Brown Rule** (rule): hairline dividers on plaster (between ritual steps).
+- **Foam** (`foam`): header, hero, the house, the 404 page; the page's default ground.
+- **Milk** (`milk`): the menu ground, and the surface of the hero recipe card and modal notes.
+- **Crema** (`crema`): the ritual ground; also the selection colour and the placeholder behind photographs on light grounds.
+- **Espresso Ink** (`ink`): headlines, button fill on light grounds, the ritual timeline.
+- **Brown** (`brown`): body text on light grounds; button hover.
+- **Roast** (`roast`): secondary text on crema, where coffee would be too weak.
+- **Coffee** (`coffee`): notation, category notes, closing lines, scrollbar thumb on milk.
+- **On-Dark** / **On-Dark Muted** (`on-dark`, `on-dark-muted`): headings and body on espresso.
+- **Rules** (`rule`, `rule-strong`, `rule-dark`): hairlines. `rule-strong` opens a ruled field, `rule` divides its rows; `rule-dark` replaces `rule` on espresso.
+- **Focus** (`focus`): the 2px focus ring on light grounds.
 
 ### Named Rules
-**The Gilt Stays On Paint Rule.** Gilt lettering, gilt rules and the gilt bead appear only on bottle-green surfaces. On plaster, headings are dark brown and dividers are the brown rule.
+**The Cup Layer Rule.** A section's ground is one of the cup's layers, in order down the page. Between light layers the seam is a soft gradient over `spacing.seam` (milk into crema runs `in oklab` over 1.75 seams); no other surface tints exist.
 
-**The Two Materials Rule.** Every section is either paint (front of shop: header, hero, menu board, door, footer) or plaster/oat (the room). No third surface colour, no gradients between them.
+**The Caramel-on-Espresso Rule.** Caramel appears only on espresso grounds. On light grounds the accent role is played by espresso ink.
 
 ## Typography
 
-**Display Font:** Besley (with Georgia, serif), a Clarendon cut for sign letters, headings and numerals.
-**Body Font:** Libre Franklin (with Arial, sans-serif).
-**Signature Font:** Yellowtail (with cursive), only for the word "Monika's".
+**Display Font:** Brygada 1918, roman and italic (Georgia, serif fallback)
+**Body Font:** Familjen Grotesk (Arial, sans-serif fallback)
 
-**Character:** A sign-writer's Clarendon over a plain, warm grotesque; the script appears only as the shop's signature, as if painted by hand on the fascia.
+**Character:** An old book face set at weight 500 with tight tracking gives the headlines and numbers a written, measured voice; the grotesk underneath stays plain and legible. Italic Brygada is the handwriting on the card: the wordmark, field terms, units and the room's long line.
 
 ### Hierarchy
-- **Signature** (Yellowtail 400, clamp(3.6rem…8.25rem) on the fascia, up to 15.5rem in the footer, 1.85rem in the header, line-height 0.9): the name "Monika's" and nothing else.
-- **Display** (Besley 800, clamp(2.75rem…5.5rem), 0.95): titles lettered on boards in gilt ("La carta", "Escríbenos" up to 6.25rem).
-- **Headline** (Besley 600, clamp(2.25rem…4.25rem), 1.02): section titles on plaster, dark brown, balanced wrap.
-- **Numeral** (Besley 800, clamp(4rem…7.5rem), 0.85, lining figures): the ritual's real measurements, with a Besley 600 unit in coffee beside it.
-- **Title** (Besley 600, clamp(1.15rem…1.4rem)): menu item names, channel labels, step titles (up to 2rem).
-- **Body** (Libre Franklin 400, 1.0625rem, 1.6): running text, 40–50ch measures; leads at clamp(1.0625rem…1.25rem) in muted.
-- **Label** (Besley 700, 1.05rem, 0.14em, uppercase): menu category headings in gilt on the board. The trade word "COFFEE" is the wider cousin (Besley 800, 0.28em).
+- **Display** (500, `display` step, 1.02): section titles (la casa, la carta, el ritual, la sala).
+- **Headline** (500, `headline` step, 1.04): the hero h1 on the recipe card, the 404 title, the room's italic long line, contact channel labels.
+- **Measure** (500, display size, 1, lining figures): the ritual's measurements (18 g, 25 s, 65 °C); the unit is italic at 0.42em. The hero notation values use the same face at the title step.
+- **Title** (500, title step): menu category names, price question, modal titles; drink and station names drop to the lead step.
+- **Lead** (400, lead step, 1.5, max 34em): the one paragraph under each section title.
+- **Body** (400, 1.0625rem, 1.6): running text; menu and station descriptions at 0.975rem.
+- **Notation** (500, 0.875rem, tabular lining figures, `coffee`): the recipe card's small print: drink composition, station counts, hero field labels, contact handles.
+- **Label** (600, 1rem): buttons and text links.
 
 ### Named Rules
-**The Signature Only Rule.** Yellowtail sets the word "Monika's" and nothing else.
+**The No Middle Size Rule.** Measurements and headlines sit at display size against small notation; do not introduce an intermediate size to bridge them.
 
-**The Measurement Is The Headline Rule.** Where a fact has a number (grams, seconds, degrees), the numeral is set largest and the sentence follows.
+**The Written Field Rule.** Italic Brygada marks the hand-written parts of the card (wordmark, field terms, units, the long line). Roman Brygada carries headings. Grotesk never goes italic.
 
 ## Layout
 
-Content sits in a centred wrap of 82.5rem with a fluid gutter (clamp(1rem, 3.2vw, 3rem)). Room sections use a 12-column grid with a fluid gap (clamp(1.5rem, 3vw, 3rem)); section heads split title (columns 1–6) and lead (8–12). Vertical rhythm is the section-y token (clamp(4.5rem…9rem)); paint sections that are part of the façade (hero, door) run tighter.
+A 12-column grid inside a centred wrap (max `spacing.wrap`, side gutter `spacing.gutter`), column gap `clamp(1rem, 2vw, 2rem)`. Sections pad by `spacing.section`; the header is sticky at `spacing.header` and gains a hairline once the page scrolls.
 
-The **joint** token (clamp(0.5rem, 0.9vw, 0.875rem)) is the width of green joinery between panes: it is the gap between the hero's fascia, bays and stallriser, and between the Sala window's panes, which sit on a paint background padded by one joint.
+Every section is a different composition inside that grid: the hero photograph runs out to the right window edge with the recipe card overlapping its lower-left foot and the notation line beside it; the house sets title and ruled notes left against a tall photograph dropped lower on the right; the menu holds each category name sticky on the left while drinks pass in two columns; the ritual is four stations on one timeline; the room is an editorial spread of photographs of different sizes with one long italic line; contact is a 5:7 split of heading and channel rows.
 
-The hero fills the first viewport (100svh minus the header). The menu board sets its body in two CSS columns with a gilt column rule; categories never break across columns, and the price question is the board's last line under a gilt rule. The ritual pairs a sticky photograph (columns 1–6) with tall steps (columns 8–12).
-
-Breakpoints: 60rem (header nav collapses to the dialog menu; hero stallriser stacks), 56rem (door board and footer to fewer columns), 44rem (12-column splits stack; menu board to one column; the ritual's sticky photo is replaced by a photo per step; Sala window becomes two columns), 40rem (fascia sign stacks centred), 26rem (header trade word drops). Touch targets hold 44px throughout.
+Responsive steps are 72rem (menu to one column), 64rem (tablet re-flows), 60rem (header collapses to a full-screen dialog menu; contact stacks), 48rem (phones: single column, hero photo edge to edge), 40rem and 30rem for the last tightening. The contact heading sizes by its own column (`17cqi`), never the viewport.
 
 ## Elevation & Depth
 
-Depth is material, not floating. Surfaces are flat paint and flat plaster; the sense of depth comes from joinery (photographs set into green with a gilt bead), from the chamfered gilt rule inset inside boards, and from the sign-writer's hard drop shade under gilt letters. The few shadows are long, soft and low, as if a board hangs on a wall.
+Flat. Depth comes from the cup's grounds and from photographs, not from shadows. Two surfaces are set down on the page and carry one soft drop: the recipe card (hero, 404) and the demonstration note.
 
 ### Shadow Vocabulary
-- **Sign-writer's shade** (`text-shadow: 0.035em 0.045em 0 #0d1913`): under every gilt letter on paint. A hard offset is native to painted sign-writing in this world.
-- **Hung board** (`box-shadow: 0 30px 60px -40px rgb(13 25 19 / 0.65)`): the menu board and the Sala window on oat.
-- **Button lift** (`box-shadow: 0 6px 16px -8px rgb(13 25 19 / 0.7)`): gilt button on hover; at rest a 1px ledge (`0 1px 0 rgb(13 25 19 / 0.35)`).
-- **Notice** (`box-shadow: 0 40px 80px -30px rgb(0 0 0 / 0.7)`): the demo-channel popover only.
+- **Card set down** (`box-shadow: 0 1px 0 rgb(74 48 38 / 0.08), 0 28px 56px -32px rgb(36 24 18 / 0.45)`): the hero recipe card; the 404 card uses the second layer only.
+- **Modal note** (`box-shadow: 0 40px 80px -30px rgb(0 0 0 / 0.6)`): the demonstration popover over a `rgb(26 17 13 / 0.6)` backdrop.
 
 ### Named Rules
-**The Hung, Not Floating Rule.** A shadow only says that a painted object hangs on a wall: long, low, with a large negative spread. No ambient card shadows on plaster.
+**The Set-Down Rule.** Only a card that sits over something else gets a shadow. Sections, photographs and list rows never do.
 
 ## Shapes
 
-Square corners everywhere. Photographs are square-cornered and cropped by their frame; the bead is a 1px gilt line inset 0.35–0.5rem inside the photo (dropped on small menu thumbnails). Boards are rectangles whose inner gilt rule has chamfered (notched) corners, drawn with a clip-path polygon. Buttons carry only a 2px hairline radius. The one round shape is the circular arrow well beside each contact channel.
+Square by default. Photographs are square-cornered with no frame, border or caption box; they clip their image; under the pointer the picture leans in 6% while a mat in the ground colour closes around it. Cards that are set down round their corners just enough to read as paper (`rounded.card`; the modal note 6px). Buttons are full pills. The cup glyph is the one drawn silhouette: open at the top, rounded at the base, built from stacked layers. Rules are 1px hairlines; the ritual timeline adds a 7px dot at each station.
 
 ## Components
 
 ### Buttons
-Painted and lettered; they step up 1px on hover and press 1px down on active (0.06s), and the arrow nudges 3px right.
-- **Shape:** near-square (2px), min-height 3rem, 1.5px border, Libre Franklin 600 at 1rem.
-- **Gilt (primary):** gilt fill, shade text; hover brightens to bright gilt with a soft lift shadow. Used for every "Escríbenos" / ask action.
-- **Line:** transparent with a gilt-line border and cream text on paint; hover turns the border to full gilt over an 8% gilt wash. The secondary action beside a gilt button.
-- **Focus:** 2px outline offset 3px, brown on plaster, bright gilt on paint.
+- **Shape:** full pill (`rounded.pill`), minimum height 3.25rem; 2.75rem in the header.
+- **Primary:** espresso ink with foam text on light grounds, label type, 0.85rem × 1.6rem padding; on hover the trailing arrow travels out to the right and comes back from the left (560ms).
+- **On espresso:** the same pill turns caramel with espresso text inside any dark section.
+- **Hover / Active:** a lighter shade (`brown`, or `caramel-light` on espresso) is poured in from the bottom (scaleY on a pseudo-element, 520ms, `cubic-bezier(0.33, 1, 0.68, 1)`) while the shadow deepens; press scales to 0.965 in 120ms. With reduced motion the pour is a 240ms fade.
+- **Text link (the quieter action):** label type in ink with a 1px underline that is erased to the right and redrawn from the left on hover (680ms); its arrow travels through like the button's.
 
-### Board (signature)
-A bottle-green panel with a 1px gilt rule inset from its edge and chamfered at the corners. It frames the fascia, the menu, the door and the demo notice. Content inside uses on-paint text, gilt titles and gilt-line dividers.
+### Recipe Card
+- **Character:** a cream card set down over a photograph.
+- **Surface:** milk, `rounded.card`, card-set-down shadow, padding `clamp(1.75rem, 3.2vw, 3rem)`.
+- **Use:** the hero (h1, sentence, button and text link) and the 404 page. It enters by translating up 1.75rem; it never fades over the photograph.
 
-### Menu Board (signature)
-One board holds the whole menu: a gilt display title, an intro in sage, a row of deep links to each category (Besley 600, gilt-line underline, 44px targets), then the categories in two columns split by a gilt column rule. Each item is a square photograph (6.5–9rem, beaded, hover zoom) beside its Besley name and a short description. The last line, under a gilt rule, asks about prices with a gilt button.
-
-### Photograph frames
-Square-cornered crop on a deep-paint backing; optional gilt bead; optional hover zoom (scale 1.03 over 0.9s, hover-capable pointers only).
+### Ruled Fields
+- **Character:** the card's ruled lines, the system's one structural device.
+- **Style:** a `rule-strong` hairline opens the field, `rule` hairlines divide rows. Terms set in italic Brygada (or notation in the hero), values in body or display.
+- **Instances:** the hero notation line (three cells, vertical hairlines between), the house notes (8.5rem term column), the contact channel rows (icon, Brygada label, notation handle, caramel arrow disc), menu category dividers, and the mobile menu links.
 
 ### Navigation
-A sticky green bar (4rem) with the script signature and spaced "COFFEE", five links in Libre Franklin 500 at 0.95rem, and a compact gilt button. Hover and the current section draw a 1px gilt underline from the left; the current link turns bright gilt. The bar gains a gilt-line border once scrolled and hides while reading downward. Below 60rem the links move to a full-screen green dialog with large Besley links separated by gilt lines and a full-width gilt button.
+- **Desktop:** foam bar, wordmark left (Brygada italic 600 at 1.7rem plus "Coffee" in 0.72rem tracked grotesk caps), links in brown 500 whose underline draws in from the left on hover, leaves to the right, and stays on the current section; small pill CTA.
+- **Mobile (≤60rem):** a "Menú" button opens a full-screen foam dialog: ruled Brygada links staggered in by 40ms, full-width pill at the foot.
 
-### Contact channels
-Rows on the door board, separated by gilt lines: gilt icon, Besley label, sage handle, and a circular gilt-line arrow well that fills gilt on hover while the row warms to paint-raised and its padding shifts in.
+### Cup in Section (signature)
+A small glass drawn in layers of what goes into a drink, read from the bottom: espresso, water, milk, foam, chocolate, cream, vanilla, caramel, ice (diagonal stripes), matcha, tea, red fruit. Each layer has its own fixed fill colour (kept in the component, not the palette), with shares of 1–3. Medium (2rem × 2.85rem) stands beside each drink's name with the composition written under it as notation; large (5.5rem × 7.5rem) is the menu's key, its layers named on hairlines. Decorative and hidden from assistive technology because the composition is also written as text. It fills from the bottom as it scrolls into view; pointing at a drink sips its top layer and pours it again (900ms) without moving the layers below.
 
-### Ritual step
-A large Besley numeral with its coffee-coloured unit, a step title and a short paragraph; on wide screens a sticky photograph beside the steps crossfades (0.7s) to the step nearest mid-screen.
-
-### Shutter (signature motion)
-Green slat shutters (repeating paint-raised / paint / shade bands) cover the hero bays and roll up once on load (1.25s, ease-in-out, door pane 0.2s later) while the photographs settle from 1.06 scale. Without motion the windows are simply open.
+### Photographs
+Square, unframed, `object-fit: cover`, crema placeholder (a darker brown on espresso). Aspect ratios vary by composition (4:5, 1:1, 3:2, 16:11). Where hover exists: the image leans in 6% (1100ms in, 700ms out) and a mat in the section's ground colour (`--mat`, 0.75rem; 0.4rem on menu thumbnails, triggered by the whole item) closes around it. Under reduced motion only the mat answers, as a fade.
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** letter in gilt with the shade drop only on bottle-green paint.
-- **Do** set photographs square-cornered inside green joinery (one joint wide), with the gilt bead on anything larger than a thumbnail.
-- **Do** frame a block that belongs to the shopfront (sign, menu, door, notice) as a board with the chamfered gilt rule.
-- **Do** alternate room sections between plaster and oat instead of drawing lines between them.
-- **Do** set real measurements as large Besley numerals with the unit in coffee.
-- **Do** let every animation rest under prefers-reduced-motion; motion is once on load, on scroll position, or on hover/press.
-- **Do** serve photographs as WebP with a JPEG fallback.
+- **Do** change ground only by cup layer, in order, with a soft seam between light layers.
+- **Do** keep caramel on espresso grounds only.
+- **Do** build structure from hairline rules: `rule-strong` to open a field, `rule` between rows.
+- **Do** keep photographs square-cornered and unframed, and treat new photographs with the same warm, matte, lower-saturation grade.
+- **Do** use the single pill button; on espresso it turns caramel.
+- **Do** write measurements in Brygada at display size with an italic unit, and composition in small tabular notation.
+- **Do** animate with the exponential ease-out (`cubic-bezier(0.16, 1, 0.3, 1)`) and fill from the bottom: the hero photo pours in on load (clip from the bottom, 1100ms), cups fill and the ritual timeline draws on scroll timelines, two room photographs drift against the scroll. Interactions follow the same idea: buttons and contact discs are poured full on hover, arrows travel through and back, underlines are written in and erased, contact rows slide their name and write a caramel rule, the notice and the menu leave faster than they arrive (200ms vs 320–380ms), focus rings tighten onto the control. Everything is readable before motion; under reduced motion nothing moves or scales, but colour, opacity and box-shadow still fade.
 
 ### Don't:
-- **Don't** use Yellowtail for anything but the word "Monika's".
-- **Don't** place gilt text or gilt rules on plaster or oat.
-- **Don't** round photograph or panel corners, or float cards on soft ambient shadows.
-- **Don't** break a menu category across the board's columns, or turn the menu into a uniform tile grid.
-- **Don't** introduce a third surface colour or a gradient between paint and plaster.
+- **Don't** put eyebrows or kickers above headings.
+- **Don't** lay content out as card grids, or put frames inside frames.
+- **Don't** add a second button style or a second accent colour.
+- **Don't** add shadows to sections, photographs or rows; only set-down cards carry one.
+- **Don't** size contact or footer type from the viewport as single giant words; size it from content or its own column.

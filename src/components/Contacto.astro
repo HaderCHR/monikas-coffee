@@ -6,31 +6,46 @@ import { contact } from '../data/contact';
 const splitAt = (text: string) => text.split('@');
 ---
 
-<section class="door on-paint" id="contacto" data-nav-section aria-labelledby="contacto-title">
+<section class="contacto dark" id="contacto" data-nav-section aria-labelledby="contacto-title">
   <div class="wrap">
-    <div class="door__board board">
-      <div class="door__intro">
-        <h2 class="door__title gilt" id="contacto-title">Escríbenos</h2>
-        <p class="door__lead">
-          ¿Quieres saber precios, qué hay hoy en la vitrina o si podemos preparar algo para tu
-          reunión? Pregúntanos por el canal que prefieras y te respondemos.
-        </p>
-        {
-          contact.isDemo && (
-            <p class="door__demo" id="aviso-canales">
-              <Icon name="info" />
-              <span>
-                Monika's Coffee es una cafetería ficticia creada para un portafolio. Estos canales son
-                de ejemplo y no reciben mensajes.
-              </span>
-            </p>
-          )
-        }
-      </div>
+    <div class="contacto__grid">
+    <!-- The heading's size follows the width of its own column (container units), never the
+         viewport, so it cannot grow past that column into the channels. -->
+    <header class="contacto__head">
+      <h2 class="contacto__title" id="contacto-title">Escríbenos</h2>
+      <p class="lead">
+        ¿Quieres saber precios, qué hay hoy en la vitrina o si podemos preparar algo para tu
+        reunión? Pregúntanos por el canal que prefieras y te respondemos.
+      </p>
+    </header>
 
-      <ul class="channels" role="list">
-        {
-          contact.channels.map((channel) => (
+    <div class="contacto__channels">
+    <ul class="channels" role="list">
+      {
+        contact.channels.map((channel) => {
+          const body = (
+            <>
+              <Icon name={channel.id} class="channel__icon" />
+              <span class="channel__label">{channel.label}</span>
+              <span class="channel__handle notation">
+                {splitAt(channel.handle).map((part, i) => (
+                  <>
+                    {i > 0 && (
+                      <>
+                        @<wbr />
+                      </>
+                    )}
+                    {part}
+                  </>
+                ))}
+              </span>
+              <span class="channel__go">
+                <span class="visually-hidden">{channel.action}</span>
+                <Icon name="arrow" />
+              </span>
+            </>
+          );
+          return (
             <li>
               {contact.isDemo || !channel.href ? (
                 <button
@@ -39,26 +54,7 @@ const splitAt = (text: string) => text.split('@');
                   popovertarget="demo-canal"
                   aria-describedby="aviso-canales"
                 >
-                  <Icon name={channel.id} class="icon channel__icon" />
-                  <span class="channel__text">
-                    <span class="channel__label">{channel.label}</span>
-                    <span class="channel__handle">
-                      {splitAt(channel.handle).map((part, i) => (
-                        <>
-                          {i > 0 && (
-                            <>
-                              @<wbr />
-                            </>
-                          )}
-                          {part}
-                        </>
-                      ))}
-                    </span>
-                  </span>
-                  <span class="channel__action">
-                    <span class="visually-hidden">{channel.action}</span>
-                    <Icon name="arrow" class="icon channel__arrow" />
-                  </span>
+                  {body}
                 </button>
               ) : (
                 <a
@@ -66,39 +62,34 @@ const splitAt = (text: string) => text.split('@');
                   href={channel.href}
                   {...(channel.href.startsWith('http') ? { rel: 'noopener', target: '_blank' } : {})}
                 >
-                  <Icon name={channel.id} class="icon channel__icon" />
-                  <span class="channel__text">
-                    <span class="channel__label">{channel.label}</span>
-                    <span class="channel__handle">
-                      {splitAt(channel.handle).map((part, i) => (
-                        <>
-                          {i > 0 && (
-                            <>
-                              @<wbr />
-                            </>
-                          )}
-                          {part}
-                        </>
-                      ))}
-                    </span>
-                  </span>
-                  <span class="channel__action">
-                    <span class="visually-hidden">{channel.action}</span>
-                    <Icon name="arrow" class="icon channel__arrow" />
-                  </span>
+                  {body}
                 </a>
               )}
             </li>
-          ))
-        }
-      </ul>
+          );
+        })
+      }
+    </ul>
+
+    {
+      contact.isDemo && (
+        <p class="contacto__demo" id="aviso-canales">
+          <Icon name="info" />
+          <span>
+            Monika's Coffee es una cafetería ficticia creada para un portafolio. Estos canales son de
+            ejemplo y no reciben mensajes.
+          </span>
+        </p>
+      )
+    }
+    </div>
     </div>
   </div>
 
   {
     contact.isDemo && (
-      <div class="demo-note board on-paint" id="demo-canal" popover aria-labelledby="demo-canal-title">
-        <h3 class="demo-note__title gilt" id="demo-canal-title">
+      <div class="demo-note" id="demo-canal" popover aria-labelledby="demo-canal-title">
+        <h3 class="demo-note__title" id="demo-canal-title">
           Canal de demostración
         </h3>
         <p>
@@ -109,7 +100,7 @@ const splitAt = (text: string) => text.split('@');
           En la web de una cafetería real, este botón abriría WhatsApp, Instagram o tu correo con la
           conversación lista para escribir.
         </p>
-        <button class="btn btn--gilt" type="button" popovertarget="demo-canal" popovertargetaction="hide">
+        <button class="btn" type="button" popovertarget="demo-canal" popovertargetaction="hide">
           Entendido
         </button>
       </div>
@@ -118,223 +109,327 @@ const splitAt = (text: string) => text.split('@');
 </section>
 
 <style>
-  .door {
-    background: var(--paint);
-    padding-block: clamp(3rem, 2rem + 4vw, 6rem);
+  .contacto {
+    padding-block: 0 var(--section-y);
   }
 
-  .door__board {
+  .contacto .wrap {
+    padding-top: var(--section-y);
+    border-top: 1px solid var(--rule);
+  }
+
+  .contacto__grid {
     display: grid;
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
-    gap: clamp(2rem, 5vw, 5rem);
-    align-items: center;
-    padding: clamp(1.5rem, 0.5rem + 4.5vw, 4.5rem);
-    background: var(--paint);
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: clamp(2.5rem, 6vw, 6rem);
+    align-items: start;
   }
 
-  .door__board::after {
-    background: var(--paint);
-  }
-
-  .door__intro {
+  .contacto__head {
+    container-type: inline-size;
     display: grid;
     gap: 1.5rem;
   }
 
-  .door__title {
-    font-weight: 800;
-    font-size: clamp(2.2rem, 0.9rem + 6.5vw, 6.25rem);
-    line-height: 0.95;
-    letter-spacing: -0.015em;
+  .contacto__title {
+    font-size: clamp(2.75rem, 17cqi, 6rem);
+    line-height: 0.98;
+    letter-spacing: -0.035em;
   }
 
-  .door__lead {
-    max-width: 44ch;
-    font-size: clamp(1.0625rem, 1rem + 0.35vw, 1.25rem);
-    line-height: 1.55;
-    color: var(--on-paint);
-  }
-
-  .door__demo {
-    display: flex;
-    gap: 0.65rem;
-    align-items: flex-start;
-    max-width: 52ch;
-    padding-top: 1.25rem;
-    border-top: 1px solid var(--gilt-line);
-    font-size: 0.9375rem;
-    line-height: 1.5;
-    color: var(--on-paint-muted);
-  }
-
-  .door__demo .icon {
-    width: 1.25rem;
-    height: 1.25rem;
-    margin-top: 0.1rem;
-    stroke: var(--gilt);
-  }
-
-  /* ----- Channels ----- */
+  /* ----- Three channels as ruled lines, the same device as the house notes ----- */
 
   .channels {
-    display: grid;
-    border-top: 1px solid var(--gilt-line);
+    border-top: 1px solid rgb(243 233 220 / 0.35);
   }
 
   .channels li {
-    border-bottom: 1px solid var(--gilt-line);
+    border-bottom: 1px solid var(--rule);
   }
 
   .channel {
+    position: relative;
     display: grid;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas:
+      'icon label go'
+      'icon handle go';
     align-items: center;
-    gap: 1.1rem;
+    gap: 0.2rem 1.25rem;
     width: 100%;
-    min-height: 5.5rem;
-    padding: 1rem 0.75rem;
+    min-height: 7rem;
+    padding: 1.25rem 0;
     border: 0;
-    background: transparent;
-    color: var(--on-paint);
+    background: none;
+    color: var(--on-dark);
     text-align: left;
     text-decoration: none;
-    cursor: pointer;
-    transition:
-      background-color 0.25s ease,
-      padding 0.35s var(--ease-out);
-  }
-
-  .channel:hover {
-    background: var(--paint-raised);
-    padding-inline: 1.25rem 1rem;
-  }
-
-  .channel:active {
-    background: var(--paint-deep);
   }
 
   .channel__icon {
-    width: 1.75rem;
-    height: 1.75rem;
-    color: var(--gilt);
-  }
-
-  .channel__text {
-    display: grid;
-    gap: 0.15rem;
-    min-width: 0;
+    grid-area: icon;
+    width: 1.6rem;
+    height: 1.6rem;
+    color: var(--caramel);
   }
 
   .channel__label {
-    font-family: var(--font-sign);
-    font-size: clamp(1.35rem, 1.15rem + 0.8vw, 1.75rem);
-    font-weight: 600;
-    line-height: 1.15;
+    grid-area: label;
+    align-self: end;
+    font-family: var(--font-display);
+    font-size: var(--step-3);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    transition: color var(--t-quick) ease;
   }
 
   .channel__handle {
-    font-size: 0.95rem;
-    color: var(--on-paint-muted);
-    overflow-wrap: break-word;
+    grid-area: handle;
+    align-self: start;
+    overflow-wrap: anywhere;
   }
 
-  .channel__action {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 2.75rem;
-    height: 2.75rem;
-    border: 1px solid var(--gilt-line);
+  .channel__go {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    grid-area: go;
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
     border-radius: 50%;
-    transition:
-      border-color 0.25s ease,
-      background-color 0.25s ease;
+    background: var(--caramel);
+    color: var(--espresso);
+    transition: transform 380ms var(--ease-out);
   }
 
-  .channel__arrow {
-    width: 1.15rem;
-    height: 1.15rem;
-    fill: none;
-    stroke: currentColor;
-    transition: transform 0.3s var(--ease-out);
+  /* The disc is poured full of a lighter caramel, like the buttons. */
+  .channel__go::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: #e3c8a4;
+    opacity: 0;
+    transition: opacity 240ms ease;
   }
 
-  .channel:hover .channel__action {
-    border-color: var(--gilt);
-    background: var(--gilt);
-    color: var(--shade);
+  /* A caramel rule is written under the row, and erased towards the right on the way out. */
+  .channel::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 1px;
+    background: var(--caramel);
+    opacity: 0;
+    transition: opacity 240ms ease;
   }
 
-  .channel:hover .channel__arrow {
-    transform: translateX(2px);
+  .channel:hover .channel__label {
+    color: var(--caramel);
   }
 
-  /* ----- Demo notice (native popover: Esc and outside click close it) ----- */
+  .channel:hover .channel__go::before,
+  .channel:hover::after {
+    opacity: 1;
+  }
+
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .channel__label {
+      transition:
+        color var(--t-quick) ease,
+        transform 600ms var(--ease-out);
+    }
+
+    .channel:hover .channel__label {
+      transform: translateX(0.4rem);
+    }
+
+    .channel__go::before {
+      opacity: 1;
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform var(--t-pour) var(--ease-pour);
+    }
+
+    .channel:hover .channel__go::before {
+      transform: scaleY(1);
+    }
+
+    .channel:hover .channel__go .icon {
+      animation: arrow-through 560ms var(--ease-out);
+    }
+
+    .channel::after {
+      opacity: 1;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 320ms var(--ease-out);
+    }
+
+    .channel:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+      transition-duration: 700ms;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .channel:active .channel__go {
+      transform: scale(0.9);
+      transition-duration: var(--t-press);
+    }
+  }
+
+  .contacto__demo {
+    display: flex;
+    gap: 0.65rem;
+    align-items: flex-start;
+    max-width: 60ch;
+    margin-top: 1.5rem;
+    font-size: var(--step--1);
+  }
+
+  .contacto__demo .icon {
+    margin-top: 0.1rem;
+    color: var(--caramel);
+  }
+
+  /* ----- The demonstration notice: a card set on the dimmed room ----- */
 
   .demo-note {
+    --focus: #8a5a2b;
     position: fixed;
     inset: 0;
-    width: min(30rem, calc(100% - 2rem));
+    width: min(100% - 2rem, 30rem);
     height: fit-content;
     margin: auto;
-    padding: clamp(1.75rem, 4vw, 2.5rem);
+    padding: clamp(1.5rem, 4vw, 2.25rem);
     border: 0;
-    display: none;
+    border-radius: 6px;
+    background: var(--milk);
+    color: var(--brown);
+    box-shadow: 0 40px 80px -30px rgb(0 0 0 / 0.6);
+  }
+
+  /* Only the display switches with the open state; the spacing belongs to the notice itself,
+     so it holds while the notice leaves. */
+  .demo-note {
     gap: 1rem;
-    line-height: 1.55;
-    box-shadow: 0 40px 80px -30px rgb(0 0 0 / 0.7);
   }
 
   .demo-note:popover-open {
     display: grid;
   }
 
-  .demo-note::backdrop {
-    background: rgb(13 25 19 / 0.55);
+  /* Enter and leave: the notice fades (and, with motion, rises) in 380ms and leaves in 200ms. */
+  /* The card turns opaque fast (180ms in, 150ms out) so it never shows two texts at once;
+     only its rise takes longer. */
+  .demo-note {
+    opacity: 0;
+    transition:
+      opacity 150ms ease,
+      transform 200ms var(--ease-out),
+      overlay 200ms allow-discrete,
+      display 200ms allow-discrete;
   }
 
-  .demo-note p {
-    color: var(--on-paint-muted);
+  .demo-note:popover-open {
+    opacity: 1;
+    transition-duration: 180ms, 380ms, 380ms, 380ms;
+    transition-timing-function: var(--ease-out);
+  }
+
+  @starting-style {
+    .demo-note:popover-open {
+      opacity: 0;
+    }
+  }
+
+  /* Reduced motion re-indexes the transition lists, so give the notice one duration per state:
+     a 180ms fade in and a 150ms fade out, nothing else. */
+  @media (prefers-reduced-motion: reduce) {
+    .demo-note {
+      transition-duration: 150ms;
+    }
+
+    .demo-note:popover-open {
+      transition-duration: 180ms;
+    }
+  }
+
+  .demo-note::backdrop {
+    background: rgb(26 17 13 / 0);
+    transition:
+      background-color 260ms ease,
+      overlay 260ms allow-discrete,
+      display 260ms allow-discrete;
+  }
+
+  .demo-note:popover-open::backdrop {
+    background: rgb(26 17 13 / 0.6);
+  }
+
+  @starting-style {
+    .demo-note:popover-open::backdrop {
+      background: rgb(26 17 13 / 0);
+    }
   }
 
   .demo-note__title {
-    font-size: 1.75rem;
-    font-weight: 700;
+    font-size: var(--step-2);
+    color: var(--ink);
   }
 
   .demo-note .btn {
+    --btn-bg: var(--ink);
+    --btn-fg: var(--foam);
+    --btn-bg-hover: #4a3026;
     justify-self: start;
     margin-top: 0.5rem;
   }
 
   @media (prefers-reduced-motion: no-preference) {
+    .demo-note {
+      transform: translateY(0.5rem) scale(0.98);
+    }
+
     .demo-note:popover-open {
-      animation: note-in 0.35s var(--ease-out);
+      transform: none;
+    }
+
+    @starting-style {
+      .demo-note:popover-open {
+        transform: translateY(0.75rem) scale(0.98);
+      }
     }
   }
 
-  @keyframes note-in {
-    from {
-      opacity: 0;
-      transform: translateY(0.75rem);
-    }
-  }
-
-  @media (max-width: 56rem) {
-    .door__board {
+  @media (max-width: 60rem) {
+    .contacto__grid {
       grid-template-columns: minmax(0, 1fr);
     }
-  }
 
-  @media (max-width: 26rem) {
-    .channel {
-      gap: 0.85rem;
-      padding-inline: 0.25rem;
+    .contacto__head {
+      max-width: 40rem;
     }
 
-    .channel__action {
-      width: 2.5rem;
-      height: 2.5rem;
+    .channel {
+      min-height: 5.5rem;
+      column-gap: 1rem;
+    }
+
+    .channel__label {
+      font-size: var(--step-2);
+    }
+
+    .channel__go {
+      width: 2.75rem;
+      height: 2.75rem;
     }
   }
 </style>

@@ -11,7 +11,7 @@ export const site = {
   description:
     'Café preparado al momento, bebidas frías y repostería hecha en casa. Mira la carta de Monika’s Coffee y escríbenos para preguntar precios o disponibilidad.',
   tagline: 'Café recién hecho y repostería de casa',
-  themeColor: '#213a2e',
+  themeColor: '#fcfaf7',
   year: 2026,
 } as const;
 

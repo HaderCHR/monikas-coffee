@@ -10,7 +10,7 @@ interface Props {
   label?: string;
 }
 
-const { name, class: className = 'icon', label } = Astro.props;
+const { name, class: className, label } = Astro.props;
 
 const brand: Record<string, string> = {
   whatsapp:
@@ -24,12 +24,12 @@ const a11y = label ? { role: 'img', 'aria-label': label } : { 'aria-hidden': 'tr
 
 {
   brand[name] ? (
-    <svg class={className} viewBox="0 0 24 24" {...a11y}>
+    <svg class:list={['icon', className]} viewBox="0 0 24 24" {...a11y}>
       <path fill="currentColor" d={brand[name]} />
     </svg>
   ) : (
     <svg
-      class={className}
+      class:list={['icon', className]}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
