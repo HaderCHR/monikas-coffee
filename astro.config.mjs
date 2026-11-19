@@ -2,9 +2,10 @@
 import { defineConfig, fontProviders } from 'astro/config';
 
 export default defineConfig({
-  // Placeholder: replace with the real domain before deploying.
-  // It feeds the canonical URL, Open Graph URLs and the sitemap.
-  site: 'https://monikas-coffee.example',
+  // Published on GitHub Pages as a project site. `site` + `base` feed the canonical URL,
+  // Open Graph URLs and the sitemap; with a custom domain, set `site` to it and drop `base`.
+  site: 'https://haderchr.github.io',
+  base: '/monikas-coffee',
 
   // Self-hosted fonts (OFL / Apache 2.0, files and licences in src/assets/fonts).
   // Astro generates @font-face rules, preload links and metric-matched fallbacks.

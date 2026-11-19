@@ -61,6 +61,7 @@ src/
   assets/       photos/ (originales de Unsplash), fonts/ (woff2 + licencias)
 public/         favicon.svg/.ico, iconos PNG, og-image.jpg, site.webmanifest, _headers
 scripts/        check-dist.mjs (comprobaciones del build), make-icons.mjs (iconos desde el SVG)
+.github/        workflows/deploy.yml (publicación en GitHub Pages)
 PRODUCT.md      registro de producto (supuestos marcados)
 .impeccable/    brief de superficie con el contrato de dirección y capturas de revisión
 ```
@@ -71,20 +72,36 @@ Requiere Node.js 22.23 o superior.
 
 ```bash
 npm install
-npm run dev        # http://localhost:4321
+npm run dev        # http://localhost:4321/monikas-coffee/
 npm run build      # genera dist/
-npm run preview    # sirve dist/ en http://localhost:4321
+npm run preview    # sirve dist/ en http://localhost:4321/monikas-coffee/
 npm run check      # comprobaciones estáticas sobre dist/ (ejecutar después de build)
 ```
 
 Astro envía telemetría anónima de uso; se desactiva con `npx astro telemetry disable`.
 
-## Antes de publicarlo
+## Publicación
 
-1. Cambia `site` en `astro.config.mjs` (ahora `https://monikas-coffee.example`): de ahí salen la URL
-   canónica, las de Open Graph, `robots.txt` y `sitemap.xml`.
-2. Si fuera una cafetería real: en `src/data/contact.ts` pon `isDemo: false` y rellena `href` y
-   `handle` de cada canal; se convertirán en enlaces normales y desaparecerán los avisos de demo.
+La web está publicada en **GitHub Pages**: https://haderchr.github.io/monikas-coffee/
+
+Cada `push` a `main` ejecuta `.github/workflows/deploy.yml`, que instala, compila, pasa
+`npm run check` y publica `dist/`. Si alguna comprobación falla, no se publica. El workflow usa
+solo acciones oficiales de GitHub fijadas por commit.
+
+Como es un sitio de proyecto, vive bajo la subruta `/monikas-coffee/` (`base` en
+`astro.config.mjs`); todas las rutas internas la respetan y `npm run check` lo verifica.
+
+GitHub Pages no lee `public/_headers`: la CSP sigue activa porque va en el `<meta>` de la página,
+pero las cabeceras que solo pueden enviarse desde el servidor (frame-ancestors, HSTS propio,
+Permissions-Policy) no se aplican allí. Y `robots.txt` solo cuenta en la raíz de un dominio, así que
+bajo la subruta es informativo.
+
+## Si pasara a ser una cafetería real
+
+1. Con dominio propio: pon el dominio en `site` y quita `base` en `astro.config.mjs`; de ahí salen la
+   URL canónica, las de Open Graph, `robots.txt` y `sitemap.xml`.
+2. En `src/data/contact.ts` pon `isDemo: false` y rellena `href` y `handle` de cada canal; se
+   convertirán en enlaces normales y desaparecerán los avisos de demo.
 3. Sustituye las fotografías de muestra por fotos propias (mismos nombres en `src/assets/photos/`).
 
 ## Fotografía
@@ -148,5 +165,5 @@ Fuentes: Besley y Libre Franklin (SIL OFL 1.1), Yellowtail (Apache 2.0); licenci
   `prefers-reduced-motion`.
 - **Fotos de muestra:** son de distintos autores, así que la luz y el estilo no son 100 %
   homogéneos como lo serían en una sesión propia.
-- **`_headers`:** solo lo aplican hostings compatibles; en otros hay que configurar esas cabeceras
-  en el servidor. La CSP va siempre en el `<meta>` de la página.
+- **`_headers`:** solo lo aplican hostings compatibles (Netlify, Cloudflare Pages); GitHub Pages lo
+  ignora. La CSP va siempre en el `<meta>` de la página.

@@ -27,6 +27,11 @@ check(/http-equiv="content-security-policy"/.test(html), 'Content-Security-Polic
 check(/<script type="application\/ld\+json">/.test(html) && !/LocalBusiness|CafeOrCoffeeShop|aggregateRating/.test(html), 'JSON-LD present and not posing as a real business');
 for (const f of ['robots.txt', 'sitemap.xml', 'favicon.ico', 'favicon.svg', 'apple-touch-icon.png', 'site.webmanifest', 'og-image.jpg', '404.html']) check(await exists(f), `dist/${f} exists`);
 check((await read('robots.txt')).includes('Sitemap:'), 'robots.txt points to the sitemap');
+// The site lives under a subpath on GitHub Pages: every root-relative URL must stay inside it.
+const basePath = new URL(attr(tags('link').find((t) => /rel="canonical"/.test(t)) || '', 'href') || 'http://x/').pathname;
+const urlsIn = (doc) => [...doc.matchAll(/\s(?:href|src|srcset|content)="([^"]*)"/g)].flatMap((m) => m[1].split(',').map((s) => s.trim().split(/\s+/)[0]));
+const outside = [...urlsIn(html), ...urlsIn(await read('404.html'))].filter((u) => u.startsWith('/') && !u.startsWith(basePath));
+check(outside.length === 0, `every root-relative URL stays under ${basePath}${outside.length ? ' (' + [...new Set(outside)].slice(0, 5).join(', ') + ')' : ''}`);
 
 // --- Structure and accessibility
 check(tags('h1').length === 1, `exactly one h1 (${tags('h1').length})`);

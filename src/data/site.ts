@@ -24,3 +24,6 @@ export const nav = [
 ] as const;
 
 export const contactAnchor = 'contacto';
+
+/** Path the site is served from (`base` in astro.config.mjs), always ending in a slash. */
+export const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
