@@ -1,0 +1,278 @@
+---
+import Photo from './Photo.astro';
+import Icon from './Icon.astro';
+import { menu } from '../data/menu';
+import { contactAnchor } from '../data/site';
+---
+
+<section class="carta" id="carta" data-nav-section aria-labelledby="carta-title">
+  <div class="wrap">
+    <!-- The menu board hangs on the wall: one painted board holding the whole menu,
+         written in two columns like a real board, a photograph beside every name. -->
+    <div class="menu-board board on-paint">
+      <header class="menu-board__head">
+        <h2 class="menu-board__title gilt" id="carta-title">La carta</h2>
+        <p class="menu-board__intro">
+          Cafés, bebidas frías y repostería. Aquí no verás precios: pregúntanos y te los contamos.
+        </p>
+        <nav class="menu-board__index" aria-label="Secciones de la carta">
+          <ul role="list">
+            {
+              menu.map((category) => (
+                <li>
+                  <a href={`#${category.id}`}>{category.title}</a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </header>
+
+      <div class="menu-board__body">
+        {
+          menu.map((category) => (
+            <section class="category" id={category.id} aria-labelledby={`${category.id}-title`}>
+              <h3 class="category__title" id={`${category.id}-title`}>
+                {category.title}
+              </h3>
+              <p class="category__note">{category.note}</p>
+              <ul class="category__items" role="list">
+                {category.items.map((item) => (
+                  <li class="item" id={item.id}>
+                    <div class="item__photo frame frame--bead frame--zoom">
+                      <Photo
+                        src={item.image}
+                        alt={item.alt}
+                        widths={[160, 240, 340, 480]}
+                        sizes="(min-width: 90rem) 9rem, (min-width: 44rem) 10vw, 6.5rem"
+                      />
+                    </div>
+                    <div class="item__text">
+                      <h4 class="item__name">{item.name}</h4>
+                      <p class="item__desc">{item.description}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ))
+        }
+
+        <aside class="menu-board__ask" aria-label="Precios y disponibilidad">
+          <p>
+            <strong>¿Cuánto cuesta? ¿Queda cheesecake hoy?</strong>
+            Los precios y la repostería del día te los contamos por mensaje.
+          </p>
+          <a class="btn btn--gilt" href={`#${contactAnchor}`}>
+            Preguntar por mensaje
+            <Icon name="arrow" class="arrow" />
+          </a>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .carta {
+    background: var(--oat);
+    padding-block: var(--section-y);
+  }
+
+  .menu-board {
+    --pad: clamp(1.5rem, 1rem + 3vw, 4rem);
+    padding: var(--pad);
+    box-shadow: 0 30px 60px -40px rgb(13 25 19 / 0.65);
+  }
+
+  /* ----- Head ----- */
+
+  .menu-board__head {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: end;
+    gap: 1rem clamp(1.5rem, 4vw, 4rem);
+    padding-bottom: clamp(1.5rem, 3vw, 2.5rem);
+    margin-bottom: clamp(1.75rem, 3.5vw, 3rem);
+    border-bottom: 1px solid var(--gilt-line);
+  }
+
+  .menu-board__title {
+    font-weight: 800;
+    font-size: clamp(2.75rem, 1.6rem + 4.4vw, 5.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.01em;
+  }
+
+  .menu-board__intro {
+    max-width: 40ch;
+    color: var(--on-paint-muted);
+    font-size: 1.0625rem;
+  }
+
+  .menu-board__index {
+    grid-column: 1 / -1;
+  }
+
+  .menu-board__index ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.75rem;
+  }
+
+  .menu-board__index a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-family: var(--font-sign);
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--on-paint);
+    text-decoration: underline;
+    text-decoration-color: var(--gilt-line);
+    text-underline-offset: 0.35em;
+    transition:
+      color 0.2s ease,
+      text-decoration-color 0.2s ease;
+  }
+
+  .menu-board__index a:hover {
+    color: var(--gilt-bright);
+    text-decoration-color: var(--gilt);
+  }
+
+  /* ----- Body: the menu written in two balanced columns, read top to bottom,
+     with a gilt rule between them as on a painted board. ----- */
+
+  .menu-board__body {
+    columns: 2;
+    column-gap: clamp(2rem, 5vw, 5rem);
+    column-rule: 1px solid var(--gilt-line);
+  }
+
+  .category {
+    break-inside: avoid;
+    padding-bottom: clamp(2.25rem, 3.5vw, 3rem);
+    scroll-margin-top: calc(var(--header-h) + 1.5rem);
+  }
+
+  .category__title {
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gilt);
+  }
+
+  .category__note {
+    margin-top: 0.4rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--on-paint-muted);
+  }
+
+  .category__items {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1.25rem;
+  }
+
+  /* Thumbnail capped at 9rem: big enough to read the drink, small enough to keep the
+     whole board within reach (a smaller cap was weighed and refused: the photos carry the menu). */
+  .item {
+    display: grid;
+    grid-template-columns: clamp(6.5rem, 10vw, 9rem) minmax(0, 1fr);
+    gap: clamp(1rem, 1.6vw, 1.5rem);
+    align-items: center;
+  }
+
+  .item__photo {
+    aspect-ratio: 1;
+  }
+
+  .item__text {
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .item__name {
+    font-size: clamp(1.15rem, 1.05rem + 0.4vw, 1.4rem);
+    font-weight: 600;
+    color: var(--on-paint);
+  }
+
+  .item__desc {
+    max-width: 40ch;
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: var(--on-paint-muted);
+  }
+
+  /* The question about prices is the board's last line, under a gilt rule. */
+  .menu-board__ask {
+    break-inside: avoid;
+    display: grid;
+    justify-items: start;
+    gap: 1.25rem;
+    padding-top: clamp(1.5rem, 2.5vw, 2rem);
+    border-top: 1px solid var(--gilt-line);
+  }
+
+  .menu-board__ask p {
+    max-width: 36ch;
+    color: var(--on-paint-muted);
+  }
+
+  .menu-board__ask strong {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-family: var(--font-sign);
+    font-size: clamp(1.4rem, 1.1rem + 1vw, 1.9rem);
+    font-weight: 600;
+    line-height: 1.15;
+    color: var(--on-paint);
+  }
+
+  /* ----- One column on phones ----- */
+
+  @media (max-width: 44rem) {
+    .menu-board__head {
+      grid-template-columns: 1fr;
+    }
+
+    .menu-board__index ul {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0 1rem;
+    }
+
+    .menu-board__index a {
+      font-size: 1rem;
+    }
+
+    .menu-board__body {
+      columns: 1;
+    }
+
+    .item {
+      align-items: start;
+    }
+
+    /* Thumbnails are too small for the gilt bead; it would only add noise. */
+    .item__photo::after {
+      display: none;
+    }
+
+    .item__name {
+      font-size: 1.15rem;
+    }
+
+    .item__desc {
+      font-size: 0.9375rem;
+    }
+
+    .menu-board__ask .btn {
+      width: 100%;
+    }
+  }
+</style>

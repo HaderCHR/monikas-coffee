@@ -1,0 +1,124 @@
+﻿---
+import Photo from './Photo.astro';
+import luz from '../assets/photos/ambiente-luz.jpg';
+import tazas from '../assets/photos/casa-tazas.jpg';
+---
+
+<section class="casa" id="la-casa" data-nav-section aria-labelledby="casa-title">
+  <div class="casa__grid wrap">
+    <div class="casa__photo frame frame--zoom">
+      <Photo
+        src={luz}
+        alt="Rincón con dos taburetes de madera junto a una ventana; la luz del sol entra entre las plantas."
+        widths={[480, 720, 960, 1200]}
+        sizes="(min-width: 60rem) 46vw, 100vw"
+      />
+    </div>
+
+    <div class="casa__side">
+      <div class="casa__text">
+        <h2 class="section-title" id="casa-title">Una casa pequeña con la cafetera siempre encendida</h2>
+        <p class="casa__intro">
+          Monika's es una cafetería de barrio pensada para quedarse un rato. Mesas de madera,
+          plantas que alguien riega cada mañana y una ventana por la que entra la mejor luz de la tarde.
+        </p>
+        <p>
+          Preparamos cada taza cuando la pides y horneamos la bollería en casa. No hay música alta
+          ni prisa por levantar la mesa: aquí se viene a desayunar despacio, a leer, a ponerse al día
+          con alguien o a no hacer nada durante lo que dura un café.
+        </p>
+      </div>
+      <div class="casa__detail frame frame--zoom">
+        <Photo
+          src={tazas}
+          alt="Dos tazas de cerámica hechas a mano, una rosada con triángulos, sobre un estante de madera."
+          widths={[400, 640, 880]}
+          sizes="(min-width: 60rem) 30vw, 100vw"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .casa {
+    background: var(--plaster);
+    padding-block: var(--section-y);
+  }
+
+  .casa__grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: clamp(1.5rem, 3vw, 3rem);
+    align-items: stretch;
+  }
+
+  .casa__photo {
+    grid-column: 1 / 7;
+    aspect-ratio: 4 / 5;
+  }
+
+  .casa__side {
+    grid-column: 7 / 13;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2.5rem;
+    padding-left: clamp(0rem, 2vw, 2rem);
+  }
+
+  .casa__text {
+    display: grid;
+    gap: 1.25rem;
+    color: var(--ink);
+  }
+
+  .casa__text h2 {
+    margin-bottom: 0.5rem;
+    font-size: clamp(2.25rem, 1.5rem + 2.6vw, 3.6rem);
+  }
+
+  .casa__intro {
+    font-size: clamp(1.125rem, 1.05rem + 0.35vw, 1.3rem);
+    line-height: 1.55;
+    color: var(--brown);
+  }
+
+  .casa__text p:not(.casa__intro) {
+    color: var(--muted);
+    max-width: 46ch;
+  }
+
+  .casa__detail {
+    aspect-ratio: 16 / 9;
+  }
+
+  @media (max-width: 44rem) {
+    .casa__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .casa__photo,
+    .casa__side {
+      grid-column: 1 / -1;
+    }
+
+    /* Text first, then the photographs. */
+    .casa__side {
+      display: contents;
+    }
+
+    .casa__text {
+      order: -1;
+    }
+
+    .casa__photo {
+      aspect-ratio: 4 / 4.4;
+    }
+
+    .casa__detail {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+    }
+  }
+</style>

@@ -1,0 +1,292 @@
+﻿---
+import Photo from './Photo.astro';
+import dosis from '../assets/photos/ritual-dosis.jpg';
+import extraccion from '../assets/photos/ritual-extraccion.jpg';
+import leche from '../assets/photos/ritual-leche.jpg';
+import agua from '../assets/photos/ritual-agua.jpg';
+
+// Each step is registered by its real measurement: the number is the information.
+const steps = [
+  {
+    measure: '18',
+    unit: 'g',
+    measureLabel: '18 gramos',
+    title: 'Molido justo antes',
+    text: 'Cada dosis se muele en el momento de prepararla. Un café molido hace una hora ya ha perdido buena parte de su aroma.',
+    image: dosis,
+    alt: 'Dos portafiltros sobre la barra: uno con granos de café y otro con el café recién molido.',
+  },
+  {
+    measure: '25',
+    unit: 's',
+    measureLabel: '25 segundos',
+    title: 'Una extracción corta',
+    text: 'El espresso cae en unos veinticinco segundos: lo justo para que salga dulce y con cuerpo, sin el amargor de pasarse.',
+    image: extraccion,
+    alt: 'Espresso cayendo del portafiltro en un hilo dorado.',
+  },
+  {
+    measure: '65',
+    unit: '°C',
+    measureLabel: '65 grados',
+    title: 'Leche, nunca hervida',
+    text: 'Texturizamos la leche hasta unos sesenta y cinco grados. Más caliente pierde su dulzor; así queda sedosa y se puede dibujar sobre ella.',
+    image: leche,
+    alt: 'Una persona vierte leche texturizada sobre un café y dibuja en la espuma.',
+  },
+  {
+    measure: '1',
+    unit: 'vaso',
+    measureLabel: 'un vaso',
+    title: 'Agua con cada café',
+    text: 'Cada taza llega a la mesa con un vaso de agua, sin pedirlo. Limpia el paladar y marca el ritmo: aquí nadie tiene prisa.',
+    image: agua,
+    alt: 'Vaso de agua sobre una mesa de madera, junto a una silla, con luz de tarde.',
+  },
+];
+---
+
+<section class="ritual" id="ritual" data-nav-section aria-labelledby="ritual-title" data-ritual>
+  <div class="wrap">
+    <header class="ritual__head">
+      <h2 class="section-title" id="ritual-title">El ritual de cada taza</h2>
+      <p class="lead">
+        Cuatro gestos que repetimos cada vez que alguien pide un café. Ninguno se ve desde la mesa,
+        pero todos se notan en la taza.
+      </p>
+    </header>
+
+    <div class="ritual__body">
+      <!-- Wide screens: one photograph stays in view and changes with the step being read. -->
+      <div class="ritual__media" aria-hidden="true">
+        <div class="ritual__stage">
+          {
+            steps.map((step, i) => (
+              <div class:list={['ritual__frame frame', { 'is-current': i === 0 }]} data-frame={i}>
+                <Photo
+                  src={step.image}
+                  alt=""
+                  widths={[560, 800, 1100]}
+                  sizes="(min-width: 44rem) 46vw, 1px"
+                />
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <ol class="ritual__steps" role="list">
+        {
+          steps.map((step, i) => (
+            <li class="step" data-step={i}>
+              <div class="step__photo frame">
+                <Photo
+                  src={step.image}
+                  alt={step.alt}
+                  widths={[400, 640, 900]}
+                  sizes="(min-width: 44rem) 1px, 100vw"
+                />
+              </div>
+              <p class="step__measure">
+                <span class="step__number" aria-hidden="true">{step.measure}</span>
+                <span class="step__unit" aria-hidden="true">{step.unit}</span>
+                <span class="visually-hidden">{step.measureLabel}</span>
+              </p>
+              <h3 class="step__title">{step.title}</h3>
+              <p class="step__text">{step.text}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </div>
+</section>
+
+<style>
+  .ritual {
+    background: var(--plaster);
+    padding-block: var(--section-y);
+  }
+
+  .ritual__head {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 1.25rem clamp(1.5rem, 3vw, 3rem);
+    align-items: end;
+    margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
+  }
+
+  .ritual__head h2 {
+    grid-column: 1 / 7;
+  }
+
+  .ritual__head .lead {
+    grid-column: 8 / 13;
+  }
+
+  .ritual__body {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: clamp(1.5rem, 3vw, 3rem);
+  }
+
+  .ritual__media {
+    grid-column: 1 / 7;
+  }
+
+  .ritual__stage {
+    position: sticky;
+    top: calc(var(--header-h) + 1.5rem);
+    height: min(calc(100svh - var(--header-h) - 3rem), 46rem);
+  }
+
+  .ritual__frame {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.7s var(--ease-out);
+  }
+
+  .ritual__frame :global(img) {
+    transform: scale(1.04);
+    transition: transform 1.4s var(--ease-out);
+  }
+
+  .ritual__frame.is-current {
+    opacity: 1;
+  }
+
+  .ritual__frame.is-current :global(img) {
+    transform: scale(1);
+  }
+
+  .ritual__steps {
+    grid-column: 8 / 13;
+  }
+
+  .step {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: min(66svh, 36rem);
+    padding-block: 2rem;
+  }
+
+  .step + .step {
+    border-top: 1px solid var(--rule);
+  }
+
+  .step__photo {
+    display: none;
+  }
+
+  .step__measure {
+    display: flex;
+    align-items: baseline;
+    gap: 0.4rem;
+    margin-bottom: 1.25rem;
+    font-family: var(--font-sign);
+    color: var(--brown);
+  }
+
+  .step__number {
+    font-size: clamp(4rem, 2.5rem + 4.8vw, 7.5rem);
+    font-weight: 800;
+    line-height: 0.85;
+    letter-spacing: -0.035em;
+    font-variant-numeric: lining-nums;
+  }
+
+  .step__unit {
+    font-size: clamp(1.25rem, 1rem + 1vw, 2rem);
+    font-weight: 600;
+    color: var(--coffee);
+  }
+
+  .step__title {
+    font-size: clamp(1.5rem, 1.25rem + 0.9vw, 2rem);
+    color: var(--brown);
+    margin-bottom: 0.75rem;
+  }
+
+  .step__text {
+    max-width: 42ch;
+    color: var(--muted);
+  }
+
+  /* ----- Narrow screens: each step carries its own photograph ----- */
+
+  @media (max-width: 44rem) {
+    .ritual__head h2,
+    .ritual__head .lead {
+      grid-column: 1 / -1;
+    }
+
+    .ritual__media {
+      display: none;
+    }
+
+    .ritual__steps {
+      grid-column: 1 / -1;
+    }
+
+    .step {
+      min-height: 0;
+      padding-block: 2.25rem;
+    }
+
+    .step:first-child {
+      padding-top: 0;
+    }
+
+    .step__photo {
+      display: block;
+      aspect-ratio: 4 / 3;
+      margin-bottom: 1.5rem;
+    }
+  }
+</style>
+
+<script>
+  // Swap the sticky photograph to match the step nearest the middle of the screen.
+  // While the section is on screen, each scroll frame picks the step by geometry, so a fast
+  // scroll or a jump from the menu can never leave a stale photograph behind.
+  const root = document.querySelector<HTMLElement>('[data-ritual]');
+  if (root && 'IntersectionObserver' in window) {
+    const frames = root.querySelectorAll<HTMLElement>('[data-frame]');
+    const steps = [...root.querySelectorAll<HTMLElement>('[data-step]')];
+    let current = '0';
+    const update = () => {
+      const middle = window.innerHeight / 2;
+      let best = steps[0];
+      let bestDistance = Infinity;
+      for (const step of steps) {
+        const r = step.getBoundingClientRect();
+        const distance = Math.abs(r.top + r.height / 2 - middle);
+        if (distance < bestDistance) {
+          bestDistance = distance;
+          best = step;
+        }
+      }
+      const index = best.dataset.step ?? '0';
+      if (index === current) return;
+      current = index;
+      frames.forEach((frame) => frame.classList.toggle('is-current', frame.dataset.frame === index));
+    };
+    let inView = false;
+    let queued = false;
+    const schedule = () => {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(() => {
+        queued = false;
+        update();
+      });
+    };
+    new IntersectionObserver(([entry]) => {
+      inView = entry.isIntersecting;
+      if (inView) schedule();
+    }).observe(root);
+    window.addEventListener('scroll', () => inView && schedule(), { passive: true });
+  }
+</script>

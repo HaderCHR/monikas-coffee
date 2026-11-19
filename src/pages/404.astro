@@ -1,0 +1,51 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Página no encontrada · Monika's Coffee" noindex>
+  <main class="lost on-paint" id="contenido" tabindex="-1">
+    <div class="lost__board board wrap">
+      <p class="lost__code gilt" aria-hidden="true">404</p>
+      <h1 class="lost__title">Esta mesa no existe</h1>
+      <p class="lost__text">
+        La página que buscas no está en la carta. Vuelve al inicio y te buscamos un buen sitio junto
+        a la ventana.
+      </p>
+      <a class="btn btn--gilt" href="/">Volver a Monika's Coffee</a>
+    </div>
+  </main>
+</Base>
+
+<style>
+  .lost {
+    display: grid;
+    place-items: center;
+    min-height: 100svh;
+    padding: var(--gutter);
+    background: var(--paint);
+  }
+
+  .lost__board {
+    display: grid;
+    justify-items: start;
+    gap: 1.25rem;
+    max-width: 40rem;
+    padding: clamp(2rem, 6vw, 4rem);
+  }
+
+  .lost__code {
+    font-family: var(--font-script);
+    font-size: clamp(4rem, 12vw, 7rem);
+    line-height: 1;
+  }
+
+  .lost__title {
+    font-size: clamp(2rem, 1.5rem + 2.5vw, 3rem);
+    color: var(--on-paint);
+  }
+
+  .lost__text {
+    max-width: 42ch;
+    color: var(--on-paint-muted);
+  }
+</style>

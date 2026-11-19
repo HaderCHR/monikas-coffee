@@ -1,0 +1,24 @@
+---
+import Base from '../layouts/Base.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import Hero from '../components/Hero.astro';
+import Casa from '../components/Casa.astro';
+import Carta from '../components/Carta.astro';
+import Ritual from '../components/Ritual.astro';
+import Sala from '../components/Sala.astro';
+import Contacto from '../components/Contacto.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+---
+
+<Base>
+  <SiteHeader />
+  <main id="contenido" tabindex="-1">
+    <Hero />
+    <Casa />
+    <Carta />
+    <Ritual />
+    <Sala />
+    <Contacto />
+  </main>
+  <SiteFooter />
+</Base>

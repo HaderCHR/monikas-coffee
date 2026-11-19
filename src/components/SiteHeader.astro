@@ -1,0 +1,408 @@
+---
+import Icon from './Icon.astro';
+import { nav, contactAnchor } from '../data/site';
+---
+
+<header class="header on-paint" data-header>
+  <div class="header__bar wrap">
+    <a class="header__logo" href="#inicio" aria-label="Monika's Coffee, volver al inicio">
+      <span class="header__script gilt" aria-hidden="true">Monika's</span>
+      <span class="header__trade" aria-hidden="true">Coffee</span>
+    </a>
+
+    <nav class="header__nav" aria-label="Principal">
+      <ul role="list">
+        {
+          nav.map((item) => (
+            <li>
+              <a href={`#${item.id}`} data-nav-link={item.id}>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="header__actions">
+      <a class="btn btn--gilt header__cta" href={`#${contactAnchor}`}>Escríbenos</a>
+      <button
+        class="header__menu-btn"
+        type="button"
+        aria-haspopup="dialog"
+        aria-expanded="false"
+        aria-controls="menu"
+        aria-label="Abrir el menú"
+        data-menu-open
+      >
+        <Icon name="menu" />
+        <span aria-hidden="true">Menú</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Full-screen menu for small screens: a modal dialog gives focus containment and Esc for free. -->
+  <dialog class="menu on-paint" id="menu" aria-label="Menú" data-menu>
+    <div class="menu__top wrap">
+      <span class="header__script gilt" aria-hidden="true">Monika's</span>
+      <button class="menu__close" type="button" aria-label="Cerrar el menú" data-menu-close>
+        <Icon name="close" />
+        <span aria-hidden="true">Cerrar</span>
+      </button>
+    </div>
+    <nav class="menu__nav wrap" aria-label="Menú móvil">
+      <ul role="list">
+        {
+          nav.map((item) => (
+            <li>
+              <a href={`#${item.id}`} data-nav-link={item.id}>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <a class="btn btn--gilt menu__cta" href={`#${contactAnchor}`}>
+        Escríbenos
+        <Icon name="arrow" class="arrow" />
+      </a>
+    </nav>
+  </dialog>
+</header>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--paint);
+    border-bottom: 1px solid transparent;
+    transition:
+      transform 0.35s var(--ease-out),
+      border-color 0.3s ease;
+  }
+
+  .header[data-scrolled='true'] {
+    border-bottom-color: var(--gilt-line);
+  }
+
+  .header[data-hidden='true'] {
+    transform: translateY(-100%);
+  }
+
+  .header__bar {
+    display: flex;
+    align-items: center;
+    gap: clamp(1rem, 3vw, 3rem);
+    height: var(--header-h);
+  }
+
+  .header__logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    min-height: 44px;
+    text-decoration: none;
+  }
+
+  .header__script {
+    font-family: var(--font-script);
+    font-size: 1.85rem;
+    line-height: 1;
+    padding-top: 0.15em;
+  }
+
+  .header__trade {
+    font-family: var(--font-sign);
+    font-weight: 700;
+    font-size: 0.72rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--on-paint-muted);
+    padding-top: 0.5em;
+  }
+
+  .header__nav {
+    margin-inline-start: auto;
+  }
+
+  .header__nav ul {
+    display: flex;
+    gap: clamp(1.25rem, 2.4vw, 2.25rem);
+  }
+
+  .header__nav a {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--on-paint);
+    text-decoration: none;
+  }
+
+  /* Underline that draws from the left on hover and stays for the current section. */
+  .header__nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0.55rem;
+    height: 1px;
+    background: var(--gilt);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s var(--ease-out);
+  }
+
+  .header__nav a:hover::after,
+  .header__nav a[aria-current='location']::after {
+    transform: scaleX(1);
+  }
+
+  .header__nav a[aria-current='location'] {
+    color: var(--gilt-bright);
+  }
+
+  .header__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .header__cta {
+    min-height: 2.75rem;
+    padding: 0.6em 1.1em;
+    font-size: 0.95rem;
+  }
+
+  .header__menu-btn,
+  .menu__close {
+    display: none;
+    align-items: center;
+    gap: 0.45rem;
+    min-height: 44px;
+    min-width: 44px;
+    padding: 0 0.6rem;
+    border: 1px solid var(--gilt-line);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--on-paint);
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition:
+      border-color 0.2s ease,
+      background-color 0.2s ease;
+  }
+
+  .header__menu-btn:hover,
+  .menu__close:hover {
+    border-color: var(--gilt);
+    background: rgb(210 174 98 / 0.08);
+  }
+
+  .header__menu-btn .icon,
+  .menu__close .icon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  /* ----- Mobile menu ----- */
+
+  .menu {
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: var(--paint);
+  }
+
+  .menu::backdrop {
+    background: var(--paint-deep);
+  }
+
+  .menu[open] {
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .menu[open] {
+      animation: menu-in 0.45s var(--ease-out);
+    }
+  }
+
+  @keyframes menu-in {
+    from {
+      opacity: 0;
+      transform: translateY(-1.5rem);
+    }
+  }
+
+  .menu__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--header-h);
+  }
+
+  .menu__close {
+    display: inline-flex;
+  }
+
+  .menu__nav {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding-block: 1.5rem 2rem;
+  }
+
+  .menu__nav li + li {
+    border-top: 1px solid var(--gilt-line);
+  }
+
+  .menu__nav a:not(.btn) {
+    display: flex;
+    align-items: center;
+    min-height: 4.25rem;
+    font-family: var(--font-sign);
+    font-size: clamp(1.9rem, 8vw, 2.6rem);
+    font-weight: 600;
+    color: var(--on-paint);
+    text-decoration: none;
+  }
+
+  .menu__nav a[aria-current='location'] {
+    color: var(--gilt);
+  }
+
+  .menu__cta {
+    margin-top: auto;
+    width: 100%;
+    min-height: 3.5rem;
+    font-size: 1.05rem;
+  }
+
+  @media (max-width: 60rem) {
+    .header__nav {
+      display: none;
+    }
+
+    .header__actions {
+      margin-inline-start: auto;
+    }
+
+    .header__menu-btn {
+      display: inline-flex;
+    }
+  }
+
+  @media (max-width: 26rem) {
+    .header__trade {
+      display: none;
+    }
+
+    .header__cta {
+      padding-inline: 0.85em;
+    }
+
+    .header__menu-btn span {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+  }
+</style>
+
+<script>
+  const header = document.querySelector<HTMLElement>('[data-header]');
+  const dialog = document.querySelector<HTMLDialogElement>('[data-menu]');
+  const openBtn = document.querySelector<HTMLButtonElement>('[data-menu-open]');
+  const closeBtn = document.querySelector<HTMLButtonElement>('[data-menu-close]');
+
+  // --- Scroll state: border once the page moves; hide while reading downwards, show on the way up.
+  if (header) {
+    let lastY = window.scrollY;
+    let ticking = false;
+
+    const update = () => {
+      const y = window.scrollY;
+      header.dataset.scrolled = String(y > 8);
+      const goingDown = y > lastY + 4;
+      const goingUp = y < lastY - 4;
+      const keepVisible = header.contains(document.activeElement) || y < 480;
+      if (goingDown && !keepVisible) header.dataset.hidden = 'true';
+      else if (goingUp || keepVisible) header.dataset.hidden = 'false';
+      lastY = y;
+      ticking = false;
+    };
+
+    window.addEventListener(
+      'scroll',
+      () => {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(update);
+        }
+      },
+      { passive: true },
+    );
+    header.addEventListener('focusin', () => (header.dataset.hidden = 'false'));
+    update();
+  }
+
+  // --- Current section in the navigation: the section crossing a line 40% down the screen.
+  // Chosen by geometry on every observer callback, so fast jumps never leave a stale link.
+  const links = document.querySelectorAll<HTMLAnchorElement>('[data-nav-link]');
+  const sections = [...document.querySelectorAll<HTMLElement>('[data-nav-section]')];
+  if ('IntersectionObserver' in window && sections.length) {
+    let currentId = '';
+    const update = () => {
+      const line = window.innerHeight * 0.4;
+      const active = sections.find((s) => {
+        const r = s.getBoundingClientRect();
+        return r.top <= line && r.bottom > line;
+      });
+      const id = active?.id ?? '';
+      if (id === currentId) return;
+      currentId = id;
+      links.forEach((link) => {
+        if (link.dataset.navLink === id) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      });
+    };
+    const observer = new IntersectionObserver(update, {
+      rootMargin: '-35% 0px -55% 0px',
+      threshold: [0, 1],
+    });
+    sections.forEach((section) => observer.observe(section));
+  }
+
+  // --- Mobile menu.
+  if (dialog && openBtn) {
+    // Keep aria-expanded in step with the dialog however it closes (button, link, Esc).
+    // Some engines fire `toggle` but not `close` for dialogs, so both are handled.
+    const sync = () => openBtn.setAttribute('aria-expanded', String(dialog.open));
+    openBtn.addEventListener('click', () => {
+      dialog.showModal();
+      sync();
+    });
+    closeBtn?.addEventListener('click', () => dialog.close());
+    dialog.addEventListener('close', sync);
+    dialog.addEventListener('toggle', sync);
+    // Following a link closes the menu; the browser then scrolls to the anchor.
+    dialog.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => dialog.close()));
+    // Leaving the small-screen layout with the menu open closes it.
+    matchMedia('(min-width: 60.0625rem)').addEventListener('change', (e) => {
+      if (e.matches && dialog.open) dialog.close();
+    });
+  }
+</script>

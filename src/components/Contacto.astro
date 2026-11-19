@@ -1,0 +1,340 @@
+---
+import Icon from './Icon.astro';
+import { contact } from '../data/contact';
+
+// Lets long handles and addresses wrap after the "@" instead of mid-word on narrow phones.
+const splitAt = (text: string) => text.split('@');
+---
+
+<section class="door on-paint" id="contacto" data-nav-section aria-labelledby="contacto-title">
+  <div class="wrap">
+    <div class="door__board board">
+      <div class="door__intro">
+        <h2 class="door__title gilt" id="contacto-title">Escríbenos</h2>
+        <p class="door__lead">
+          ¿Quieres saber precios, qué hay hoy en la vitrina o si podemos preparar algo para tu
+          reunión? Pregúntanos por el canal que prefieras y te respondemos.
+        </p>
+        {
+          contact.isDemo && (
+            <p class="door__demo" id="aviso-canales">
+              <Icon name="info" />
+              <span>
+                Monika's Coffee es una cafetería ficticia creada para un portafolio. Estos canales son
+                de ejemplo y no reciben mensajes.
+              </span>
+            </p>
+          )
+        }
+      </div>
+
+      <ul class="channels" role="list">
+        {
+          contact.channels.map((channel) => (
+            <li>
+              {contact.isDemo || !channel.href ? (
+                <button
+                  class="channel"
+                  type="button"
+                  popovertarget="demo-canal"
+                  aria-describedby="aviso-canales"
+                >
+                  <Icon name={channel.id} class="icon channel__icon" />
+                  <span class="channel__text">
+                    <span class="channel__label">{channel.label}</span>
+                    <span class="channel__handle">
+                      {splitAt(channel.handle).map((part, i) => (
+                        <>
+                          {i > 0 && (
+                            <>
+                              @<wbr />
+                            </>
+                          )}
+                          {part}
+                        </>
+                      ))}
+                    </span>
+                  </span>
+                  <span class="channel__action">
+                    <span class="visually-hidden">{channel.action}</span>
+                    <Icon name="arrow" class="icon channel__arrow" />
+                  </span>
+                </button>
+              ) : (
+                <a
+                  class="channel"
+                  href={channel.href}
+                  {...(channel.href.startsWith('http') ? { rel: 'noopener', target: '_blank' } : {})}
+                >
+                  <Icon name={channel.id} class="icon channel__icon" />
+                  <span class="channel__text">
+                    <span class="channel__label">{channel.label}</span>
+                    <span class="channel__handle">
+                      {splitAt(channel.handle).map((part, i) => (
+                        <>
+                          {i > 0 && (
+                            <>
+                              @<wbr />
+                            </>
+                          )}
+                          {part}
+                        </>
+                      ))}
+                    </span>
+                  </span>
+                  <span class="channel__action">
+                    <span class="visually-hidden">{channel.action}</span>
+                    <Icon name="arrow" class="icon channel__arrow" />
+                  </span>
+                </a>
+              )}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+
+  {
+    contact.isDemo && (
+      <div class="demo-note board on-paint" id="demo-canal" popover aria-labelledby="demo-canal-title">
+        <h3 class="demo-note__title gilt" id="demo-canal-title">
+          Canal de demostración
+        </h3>
+        <p>
+          Monika's Coffee no existe fuera de esta web: es una marca ficticia creada como proyecto de
+          portafolio, así que este canal no está activo y nadie recibirá tu mensaje.
+        </p>
+        <p>
+          En la web de una cafetería real, este botón abriría WhatsApp, Instagram o tu correo con la
+          conversación lista para escribir.
+        </p>
+        <button class="btn btn--gilt" type="button" popovertarget="demo-canal" popovertargetaction="hide">
+          Entendido
+        </button>
+      </div>
+    )
+  }
+</section>
+
+<style>
+  .door {
+    background: var(--paint);
+    padding-block: clamp(3rem, 2rem + 4vw, 6rem);
+  }
+
+  .door__board {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: center;
+    padding: clamp(1.5rem, 0.5rem + 4.5vw, 4.5rem);
+    background: var(--paint);
+  }
+
+  .door__board::after {
+    background: var(--paint);
+  }
+
+  .door__intro {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .door__title {
+    font-weight: 800;
+    font-size: clamp(2.2rem, 0.9rem + 6.5vw, 6.25rem);
+    line-height: 0.95;
+    letter-spacing: -0.015em;
+  }
+
+  .door__lead {
+    max-width: 44ch;
+    font-size: clamp(1.0625rem, 1rem + 0.35vw, 1.25rem);
+    line-height: 1.55;
+    color: var(--on-paint);
+  }
+
+  .door__demo {
+    display: flex;
+    gap: 0.65rem;
+    align-items: flex-start;
+    max-width: 52ch;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--gilt-line);
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    color: var(--on-paint-muted);
+  }
+
+  .door__demo .icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-top: 0.1rem;
+    stroke: var(--gilt);
+  }
+
+  /* ----- Channels ----- */
+
+  .channels {
+    display: grid;
+    border-top: 1px solid var(--gilt-line);
+  }
+
+  .channels li {
+    border-bottom: 1px solid var(--gilt-line);
+  }
+
+  .channel {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 1.1rem;
+    width: 100%;
+    min-height: 5.5rem;
+    padding: 1rem 0.75rem;
+    border: 0;
+    background: transparent;
+    color: var(--on-paint);
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+      background-color 0.25s ease,
+      padding 0.35s var(--ease-out);
+  }
+
+  .channel:hover {
+    background: var(--paint-raised);
+    padding-inline: 1.25rem 1rem;
+  }
+
+  .channel:active {
+    background: var(--paint-deep);
+  }
+
+  .channel__icon {
+    width: 1.75rem;
+    height: 1.75rem;
+    color: var(--gilt);
+  }
+
+  .channel__text {
+    display: grid;
+    gap: 0.15rem;
+    min-width: 0;
+  }
+
+  .channel__label {
+    font-family: var(--font-sign);
+    font-size: clamp(1.35rem, 1.15rem + 0.8vw, 1.75rem);
+    font-weight: 600;
+    line-height: 1.15;
+  }
+
+  .channel__handle {
+    font-size: 0.95rem;
+    color: var(--on-paint-muted);
+    overflow-wrap: break-word;
+  }
+
+  .channel__action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 1px solid var(--gilt-line);
+    border-radius: 50%;
+    transition:
+      border-color 0.25s ease,
+      background-color 0.25s ease;
+  }
+
+  .channel__arrow {
+    width: 1.15rem;
+    height: 1.15rem;
+    fill: none;
+    stroke: currentColor;
+    transition: transform 0.3s var(--ease-out);
+  }
+
+  .channel:hover .channel__action {
+    border-color: var(--gilt);
+    background: var(--gilt);
+    color: var(--shade);
+  }
+
+  .channel:hover .channel__arrow {
+    transform: translateX(2px);
+  }
+
+  /* ----- Demo notice (native popover: Esc and outside click close it) ----- */
+
+  .demo-note {
+    position: fixed;
+    inset: 0;
+    width: min(30rem, calc(100% - 2rem));
+    height: fit-content;
+    margin: auto;
+    padding: clamp(1.75rem, 4vw, 2.5rem);
+    border: 0;
+    display: none;
+    gap: 1rem;
+    line-height: 1.55;
+    box-shadow: 0 40px 80px -30px rgb(0 0 0 / 0.7);
+  }
+
+  .demo-note:popover-open {
+    display: grid;
+  }
+
+  .demo-note::backdrop {
+    background: rgb(13 25 19 / 0.55);
+  }
+
+  .demo-note p {
+    color: var(--on-paint-muted);
+  }
+
+  .demo-note__title {
+    font-size: 1.75rem;
+    font-weight: 700;
+  }
+
+  .demo-note .btn {
+    justify-self: start;
+    margin-top: 0.5rem;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .demo-note:popover-open {
+      animation: note-in 0.35s var(--ease-out);
+    }
+  }
+
+  @keyframes note-in {
+    from {
+      opacity: 0;
+      transform: translateY(0.75rem);
+    }
+  }
+
+  @media (max-width: 56rem) {
+    .door__board {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  @media (max-width: 26rem) {
+    .channel {
+      gap: 0.85rem;
+      padding-inline: 0.25rem;
+    }
+
+    .channel__action {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+  }
+</style>

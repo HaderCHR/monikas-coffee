@@ -1,0 +1,212 @@
+---
+import Icon from './Icon.astro';
+import { site, nav, contactAnchor } from '../data/site';
+import { photographers } from '../data/credits';
+---
+
+<footer class="footer on-paint">
+  <div class="wrap">
+    <p class="footer__signature gilt" aria-hidden="true">Monika's</p>
+
+    <div class="footer__grid">
+      <div class="footer__about">
+        <p class="footer__tagline">Café, repostería de casa y una mesa junto a la ventana.</p>
+        <p class="footer__fiction">
+          Monika's Coffee es una marca ficticia creada como proyecto de portafolio. No tiene local,
+          horarios ni canales de contacto reales.
+        </p>
+      </div>
+
+      <nav class="footer__nav" aria-label="Secundaria">
+        <h2 class="footer__heading">En esta página</h2>
+        <ul role="list">
+          {
+            nav.map((item) => (
+              <li>
+                <a href={`#${item.id}`}>{item.label}</a>
+              </li>
+            ))
+          }
+          <li><a href={`#${contactAnchor}`}>Escríbenos</a></li>
+        </ul>
+      </nav>
+
+      <div class="footer__credits">
+        <h2 class="footer__heading">Fotografía</h2>
+        <details>
+          <summary>Fotos de Unsplash, de {photographers.length} fotógrafos</summary>
+          <ul role="list">
+            {
+              photographers.map((p) => (
+                <li>
+                  <a href={`https://unsplash.com/@${p.handle}`} rel="noopener" target="_blank">
+                    {p.author}
+                    <span class="visually-hidden"> (abre en una pestaña nueva)</span>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </details>
+      </div>
+    </div>
+
+    <div class="footer__base">
+      <p>© {site.year} {site.name} · Marca ficticia</p>
+      <a class="footer__top" href="#inicio">
+        Volver arriba
+        <Icon name="arrow-up" class="icon footer__top-icon" />
+      </a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--paint-deep);
+    padding-block: clamp(3rem, 6vw, 5.5rem) 1.5rem;
+    font-size: 0.95rem;
+  }
+
+  .footer__signature {
+    margin: 0 0 clamp(2rem, 4vw, 3.5rem);
+    font-family: var(--font-script);
+    font-size: clamp(5rem, 1rem + 17vw, 15.5rem);
+    line-height: 0.9;
+    padding: 0.05em 0 0.15em 0.12em;
+    color: var(--gilt);
+    text-shadow: 0.03em 0.04em 0 var(--shade);
+  }
+
+  .footer__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1.2fr);
+    gap: 2.5rem clamp(2rem, 5vw, 5rem);
+    padding-block: 2.5rem;
+    border-top: 1px solid var(--gilt-line);
+  }
+
+  .footer__tagline {
+    font-family: var(--font-sign);
+    font-size: clamp(1.35rem, 1.15rem + 0.7vw, 1.75rem);
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--on-paint);
+    max-width: 22ch;
+    margin-bottom: 1rem;
+  }
+
+  .footer__fiction {
+    max-width: 44ch;
+    color: var(--on-paint-muted);
+  }
+
+  .footer__heading {
+    margin-bottom: 0.75rem;
+    font-family: var(--font-text);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gilt);
+  }
+
+  .footer__nav a,
+  .footer__credits a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    color: var(--on-paint);
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    transition: text-decoration-color 0.2s ease, color 0.2s ease;
+  }
+
+  .footer__nav a:hover,
+  .footer__credits a:hover {
+    color: var(--gilt-bright);
+    text-decoration-color: currentColor;
+  }
+
+  .footer__credits summary {
+    display: flex;
+    align-items: center;
+    min-height: 2.75rem;
+    color: var(--on-paint-muted);
+    cursor: pointer;
+    list-style-position: inside;
+  }
+
+  .footer__credits summary:hover {
+    color: var(--on-paint);
+  }
+
+  .footer__credits ul {
+    columns: 2;
+    column-gap: 1.25rem;
+    margin-top: 0.5rem;
+  }
+
+  .footer__credits li {
+    break-inside: avoid;
+  }
+
+  .footer__credits a {
+    display: flex;
+    width: 100%;
+    min-height: 2.75rem;
+    font-size: 0.875rem;
+  }
+
+  .footer__base {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--gilt-line);
+    color: var(--on-paint-muted);
+  }
+
+  .footer__top {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    color: var(--on-paint);
+    text-decoration: none;
+  }
+
+  .footer__top-icon {
+    width: 1.1rem;
+    height: 1.1rem;
+    fill: none;
+    stroke: currentColor;
+    transition: transform 0.3s var(--ease-out);
+  }
+
+  .footer__top:hover {
+    color: var(--gilt-bright);
+  }
+
+  .footer__top:hover .footer__top-icon {
+    transform: translateY(-3px);
+  }
+
+  @media (max-width: 56rem) {
+    .footer__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .footer__about {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 34rem) {
+    .footer__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
