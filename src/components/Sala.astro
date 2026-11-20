@@ -7,8 +7,11 @@ import tazas from '../assets/photos/casa-tazas.jpg';
 ---
 
 <section class="sala dark" id="sala" data-nav-section aria-labelledby="sala-title">
+  <!-- The surface of the espresso: a curved edge that flattens as the room rises into view.
+       Hidden unless the motion script runs. -->
+  <div class="sala__meniscus" aria-hidden="true"></div>
   <div class="sala__spread wrap">
-    <div class="sala__photo sala__photo--mesa photo photo--zoom">
+    <div class="sala__photo sala__photo--mesa photo photo--zoom" data-depth="0">
       <Photo
         src={mesa}
         alt="Tres cafés con un corazón dibujado en la espuma, sobre una mesa de madera rodeada de plantas."
@@ -18,13 +21,13 @@ import tazas from '../assets/photos/casa-tazas.jpg';
     </div>
 
     <div class="sala__head">
-      <h2 class="title" id="sala-title">La sala, a{' '}cualquier{' '}hora</h2>
+      <h2 class="title" id="sala-title" data-motion="title">La sala, a{' '}cualquier{' '}hora</h2>
       <p class="lead">
         Mesas de madera, plantas en cada rincón y una luz que cambia con el día.
       </p>
     </div>
 
-    <div class="sala__photo sala__photo--pastel photo photo--zoom drift">
+    <div class="sala__photo sala__photo--pastel photo photo--zoom" data-depth="1">
       <Photo
         src={pastel}
         alt="Manos sobre una mesa con un trozo de tarta, macarons y una taza de café."
@@ -33,7 +36,7 @@ import tazas from '../assets/photos/casa-tazas.jpg';
       />
     </div>
 
-    <div class="sala__photo sala__photo--verde photo photo--zoom drift drift--far">
+    <div class="sala__photo sala__photo--verde photo photo--zoom" data-depth="2">
       <Photo
         src={tazaVerde}
         alt="Taza de cerámica verde oliva sobre su platillo, junto a un paño de lino."
@@ -42,9 +45,9 @@ import tazas from '../assets/photos/casa-tazas.jpg';
       />
     </div>
 
-    <p class="sala__line">Por la mañana, con prisa amable. Por la tarde, con tiempo de sobra.</p>
+    <p class="sala__line" data-motion="ink">Por la mañana, con prisa amable. Por la tarde, con tiempo de sobra.</p>
 
-    <div class="sala__photo sala__photo--tazas photo photo--zoom">
+    <div class="sala__photo sala__photo--tazas photo photo--zoom" data-depth="0.6">
       <Photo
         src={tazas}
         alt="Dos tazas de cerámica hechas a mano, una rosada con triángulos, sobre un estante de madera."
@@ -57,7 +60,21 @@ import tazas from '../assets/photos/casa-tazas.jpg';
 
 <style>
   .sala {
+    position: relative;
     padding-block: var(--section-y);
+  }
+
+  /* Crema hanging into the top of the room in a shallow curve: the meniscus of the espresso.
+     It starts flattened (invisible) and only the motion script draws and releases it. */
+  .sala__meniscus {
+    position: absolute;
+    inset: 0 0 auto;
+    height: clamp(2.5rem, 6vw, 6rem);
+    background: var(--crema);
+    border-radius: 0 0 50% 50% / 0 0 100% 100%;
+    transform: scaleY(0);
+    transform-origin: top;
+    pointer-events: none;
   }
 
   /* An editorial spread: photographs of different sizes and heights, the heading and one long
@@ -117,38 +134,6 @@ import tazas from '../assets/photos/casa-tazas.jpg';
     grid-row: 3;
     aspect-ratio: 3 / 2;
     margin-top: clamp(1rem, 3vw, 3rem);
-  }
-
-  /* Depth: two photographs drift slightly against the scroll. */
-  @media (prefers-reduced-motion: no-preference) and (min-width: 48.0625rem) {
-    @supports (animation-timeline: view()) {
-      .drift {
-        animation: drift linear both;
-        animation-timeline: view();
-      }
-
-      .drift--far {
-        animation-name: drift-far;
-      }
-    }
-  }
-
-  @keyframes drift {
-    from {
-      transform: translateY(2rem);
-    }
-    to {
-      transform: translateY(-2rem);
-    }
-  }
-
-  @keyframes drift-far {
-    from {
-      transform: translateY(4rem);
-    }
-    to {
-      transform: translateY(-3rem);
-    }
   }
 
   @media (max-width: 64rem) {

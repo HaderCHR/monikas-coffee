@@ -43,9 +43,15 @@ cursor.
 ## Tecnología
 
 - **[Astro 7](https://astro.build)** (versión fijada `7.4.5`) generando un sitio **estático**:
-  cero JavaScript de framework en el cliente; un solo script pequeño (cabecera y menú). Los
-  efectos ligados al scroll usan animaciones CSS con `animation-timeline`: sin librerías y sin
-  JavaScript; donde el navegador no las admite, todo se ve en reposo.
+  sin framework en el cliente. La página se lee completa sin JavaScript.
+- **Movimiento:** [GSAP](https://gsap.com) 3.15.1 (versión fijada) con ScrollTrigger y SplitText,
+  en un solo módulo diferido (`src/scripts/motion.ts`, ~49 KB comprimido junto con el script de la
+  cabecera) que solo se carga en la portada. La entrada de la portada es CSS puro, así que el primer
+  pintado no espera a ningún script. Todo el movimiento va dentro de `gsap.matchMedia`: no se
+  ejecuta con `prefers-reduced-motion`, reduce amplitudes en pantallas estrechas y el efecto
+  magnético solo existe con un puntero fino. Se anima casi solo `transform` y `opacity` (las
+  fotos se «sirven» con una capa que se encoge con `transform`, no con `clip-path`), y las capas
+  se promocionan solo mientras se mueven.
 - **Imágenes:** `astro:assets` + sharp en build: WebP responsive (`srcset`/`sizes`) con JPEG de
   respaldo, `width`/`height` explícitos (sin saltos de maquetación), `lazy` fuera del primer
   pantallazo y `fetchpriority="high"` solo en la imagen principal. Se probó AVIF y se descartó:
@@ -54,9 +60,11 @@ cursor.
   métricas ajustadas, sin peticiones a terceros.
 - **Seguridad:** CSP generada por Astro (hashes de scripts y estilos) en un `<meta>`, más
   `public/_headers` (nosniff, frame-ancestors, Referrer-Policy, Permissions-Policy, HSTS) para
-  hostings que lo leen (Netlify, Cloudflare Pages). Sin formularios, sin backend, sin scripts
-  externos, sin dependencias aparte de Astro.
-- **Única dependencia:** `astro` (sharp llega como dependencia opcional de Astro).
+  hostings que lo leen (Netlify, Cloudflare Pages). Sin formularios, sin backend y sin scripts
+  externos: GSAP se empaqueta y se sirve desde el propio sitio, y la CSP no necesita excepciones
+  (SplitText aplica sus estilos por CSSOM).
+- **Dependencias:** `astro` (sharp llega como dependencia opcional de Astro) y `gsap`, bajo la
+  licencia estándar de GSAP (gratuita, incluidos los plugins, desde la versión 3.13).
 
 ## Estructura
 
@@ -172,10 +180,26 @@ Fuentes: Brygada 1918 y Familjen Grotesk (SIL OFL 1.1); licencias en
   hacer pasar la cafetería por un negocio verificable.
 - **Sin filtros en la carta:** las cuatro categorías caben en una pizarra con índice de anclas
   enlazables (`#carta-clasicos`, etc.); ocultar productos tras filtros no mejoraba la exploración.
-- **Movimiento:** una sola familia de curvas (salida exponencial) y una idea: las cosas se llenan
-  desde abajo, como una taza. La portada se sirve al cargar; las tacitas de la carta se llenan al
-  entrar en pantalla; la línea del ritual se dibuja al leerla; dos fotos de la sala se desplazan un
-  poco para dar profundidad. Las interacciones siguen la misma idea: los botones y los discos de
+- **Movimiento:** una idea, «servir»: la página es una taza en sección y todo en ella se sirve.
+  - *Portada:* la sala se vierte desde abajo, la ficha se posa con peso y su sombra llega un
+    instante después, el titular sube palabra a palabra desde su máscara y las medidas se escriben
+    al final. Al bajar, una cámara lenta: la foto se acerca y la ficha y las notas, más cerca del
+    espectador, se desplazan más (tres profundidades).
+  - *Títulos:* cada línea sube desde detrás de su máscara; «Escríbenos», letra a letra.
+  - *Fotos:* se sirven desde abajo y se reencuadran dentro de su marco al cruzar la pantalla; en la
+    sala, cuatro fotos a cuatro profundidades.
+  - *La carta:* la taza grande prepara un cappuccino (espresso, leche, espuma, cada capa nombrada al
+    servirse) y cada bebida llena su tacita de abajo arriba, en orden de lectura.
+  - *El ritual:* la línea es un solo trazo con inercia que llega a cada estación, y cada medida se
+    cuenta hasta su valor (18 g, 25 s, 65 °C).
+  - *Transiciones:* donde la crema se encuentra con el espresso, la superficie oscura sube con un
+    menisco curvo que se aplana; al final, la página se levanta y deja ver el pie, que espera
+    debajo.
+  - *Micro-interacciones:* los botones principales y los discos de contacto son magnéticos y vuelven
+    con un pequeño rebote; al pulsarlos se aplastan conservando el volumen.
+  La inercia sale de animaciones que siguen al scroll con retardo, no de secuestrar el scroll: el
+  desplazamiento nativo, los anclajes y la búsqueda del navegador quedan intactos. Las
+  interacciones siguen la misma idea: los botones y los discos de
   contacto se «llenan» de un tono más claro al pasar el cursor, las flechas salen y vuelven, los
   subrayados se escriben y se borran, al señalar una bebida se vuelve a servir la capa superior de
   su tacita y su foto se enmarca con un paspartú del color del fondo, y el aviso y el menú salen más

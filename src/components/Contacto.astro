@@ -12,7 +12,7 @@ const splitAt = (text: string) => text.split('@');
     <!-- The heading's size follows the width of its own column (container units), never the
          viewport, so it cannot grow past that column into the channels. -->
     <header class="contacto__head">
-      <h2 class="contacto__title" id="contacto-title">Escríbenos</h2>
+      <h2 class="contacto__title" id="contacto-title" data-motion="chars">Escríbenos</h2>
       <p class="lead">
         ¿Quieres saber precios, qué hay hoy en la vitrina o si podemos preparar algo para tu
         reunión? Pregúntanos por el canal que prefieras y te respondemos.
@@ -139,12 +139,36 @@ const splitAt = (text: string) => text.split('@');
 
   /* ----- Three channels as ruled lines, the same device as the house notes ----- */
 
+  /* The rules are strokes (scaled by --rule) so the motion script can write them in. */
   .channels {
-    border-top: 1px solid rgb(243 233 220 / 0.35);
+    position: relative;
+  }
+
+  .channels::before,
+  .channels li::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    transform-origin: left;
+    pointer-events: none;
+  }
+
+  .channels::before {
+    top: 0;
+    background: rgb(243 233 220 / 0.35);
+    transform: scaleX(var(--rule-top, 1));
   }
 
   .channels li {
-    border-bottom: 1px solid var(--rule);
+    position: relative;
+  }
+
+  .channels li::after {
+    bottom: 0;
+    background: var(--rule);
+    transform: scaleX(var(--rule, 1));
   }
 
   .channel {
@@ -202,7 +226,7 @@ const splitAt = (text: string) => text.split('@');
     border-radius: 50%;
     background: var(--caramel);
     color: var(--espresso);
-    transition: transform 380ms var(--ease-out);
+    transition: scale 420ms var(--ease-bounce);
   }
 
   /* The disc is poured full of a lighter caramel, like the buttons. */
@@ -279,9 +303,10 @@ const splitAt = (text: string) => text.split('@');
   }
 
   @media (prefers-reduced-motion: no-preference) {
+    /* Pressed, the disc gives under the finger (scale, so it composes with the magnet). */
     .channel:active .channel__go {
-      transform: scale(0.9);
-      transition-duration: var(--t-press);
+      scale: 0.88;
+      transition: scale var(--t-press) var(--ease-in);
     }
   }
 

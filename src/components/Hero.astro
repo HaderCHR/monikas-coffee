@@ -3,6 +3,11 @@ import Photo from './Photo.astro';
 import Icon from './Icon.astro';
 import { contactAnchor } from '../data/site';
 import sala from '../assets/photos/casa-sala.jpg';
+
+// The headline is set word by word, each word in its own mask, so it can rise into the card
+// at first paint without waiting for any script. Screen readers still read one sentence.
+const headline = 'Café recién hecho y repostería de casa, para quedarse un rato.';
+const words = headline.split(' ');
 ---
 
 <section class="hero" id="inicio" data-nav-section aria-labelledby="hero-title">
@@ -20,8 +25,16 @@ import sala from '../assets/photos/casa-sala.jpg';
     <!-- The house recipe card, set down over the photograph. -->
     <div class="hero__card">
       <h1 class="hero__title" id="hero-title">
-        <span class="visually-hidden">Monika's Coffee: </span>Café recién hecho y repostería de casa,
-        para quedarse un rato.
+        <span class="visually-hidden">Monika's Coffee: </span>{
+          words.map((word, i) => (
+            <>
+              <span class="w">
+                <span>{word}</span>
+              </span>
+              {i < words.length - 1 && ' '}
+            </>
+          ))
+        }
       </h1>
       <p class="hero__text">
         Una cafetería pequeña para sentarse sin prisa: espressos y lattes preparados al momento,
@@ -186,42 +199,95 @@ import sala from '../assets/photos/casa-sala.jpg';
     gap: 0.75rem 1.75rem;
   }
 
-  /* ----- The one authored entrance: the room is poured in from the bottom, then the card
-     is set down on it. Everything starts visible without it. ----- */
+  /* Each word sits in a mask a little taller than its line, so accents and descenders are
+     never clipped; the mask has no effect at rest. */
+  .hero__title .w {
+    display: inline-block;
+    overflow: clip;
+    vertical-align: top;
+    padding-block: 0.1em 0.2em;
+    margin-block: -0.1em -0.2em;
+  }
+
+  .hero__title .w > span {
+    display: inline-block;
+  }
+
+  /* ----- The authored entrance, in CSS so it plays at first paint (no script to wait for).
+     The room is poured in from the bottom; the card is set down on it with some weight and
+     its shadow lands a beat later; the headline rises word by word inside the card, then the
+     sentence, the actions, and the measurements written on their ruled line. Each layer uses
+     its own property (clip-path, translate, scale) so the scroll camera added by the motion
+     script composes with it instead of fighting it. ----- */
 
   @media (prefers-reduced-motion: no-preference) {
     .hero__photo {
-      animation: pour-in 1100ms var(--ease-out) 80ms backwards;
+      animation: pour-in 1150ms var(--ease-out) 60ms backwards;
     }
 
     .hero__photo :global(img) {
-      animation: settle 1700ms var(--ease-out) 80ms backwards;
+      animation: settle 1800ms var(--ease-out) 60ms backwards;
     }
 
-    /* The card stays opaque: it is set down, never faded in over the photograph. */
     .hero__card {
-      animation: set-down 900ms var(--ease-out) 250ms backwards;
+      animation:
+        set-down 950ms cubic-bezier(0.2, 1.1, 0.35, 1) 180ms backwards,
+        land 900ms var(--ease-out) 520ms backwards;
     }
 
-    /* Then the measurements are written on their ruled line: two strokes, three values. */
+    /* nth-of-type counts the visually hidden span first, so the words are spans 2 to 13. */
+    .hero__title .w > span {
+      animation: word-up 1000ms var(--ease-out) backwards;
+    }
+
+    .hero__title .w:nth-of-type(2) > span { animation-delay: 300ms; }
+    .hero__title .w:nth-of-type(3) > span { animation-delay: 340ms; }
+    .hero__title .w:nth-of-type(4) > span { animation-delay: 380ms; }
+    .hero__title .w:nth-of-type(5) > span { animation-delay: 420ms; }
+    .hero__title .w:nth-of-type(6) > span { animation-delay: 460ms; }
+    .hero__title .w:nth-of-type(7) > span { animation-delay: 500ms; }
+    .hero__title .w:nth-of-type(8) > span { animation-delay: 540ms; }
+    .hero__title .w:nth-of-type(9) > span { animation-delay: 580ms; }
+    .hero__title .w:nth-of-type(10) > span { animation-delay: 620ms; }
+    .hero__title .w:nth-of-type(11) > span { animation-delay: 660ms; }
+    .hero__title .w:nth-of-type(12) > span { animation-delay: 700ms; }
+    .hero__title .w:nth-of-type(13) > span { animation-delay: 740ms; }
+
+    .hero__text {
+      animation: rise 900ms var(--ease-out) 640ms backwards;
+    }
+
+    .hero__actions > * {
+      animation: rise 800ms var(--ease-out) 740ms backwards;
+    }
+
+    .hero__actions > * + * {
+      animation-delay: 810ms;
+    }
+
+    /* The measurements are written on their ruled line: two strokes, three values. */
     .hero__notes dl::before {
-      animation: write 900ms var(--ease-out) 620ms backwards;
+      animation: write 1000ms var(--ease-out) 820ms backwards;
     }
 
     .hero__notes dl::after {
-      animation: write 900ms var(--ease-out) 720ms backwards;
+      animation: write 1000ms var(--ease-out) 900ms backwards;
     }
 
     .hero__notes dd {
-      animation: rise 700ms var(--ease-out) 820ms backwards;
+      animation: rise 800ms var(--ease-out) 980ms backwards;
     }
 
     .hero__notes dl > div:nth-child(2) dd {
-      animation-delay: 890ms;
+      animation-delay: 1040ms;
     }
 
     .hero__notes dl > div:nth-child(3) dd {
-      animation-delay: 960ms;
+      animation-delay: 1100ms;
+    }
+
+    .hero__notes .text-link {
+      animation: rise 800ms var(--ease-out) 1160ms backwards;
     }
   }
 
@@ -236,7 +302,28 @@ import sala from '../assets/photos/casa-sala.jpg';
 
   @keyframes settle {
     from {
-      transform: scale(1.08);
+      scale: 1.1;
+    }
+  }
+
+  @keyframes set-down {
+    from {
+      translate: 0 2.4rem;
+    }
+  }
+
+  /* The shadow arrives after the card: it lands, then it rests on the photograph. */
+  @keyframes land {
+    from {
+      box-shadow:
+        0 1px 0 rgb(74 48 38 / 0),
+        0 10px 20px -18px rgb(36 24 18 / 0);
+    }
+  }
+
+  @keyframes word-up {
+    from {
+      translate: 0 112%;
     }
   }
 
@@ -249,13 +336,7 @@ import sala from '../assets/photos/casa-sala.jpg';
   @keyframes rise {
     from {
       opacity: 0;
-      transform: translateY(0.45em);
-    }
-  }
-
-  @keyframes set-down {
-    from {
-      transform: translateY(1.75rem);
+      translate: 0 0.7rem;
     }
   }
 

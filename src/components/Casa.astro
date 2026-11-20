@@ -12,7 +12,7 @@ const notes = [
 
 <section class="casa" id="la-casa" data-nav-section aria-labelledby="casa-title">
   <div class="casa__grid wrap">
-    <h2 class="title casa__title" id="casa-title">
+    <h2 class="title casa__title" id="casa-title" data-motion="title">
       Una casa pequeña con la cafetera siempre encendida
     </h2>
 
@@ -103,11 +103,13 @@ const notes = [
   .casa__notes::before {
     top: 0;
     background: var(--rule-strong);
+    transform: scaleX(var(--rule-top, 1));
   }
 
   .casa__note::after {
     bottom: 0;
     background: var(--rule);
+    transform: scaleX(var(--rule, 1));
   }
 
   .casa__note {
@@ -116,31 +118,6 @@ const notes = [
     grid-template-columns: 8.5rem minmax(0, 1fr);
     gap: 1rem;
     padding-block: 0.95rem;
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    @supports (animation-timeline: view()) {
-      .casa__notes::before,
-      .casa__note::after {
-        animation: write linear both;
-        animation-timeline: view();
-        animation-range: entry 40% cover 30%;
-      }
-
-      .casa__note:nth-child(2)::after {
-        animation-range: entry 60% cover 34%;
-      }
-
-      .casa__note:nth-child(3)::after {
-        animation-range: entry 80% cover 38%;
-      }
-    }
-  }
-
-  @keyframes write {
-    from {
-      transform: scaleX(0);
-    }
   }
 
   .casa__note dt {

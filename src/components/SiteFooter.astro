@@ -71,6 +71,7 @@ import { photographers } from '../data/credits';
 
 <style>
   .footer {
+    position: relative;
     background: var(--espresso-deep);
     padding-top: clamp(3.5rem, 2rem + 5vw, 6rem);
     font-size: 0.975rem;
@@ -246,6 +247,17 @@ import { photographers } from '../data/credits';
     41% {
       transform: translateY(120%);
       opacity: 0;
+    }
+  }
+
+  /* The page is lifted off the footer: on screens tall enough to hold it, the footer waits
+     underneath (sticky at the bottom, below main) and the contact section slides away to
+     uncover it. CSS only; the motion script adds a slight rise to its content. */
+  @media (min-width: 48rem) and (min-height: 40rem) {
+    .footer {
+      position: sticky;
+      bottom: 0;
+      z-index: 0;
     }
   }
 

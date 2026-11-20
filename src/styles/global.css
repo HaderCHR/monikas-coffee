@@ -50,6 +50,9 @@
   --t-pour: 520ms;
   /* A gentler deceleration for pours, so the rising surface stays visible for a moment. */
   --ease-pour: cubic-bezier(0.33, 1, 0.68, 1);
+  /* Weight: a small overshoot for things that are released, a quick start for things that go. */
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
 }
 
 /* ----- Base ----- */
@@ -156,6 +159,35 @@ a {
 
 main:focus {
   outline: none;
+}
+
+/* main sits above the footer, so on tall screens the footer can wait underneath it and be
+   uncovered as the page is lifted away; the shadow is the page's edge. */
+main {
+  position: relative;
+  z-index: 1;
+  /* Opaque: the hero and the house have no ground of their own, and must cover the footer. */
+  background: var(--foam);
+}
+
+@media (min-width: 48rem) and (min-height: 40rem) {
+  main {
+    box-shadow: 0 2.5rem 3rem -2rem rgb(13 8 6 / 0.6);
+  }
+}
+
+/* Text split by the motion script: each line or letter rises from behind a mask that is a
+   little taller than the line, so accents and descenders are never clipped. While split, the
+   heading stacks its lines in a flex column so the masks' margins cannot collapse. */
+.is-split {
+  display: flex;
+  flex-direction: column;
+}
+
+.m-line-mask,
+.m-char-mask {
+  padding-block: 0.12em 0.22em;
+  margin-block: -0.12em -0.22em;
 }
 
 /* A section on espresso: its own ink, rules, focus and selection. */
@@ -269,7 +301,7 @@ main:focus {
   box-shadow: 0 1px 2px rgb(36 24 18 / 0.18);
   transition:
     box-shadow 300ms ease,
-    transform 380ms var(--ease-out);
+    scale 460ms var(--ease-bounce);
 }
 
 .dark .btn {
@@ -363,10 +395,12 @@ main:focus {
   }
 }
 
+/* Pressed, the pill squashes and widens a little (volume kept), and springs back on release.
+   It uses the scale property, so it composes with the magnetic pull set by the motion script. */
 @media (prefers-reduced-motion: no-preference) {
   .btn:active {
-    transform: scale(0.965);
-    transition-duration: var(--t-press);
+    scale: 1.03 0.93;
+    transition: scale var(--t-press) var(--ease-in);
   }
 }
 
@@ -430,6 +464,26 @@ main:focus {
 
 .photo img {
   object-fit: cover;
+}
+
+/* The pour: a cover in the colour of the ground sits over the photograph and shrinks upwards,
+   uncovering it from the bottom. Only its transform changes (via --cover), so the motion runs
+   on the compositor; at rest --cover is 0 and the cover does not exist visually. */
+.photo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: var(--mat);
+  transform: scaleY(var(--cover, 0));
+  transform-origin: top;
+  pointer-events: none;
+}
+
+/* While a photograph is being poured, its cover and image get their own layers. */
+.photo.is-pouring::before,
+.photo.is-pouring img {
+  will-change: transform;
 }
 
 .photo--zoom::after {

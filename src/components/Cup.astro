@@ -102,23 +102,4 @@ const layers = composition[id] ?? [];
   .cup__layer--te { background: #b0404b; }
   .cup__layer--frutos { background: #6e1f35; }
 
-  /* The cup fills from the bottom as it scrolls into view. */
-  @media (prefers-reduced-motion: no-preference) {
-    @supports (animation-timeline: view()) {
-      .cup__fill {
-        animation: fill linear both;
-        animation-timeline: view();
-        animation-range: entry 20% cover 40%;
-      }
-    }
-  }
-
-  @keyframes fill {
-    from {
-      transform: scaleY(0);
-    }
-    to {
-      transform: scaleY(1);
-    }
-  }
 </style>
